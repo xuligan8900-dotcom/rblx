@@ -5,6 +5,7 @@ local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 local Catalog = require(RS:WaitForChild("Shared").Catalog)
 local Languages = require(RS.Shared.Localization)
+local Interaction = require(RS.Shared.Interaction)
 local remote = RS:WaitForChild("GardenRequest")
 local language = Languages.language(player.LocaleId)
 local function tr(key, ...)
@@ -15,10 +16,12 @@ local temporary = false
 local lastNotice = "ready"
 local refreshChrome
 local toolButtons, tabButtons = {}, {}
-local menuButton, home, hint, languageButton, toast
+local menuButton, home, hint, languageButton, toast, mission, seedButton, sellButton
+local feedback
+local currentSlot
 local localizationLoaded = false
 local page = "garden"
-local tool = "Plant"
+local tool = "Auto"
 local profile = nil
 local selectedSeed = "p01"
 local parents = {}
@@ -153,6 +156,8 @@ request = function(action, args)
 		return
 	end
 	busy = true
+	local priorPlant = profile and args and args.id and profile.plants[args.id]
+	local feedbackCell = if args and args.cell then args.cell elseif priorPlant then priorPlant.cell else nil
 	local ok, result = pcall(function()
 		return remote:InvokeServer(action, args or {})
 	end)
@@ -179,7 +184,17 @@ request = function(action, args)
 		effects = profile.settings.effects ~= false
 		temporary = result.temporary
 		lastWeather = result.weather
-		render()
+		currentSlot = result.slot or currentSlot
+		if action == "Sync" and panel.Visible then
+			if refreshChrome then
+				refreshChrome()
+			end
+		else
+			render()
+		end
+		if result.ok and feedback then
+			feedback(action, feedbackCell)
+		end
 	end
 	notice.Text = tr(lastNotice)
 	if toast and action ~= "Sync" then
@@ -232,7 +247,7 @@ render = function()
 					(if selectedSeed == id then "✓ " else "") .. name(id) .. " ×" .. profile.seeds[id],
 					function()
 						selectedSeed = seed
-						tool = "Plant"
+						tool = "Auto"
 						panel.Visible = false
 						render()
 					end
@@ -370,18 +385,37 @@ local ProximityPromptService = game:GetService("ProximityPromptService")
 local actionbar = create("Frame", gui, {
 	AnchorPoint = Vector2.new(0.5, 1),
 	Position = UDim2.new(0.5, 0, 1, -68),
-	Size = UDim2.fromOffset(306, 44),
+	Size = UDim2.new(0.95, 0, 0, 44),
 	BackgroundTransparency = 1,
 })
 create("UIListLayout", actionbar, { FillDirection = Enum.FillDirection.Horizontal, Padding = UDim.new(0, 6) })
 
-for _, mode in { "Plant", "Water", "Harvest" } do
-	local m = mode
-	toolButtons[m] = button(actionbar, tr(string.lower(m)), function()
-		tool = m
-		panel.Visible = false
-	end, 98)
-end
+create("UISizeConstraint", actionbar, { MaxSize = Vector2.new(380, 44) })
+toolButtons.Auto = button(actionbar, tr("auto"), function()
+	tool = "Auto"
+	panel.Visible = false
+end, 98)
+seedButton = button(actionbar, tr("choose_seed"), function()
+	page = "garden"
+	panel.Visible = true
+	render()
+end, 130)
+sellButton = button(actionbar, tr("sell_all"), function()
+	request("SellAll", {})
+end, 135)
+mission = create("TextLabel", gui, {
+	Position = UDim2.fromOffset(20, 85),
+	Size = UDim2.fromOffset(320, 78),
+	Text = tr("mission_plant"),
+	TextColor3 = cream,
+	BackgroundColor3 = green,
+	BackgroundTransparency = 0.1,
+	Font = Enum.Font.GothamMedium,
+	TextSize = 15,
+	TextWrapped = true,
+})
+create("UICorner", mission, { CornerRadius = UDim.new(0, 10) })
+
 hint = create("TextLabel", gui, {
 	AnchorPoint = Vector2.new(0.5, 1),
 	Position = UDim2.new(0.5, 0, 1, -121),
@@ -439,19 +473,11 @@ local function actAt(position)
 		return
 	end
 	local cell = target:GetAttribute("Cell")
-	local id = nil
-	for key, p in profile.plants do
-		if p.cell == cell then
-			id = key
-			break
-		end
-	end
-	if tool == "Plant" and not id then
-		request("Plant", { id = selectedSeed, cell = cell })
-	elseif id and tool ~= "Plant" then
-		request(tool, { id = id })
+	local action, args, key = Interaction.resolve(profile, cell, selectedSeed, os.time())
+	if action then
+		request(action, args)
 	else
-		hint.Text = if id then tr("occupied_hint") else tr("empty_hint")
+		hint.Text = tr(key)
 	end
 end
 UserInputService.InputBegan:Connect(function(input, processed)
@@ -512,6 +538,9 @@ refreshChrome = function()
 		b.Text = tr(string.lower(mode))
 	end
 	hint.Text = tr("tool_hint")
+	mission.Text = tr(Interaction.mission(profile))
+	seedButton.Text = tr("choose_seed")
+	sellButton.Text = tr("sell_all")
 	if worldLanguage ~= language then
 		worldLanguage = language
 		refreshWorld()
@@ -552,13 +581,10 @@ task.spawn(function()
 						break
 					end
 				end
+				local _, _, actionKey =
+					Interaction.resolve(profile, targetCell:GetAttribute("Cell"), selectedSeed, os.time())
 				hint.Text = if plant
-					then tr(
-						"hover_growing",
-						name(plant.species),
-						math.floor(plant.progress * 100),
-						tr(string.lower(tool))
-					)
+					then tr("hover_growing", name(plant.species), math.floor(plant.progress * 100), tr(actionKey))
 					else tr("hover_plant", name(selectedSeed))
 			end
 		else
@@ -566,10 +592,50 @@ task.spawn(function()
 		end
 	end
 end)
+feedback = function(action, cell)
+	if
+		not effects
+		or not cell
+		or not currentSlot
+		or (action ~= "Plant" and action ~= "Water" and action ~= "Harvest")
+	then
+		return
+	end
+	local plot = world:FindFirstChild("Garden" .. currentSlot)
+	local soil = plot and plot:FindFirstChild("Soil" .. cell)
+	if not soil then
+		return
+	end
+	local origin = soil.Position
+	for i = 1, 6 do
+		local p = Instance.new("Part")
+		p.Name = "GardenFeedback"
+		p.Anchored = true
+		p.CanCollide = false
+		p.CanTouch = false
+		p.CanQuery = false
+		p.Shape = Enum.PartType.Ball
+		p.Size = Vector3.new(0.16, 0.25, 0.16)
+		p.Color = if action == "Water"
+			then Color3.fromRGB(116, 195, 225)
+			elseif action == "Harvest" then Color3.fromRGB(232, 203, 123)
+			else Color3.fromRGB(151, 185, 120)
+		local angle = i * math.pi / 3
+		p.Position = origin
+			+ Vector3.new(math.cos(angle) * 0.8, if action == "Water" then 2.5 else 0.7, math.sin(angle) * 0.8)
+		p.Parent = workspace
+		TweenService:Create(
+			p,
+			TweenInfo.new(0.6),
+			{ Position = p.Position + Vector3.new(0, if action == "Water" then -2 else 1.8, 0), Transparency = 1 }
+		):Play()
+		game:GetService("Debris"):AddItem(p, 0.7)
+	end
+end
 request("Sync", {})
 task.spawn(function()
 	while gui.Parent do
-		task.wait(4)
+		task.wait(1)
 		if not busy then
 			request("Sync", {})
 		end

@@ -7,6 +7,7 @@ local fields: { [string]: { string } } = {
 	Replant = { "id", "cell" },
 	Harvest = { "id" },
 	Sell = { "id" },
+	SellAll = {},
 	Favorite = { "id" },
 	Cross = { "id", "other" },
 	Research = { "id" },

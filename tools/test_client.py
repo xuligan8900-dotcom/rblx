@@ -12,6 +12,8 @@ local Languages=nativeRequire("../src/shared/Localization")
 local Genetics=nativeRequire("../src/shared/Genetics")
 local sim=nativeRequire("../src/shared/Simulation").new(Catalog,Genetics,function() return .5 end,function() return "id" end)
 local profile=sim.profile()
+local clock=100
+local os={time=function() return clock end}
 local function signal() return {Connect=function(self,fn) self.callback=fn; return {} end} end
 local methods={}
 local mt={__index=function(t,k) return methods[k] or t.props[k] end,__newindex=function(t,k,v) t.props[k]=v; if k=="Parent" and v then table.insert(v.children,t) end end}
@@ -34,10 +36,10 @@ Enum=setmetatable({},{__index=function(t,k) local v=setmetatable({},{__index=fun
 task={spawn=function() end,delay=function() end,defer=function(fn,...) fn(...) end}
 local playerGui=Instance.new("PlayerGui")
 local player={LocaleId="en-us",UserId=1,WaitForChild=function() return playerGui end}
-local shared={Catalog=Catalog,Localization=Languages}
+local shared={Catalog=Catalog,Localization=Languages,Interaction=nativeRequire("../src/shared/Interaction")}
 local remote={InvokeServer=function(self,action,args)
  local ok,msg=true,"ready"
- if action~="Sync" then ok,msg=sim.act(profile,action,args,100,"Sunny") end
+ if action~="Sync" then ok,msg=sim.act(profile,action,args,clock,"Sunny") end
  return {ok=ok,message=msg,profile=profile,weather="Sunny",temporary=true}
 end}
 local rs={Shared=shared,WaitForChild=function(self,key) return if key=="Shared" then shared else remote end}
@@ -47,6 +49,12 @@ workspace=Instance.new("Workspace")
 local world=Instance.new("Folder"); world.Name="MutationGarden"; world.Parent=workspace
 local sign=Instance.new("TextLabel"); sign:SetAttribute("LocaleKey","station_shop"); sign.Parent=world
 local prompt=Instance.new("ProximityPrompt"); prompt:SetAttribute("GardenScreen","research"); prompt.Parent=world
+local soil=Instance.new("Part"); soil:SetAttribute("Cell",1); soil:SetAttribute("Owner",1); soil.Parent=world
+Vector3={new=function(x,y,z) return setmetatable({X=x,Y=y,Z=z},{__mul=function(a,b) return a end}) end}
+RaycastParams={new=function() return {} end}
+workspace.CurrentCamera={ScreenPointToRay=function() return {Origin=Vector3.new(0,0,0),Direction=Vector3.new(0,0,1)} end}
+function workspace:Raycast() return {Instance=soil} end
+service.UserInputService.GetMouseLocation=function() return {X=100,Y=100} end
 local function require(value) return value end
 local function runClient()
 '''
@@ -62,7 +70,7 @@ assert(find(Languages.en.language)); find(Languages.en.language).Activated.callb
 assert(profile.settings.language=="ru" and profile.settings.languageChosen)
 assert(sign.Text==Languages.ru.station_shop)
 assert(prompt.ObjectText==Languages.ru.station_research and prompt.ActionText==Languages.ru.open)
-for _,key in {"garden","shop","inventory","research","collection","quests","settings","menu","home","plant","water","harvest"} do
+for _,key in {"garden","shop","inventory","research","collection","quests","settings","menu","home","auto","choose_seed","sell_all"} do
  assert(find(Languages.ru[key]),"Client failed to update: "..key)
 end
 assert(find(Languages.ru.language))
@@ -71,6 +79,16 @@ assert(find(Languages.text("ru","shop_item",Languages.ru.p01,Languages.ru.Common
 assert(not find("Settings") and not find("My garden"))
 assert(find("EN")); find("EN").Activated.callback(); assert(profile.settings.language=="en" and find("Settings"))
 print("PASS real client language callbacks refresh tabs, HUD, shop, world labels, prompts and saved preference using UI mocks")
+local function clickSoil() service.UserInputService.InputBegan.callback({UserInputType="MouseButton1"},false) end
+clickSoil(); assert(profile.stats.planted==1)
+clickSoil(); assert(profile.stats.watered==1)
+clickSoil(); assert(profile.stats.watered==1)
+clock=113; sim.advance(profile,clock,false)
+clickSoil(); assert(profile.stats.harvested==1)
+local coins=profile.coins
+assert(find(Languages.en.sell_all)); find(Languages.en.sell_all).Activated.callback()
+assert(profile.coins>coins and profile.stats.sold==1)
+print("PASS real client click callbacks perform plant, water, harvest and one-button sale with mocked raycast/services")
 '''
 f=root/'build/ClientLocaleTests.luau';f.write_text(pre+source+post)
 subprocess.run([str(root/'.tools/bin/luau'),str(f)],cwd=root,check=True)

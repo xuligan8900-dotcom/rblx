@@ -44,3 +44,4 @@ Source: src/shared/Catalog.luau. tools/catalog.json is its authoring mirror. Gro
 |p38|Glass Poppy|5|50|157|5|59|5618|Crystal Valley|
 |p39|Dusk Fig|3|65|203|6|77|7040|Mushroom Forest|
 |p40|Comet Peony|11|68|209|6|80|7097|Cosmic Conservatory|
+First-session exception: the first three seeds planted by a profile use a duration of min(12, species base seconds), before genome and water bonuses. This ends after three seed placements. Replanting does not repeat this introductory speed boost. The table above represents regular farming.

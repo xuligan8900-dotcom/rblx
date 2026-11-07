@@ -1,6 +1,18 @@
 --!strict
 local L = {}
 L.en = {
+	["auto"] = "Interact",
+	["choose_seed"] = "Choose seeds",
+	["sell_all"] = "Sell harvest",
+	["growing_hint"] = "Watered · growing. Plant another seed while you wait.",
+	["mission_plant"] = "YOUR FIRST GARDEN\nClick an empty soil square to plant your first seed.",
+	["mission_water"] = "HELP IT GROW\nClick the seedling to water it. Watch the soil turn dark.",
+	["mission_harvest"] = "FIRST HARVEST\nThe first three seeds grow quickly. Click a mature plant to collect it.",
+	["mission_sell"] = "YOUR FIRST PROFIT\nPress Sell harvest. Protected specimens will stay in your collection.",
+	["mission_experiment"] = "TRY A NEW COMBINATION\nBuy another seed, or keep two matching specimens for the genetics lab.",
+	["error_nothing_sell"] = "No unprotected harvest to sell",
+	["sold_all"] = "Harvest sold. Coins added.",
+
 	["title"] = "MUTATION GARDEN",
 	["subtitle"] = "GENETIC PARADISE",
 	["garden"] = "Garden",
@@ -206,6 +218,18 @@ L.en = {
 	["Economy6"] = "Economy 6",
 }
 L.ru = {
+	["auto"] = "Действовать",
+	["choose_seed"] = "Выбрать семена",
+	["sell_all"] = "Продать урожай",
+	["growing_hint"] = "Полито · растёт. Пока можно посадить ещё семена.",
+	["mission_plant"] = "ПЕРВЫЙ САД\nНажмите на пустую клетку грядки, чтобы посадить семена.",
+	["mission_water"] = "ПОМОГИТЕ РАСТЕНИЮ\nНажмите на росток, чтобы полить его. Земля потемнеет.",
+	["mission_harvest"] = "ПЕРВЫЙ УРОЖАЙ\nПервые три растения растут быстрее. Нажмите на созревшее, чтобы собрать его.",
+	["mission_sell"] = "ПЕРВАЯ ПРИБЫЛЬ\nНажмите «Продать урожай». Защищённые растения останутся у вас.",
+	["mission_experiment"] = "ПОПРОБУЙТЕ НОВОЕ\nКупите другие семена или оставьте два растения одного типа для лаборатории.",
+	["error_nothing_sell"] = "Нет незащищённого урожая для продажи",
+	["sold_all"] = "Урожай продан. Монеты начислены.",
+
 	["title"] = "САД МУТАЦИЙ",
 	["subtitle"] = "ГЕНЕТИЧЕСКИЙ РАЙ",
 	["garden"] = "Сад",

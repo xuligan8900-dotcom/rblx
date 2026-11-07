@@ -773,6 +773,10 @@ function World:model(plant, cfg, position, stage, parent, phenotype)
 end
 function World:render(index, profile, sim, genetics)
 	local plot = self.plots[index]
+	local planted = {}
+	for _, plant in profile.plants do
+		planted[plant.cell] = plant
+	end
 	for i = 1, self.catalog.expansions[profile.expansion] do
 		if not plot.cells[i] then
 			local cell = part(
@@ -798,6 +802,11 @@ function World:render(index, profile, sim, genetics)
 			cell:SetAttribute("Owner", plot.owner.UserId)
 			plot.cells[i] = cell
 		end
+	end
+	for cellIndex, soil in plot.cells do
+		local plant = planted[cellIndex]
+		local wet = plant and plant.waterUntil > os.time()
+		soil.Color = if wet then Color3.fromRGB(64, 47, 34) else Color3.fromRGB(105, 78, 59)
 	end
 	for id, m in self.visuals do
 		if m.Parent == plot.model and not profile.plants[id] then

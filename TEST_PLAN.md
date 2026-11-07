@@ -32,3 +32,7 @@ NOT RUN: rendered appearance, actual raycast coordinates at different GUI insets
 PASS: EN/RU key parity for 203 entries, matching format arguments, coverage of all current catalogs and locale detection; validated server-side preference updates; actual client script callbacks under UI/service mocks update tabs, controls, shop, world labels and prompts in both directions. These are not visual Studio tests. Total current test groups: 30.
 
 NOT RUN: open v4 in Studio, press RU, verify every menu and world prompt, return to EN, test two clients with different languages, check narrow-screen wrapping, then verify manual selection survives a real DataStore save/rejoin. Local unpublished sessions intentionally reset settings. Review Future lighting, detailed-leaf trees, Terrain perimeter hills and runtime costs on actual devices. No graphical acceptance is claimed.
+
+## Interaction rework
+
+PASS: contextual action resolution and early-growth full first-session flow, guarded watering counter, exact bulk-sale pricing/protected items/duplicate requests, older-profile stats initialization/corruption checks. Actual client callback tests with mocked raycast/services perform the new click flow. Total: 34 local test groups. NOT RUN: actual Studio input, droplet/harvest effects, visible soil change, first-session pacing and user acceptance. No graphical improvement is claimed by these tests.

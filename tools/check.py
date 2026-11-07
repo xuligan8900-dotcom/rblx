@@ -12,6 +12,7 @@ for path in sorted((ROOT/'src').rglob('*.luau')):
 run('stylua','--syntax','Luau','--check','src','tests')
 run('luau','tests/run.luau')
 run('luau','tests/localization.luau')
+run('luau','tests/first_session.luau')
 subprocess.run([sys.executable, str(ROOT/'tools/test_profiles.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable, str(ROOT/'tools/test_world.py')],cwd=ROOT,check=True)
 subprocess.run([sys.executable, str(ROOT/'tools/test_client.py')],cwd=ROOT,check=True)

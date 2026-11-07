@@ -43,3 +43,7 @@ The latest art revision is in downloads/MutationGarden-v3.zip (open MutationGard
 ## Russian interface update
 
 Use the RU button at the top right to switch the current interface to Russian (the button then reads EN). The same switch is in Settings. Existing tabs, tools, hints, plant names, shop/research/collection, notifications, world signs and prompts now use centralized EN/RU keys. A manual language choice is saved in the profile when real DataStore saves are available. Unpublished local test mode resets preferences when stopped. Initial language follows the Roblox player's locale. The current download is downloads/MutationGarden-v4.zip containing MutationGarden-v4.rbxlx.
+
+## Current test build: interaction rework
+
+Download downloads/MutationGarden-v5.zip and open MutationGarden-v5.rbxlx. Click an empty nearby soil cell to plant, click the seedling to water, and click the mature plant to collect. No tool switching is necessary. First three plants grow faster. Choose seeds opens the seed selector; Sell harvest sells all unprotected harvested specimens once. Protect any parents you want to retain for crossing. The objective card explains the first sequence. RU/EN remains in the top-right corner. Source gameplay checks pass locally; realistic art and Studio playability acceptance are still outstanding.

@@ -32,6 +32,7 @@ function S.new(catalog, genetics, random, uuid)
 			tutorial = 1,
 			settings = { language = "auto", effects = true },
 			savedAt = 0,
+			stats = { planted = 0, watered = 0, harvested = 0, sold = 0 },
 		}
 	end
 	function api.validate(p)
@@ -133,6 +134,30 @@ function S.new(catalog, genetics, random, uuid)
 				end
 			end
 		end
+		if p.stats ~= nil then
+			if type(p.stats) ~= "table" then
+				return false
+			end
+			for _, k in { "planted", "watered", "harvested", "sold" } do
+				local v = p.stats[k]
+				if type(v) ~= "number" or v < 0 or v % 1 ~= 0 or v == math.huge then
+					return false
+				end
+			end
+		end
+		for _, plant in p.plants do
+			if
+				plant.baseSeconds ~= nil
+				and (
+					type(plant.baseSeconds) ~= "number"
+					or plant.baseSeconds <= 0
+					or plant.baseSeconds > species[plant.species].seconds
+					or plant.baseSeconds ~= plant.baseSeconds
+				)
+			then
+				return false
+			end
+		end
 		local cells = {}
 		for _, plant in p.plants do
 			if plant.cell < 1 or plant.cell > catalog.expansions[p.expansion] or cells[plant.cell] then
@@ -194,7 +219,7 @@ function S.new(catalog, genetics, random, uuid)
 					end
 				end
 			end
-			plant.progress = math.min(1, plant.progress + (dt + wet * 0.4) * speed / c.seconds)
+			plant.progress = math.min(1, plant.progress + (dt + wet * 0.4) * speed / (plant.baseSeconds or c.seconds))
 			plant.updated = math.max(plant.updated, now)
 		end
 	end
@@ -234,6 +259,7 @@ function S.new(catalog, genetics, random, uuid)
 	end
 	function api.act(p, action, args, now, weather)
 		api.advance(p, now, false)
+		p.stats = p.stats or { planted = 0, watered = 0, harvested = 0, sold = 0 }
 		if action == "Buy" then
 			local c = species[args.id]
 			if not c or c.biome > api.biome(p) or c.level > api.level(p) then
@@ -274,10 +300,12 @@ function S.new(catalog, genetics, random, uuid)
 				genome = genetics.create(random),
 				mutations = {},
 				seed = math.floor(random() * 1000000),
+				baseSeconds = if p.stats.planted < 3 then math.min(12, c.seconds) else c.seconds,
 				progress = 0,
 				updated = now,
 				waterUntil = 0,
 			}
+			p.stats.planted += 1
 			p.tutorial = math.max(p.tutorial, 2)
 		elseif action == "Replant" then
 			local plant = p.harvest[args.id]
@@ -303,11 +331,17 @@ function S.new(catalog, genetics, random, uuid)
 			plant.progress = 0
 			plant.updated = math.max(plant.updated, now)
 			plant.waterUntil = 0
+			plant.baseSeconds = species[plant.species].seconds
+			plant.watered = nil
 			plant.amount = nil
 		elseif action == "Water" then
 			local plant = p.plants[args.id]
 			if not plant then
 				return false, "error_plant_missing"
+			end
+			if not plant.watered then
+				p.stats.watered += 1
+				plant.watered = true
 			end
 			plant.waterUntil = now + 120
 			p.tutorial = math.max(p.tutorial, 3)
@@ -346,6 +380,7 @@ function S.new(catalog, genetics, random, uuid)
 			end
 			p.plants[args.id] = nil
 			p.harvest[args.id] = plant
+			p.stats.harvested += 1
 			p.xp += 10
 			p.quest += 1
 			if not p.collection[plant.species] then
@@ -367,7 +402,31 @@ function S.new(catalog, genetics, random, uuid)
 			end
 			p.coins = math.min(1e9, p.coins + math.floor(api.price(plant) * (1 + bonus)))
 			p.harvest[args.id] = nil
+			p.stats.sold += 1
 			p.tutorial = math.max(p.tutorial, 5)
+		elseif action == "SellAll" then
+			local bonus = 0
+			for i = 1, 6 do
+				if p.research["Economy" .. i] then
+					bonus += 0.04
+				end
+			end
+			local countSold = 0
+			local total = 0
+			for id, plant in p.harvest do
+				if not plant.favorite then
+					total += math.floor(api.price(plant) * (1 + bonus))
+					p.harvest[id] = nil
+					countSold += 1
+				end
+			end
+			if countSold == 0 then
+				return false, "error_nothing_sell"
+			end
+			p.coins = math.min(1e9, p.coins + total)
+			p.stats.sold += countSold
+			p.tutorial = math.max(p.tutorial, 5)
+			return true, "sold_all"
 		elseif action == "Favorite" then
 			local plant = p.harvest[args.id]
 			if not plant then
