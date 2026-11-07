@@ -130,6 +130,7 @@ remote.OnServerInvoke = function(player, action, args)
 		slot = slots[player],
 		weather = weather,
 		weatherUntil = weatherUntil,
+		temporary = profiles.temporary,
 	}
 end
 Players.PlayerAdded:Connect(join)

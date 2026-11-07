@@ -143,13 +143,14 @@ request = function(action, args)
 	notice.Text = result.message
 	if result.profile then
 		profile = result.profile
-		status.Text = string.format(
-			"%d Coins  •  %d RP  •  Level %d  •  %s",
-			profile.coins,
-			profile.rp,
-			1 + math.floor(profile.xp / 50),
-			result.weather
-		)
+		status.Text = (if result.temporary then "LOCAL TEST · NO SAVES | " else "")
+			.. string.format(
+				"%d Coins  •  %d RP  •  Level %d  •  %s",
+				profile.coins,
+				profile.rp,
+				1 + math.floor(profile.xp / 50),
+				result.weather
+			)
 		render()
 	end
 end

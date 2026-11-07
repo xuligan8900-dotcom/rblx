@@ -16,3 +16,7 @@
 ## NOT IMPLEMENTED / NOT RUN
 
 Trade reservation/commit and crash recovery, receipt idempotency, product grants, historical migrations, daily/weekly rotation, full tutorial skipping and persistent preferences. Do not treat absent tests as passing or publish monetization/trading without those systems.
+
+## Local Studio mode regression
+
+Three additional mocked-service checks execute the real Profiles source: unpublished Studio makes zero DataStore calls and resets on rejoin; published Studio and live servers select DataStore; published API failures do not fall back to temporary profiles. These are not Roblox integration tests. Actual Studio mode and HUD remain NOT RUN here.

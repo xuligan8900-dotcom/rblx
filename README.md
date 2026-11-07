@@ -15,6 +15,8 @@ python3 tools/check.py
 
 Open `build/MutationGarden.rbxlx` in Roblox Studio, or install the official matching Rojo Studio plugin and connect to Rojo on port 34872. No Roblox asset IDs are required. On other operating systems install the same vendor tool versions for that platform; bootstrap.py targets Linux only.
 
+**Quick local play:** open the built place and press Play. In an unpublished place running inside Studio only, progress is temporary and the HUD displays `LOCAL TEST · NO SAVES`. No publication or API access is needed for that mode. Stopping the session resets the garden. Published places and live servers never fall back to temporary profiles.
+
 For DataStore testing publish a **private test experience** and enable Game Settings → Security → Enable Studio Access to API Services. Use a test universe, never production data. Set maximum server size to 8 in experience settings. API failure intentionally prevents loading rather than silently issuing a replacement profile. Start a server with two clients from Studio's Test controls. See TEST_PLAN.md.
 
 Use the Garden tab to choose seeds, plant into numbered cells, water and harvest. Buy seeds in Seeds. Sell or protect specimens in Specimens; select two with matching architecture to cross for 30 Coins. Parents are consumed. Replant a specimen to grow its inherited genome. Research spends RP; quests reward accumulated harvest milestones. Settings expands the garden. Close the panel to walk around. Other gardens are visible but cannot be modified through this API.

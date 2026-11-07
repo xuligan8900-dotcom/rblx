@@ -4,8 +4,16 @@ local HttpService = game:GetService("HttpService")
 local Profiles = {}
 Profiles.__index = Profiles
 function Profiles.new(sim)
+	local temporary = game:GetService("RunService"):IsStudio() and game.GameId == 0
+	local store = nil
+	if temporary then
+		warn("LOCAL STUDIO TEST: unpublished place; progress is temporary and resets when testing stops.")
+	else
+		store = DataStoreService:GetDataStore("MutationGarden_v1")
+	end
 	return setmetatable({
-		store = DataStoreService:GetDataStore("MutationGarden_v1"),
+		store = store,
+		temporary = temporary,
 		sim = sim,
 		loaded = {},
 		token = game.JobId .. HttpService:GenerateGUID(false),
@@ -13,6 +21,11 @@ function Profiles.new(sim)
 	}, Profiles)
 end
 function Profiles:load(player)
+	if self.temporary then
+		local p = self.sim.profile()
+		self.loaded[player] = p
+		return p
+	end
 	local key = tostring(player.UserId)
 	local now = os.time()
 	local accepted = false
@@ -39,6 +52,16 @@ function Profiles:load(player)
 	return p
 end
 function Profiles:save(player, release)
+	if self.temporary then
+		if not self.loaded[player] then
+			return false
+		end
+		if release then
+			self.loaded[player] = nil
+		end
+		-- Successful temporary-state lifecycle, not a durable save.
+		return true
+	end
 	if self.busy[player] then
 		return false
 	end
