@@ -1,0 +1,2465 @@
+<roblox version="4">
+  <Item class="Lighting" referent="0">
+    <Properties>
+      <string name="Name">Lighting</string>
+      <float name="Brightness">2</float>
+      <float name="ClockTime">14</float>
+    </Properties>
+  </Item>
+  <Item class="ReplicatedStorage" referent="1">
+    <Properties>
+      <string name="Name">ReplicatedStorage</string>
+    </Properties>
+    <Item class="Folder" referent="2">
+      <Properties>
+        <string name="Name">Shared</string>
+      </Properties>
+      <Item class="ModuleScript" referent="3">
+        <Properties>
+          <string name="Name">Catalog</string>
+          <string name="Source"><![CDATA[--!strict
+return {
+	["plants"] = {
+		{
+			["id"] = "p01",
+			["name"] = "Sunny Daisy",
+			["biome"] = 1,
+			["rarity"] = "Common",
+			["archetype"] = "Flower",
+			["price"] = 8,
+			["seconds"] = 25,
+			["yieldCount"] = 2,
+			["value"] = 8,
+			["hue"] = 0.0,
+			["level"] = 1,
+		},
+		{
+			["id"] = "p02",
+			["name"] = "Mint Sprout",
+			["biome"] = 1,
+			["rarity"] = "Common",
+			["archetype"] = "Bush",
+			["price"] = 11,
+			["seconds"] = 31,
+			["yieldCount"] = 2,
+			["value"] = 11,
+			["hue"] = 0.137,
+			["level"] = 1,
+		},
+		{
+			["id"] = "p03",
+			["name"] = "Pebble Cactus",
+			["biome"] = 1,
+			["rarity"] = "Common",
+			["archetype"] = "Cactus",
+			["price"] = 14,
+			["seconds"] = 37,
+			["yieldCount"] = 2,
+			["value"] = 14,
+			["hue"] = 0.274,
+			["level"] = 1,
+		},
+		{
+			["id"] = "p04",
+			["name"] = "Honey Tulip",
+			["biome"] = 1,
+			["rarity"] = "Common",
+			["archetype"] = "Flower",
+			["price"] = 17,
+			["seconds"] = 43,
+			["yieldCount"] = 2,
+			["value"] = 17,
+			["hue"] = 0.411,
+			["level"] = 1,
+		},
+		{
+			["id"] = "p05",
+			["name"] = "Soft Fern",
+			["biome"] = 1,
+			["rarity"] = "Common",
+			["archetype"] = "Vine",
+			["price"] = 20,
+			["seconds"] = 49,
+			["yieldCount"] = 2,
+			["value"] = 20,
+			["hue"] = 0.548,
+			["level"] = 1,
+		},
+		{
+			["id"] = "p06",
+			["name"] = "Blueberry Lantern",
+			["biome"] = 2,
+			["rarity"] = "Uncommon",
+			["archetype"] = "Bush",
+			["price"] = 20,
+			["seconds"] = 65,
+			["yieldCount"] = 3,
+			["value"] = 23,
+			["hue"] = 0.685,
+			["level"] = 3,
+		},
+		{
+			["id"] = "p07",
+			["name"] = "Velvet Rose",
+			["biome"] = 2,
+			["rarity"] = "Uncommon",
+			["archetype"] = "Flower",
+			["price"] = 23,
+			["seconds"] = 71,
+			["yieldCount"] = 3,
+			["value"] = 26,
+			["hue"] = 0.822,
+			["level"] = 3,
+		},
+		{
+			["id"] = "p08",
+			["name"] = "Moon Mint",
+			["biome"] = 2,
+			["rarity"] = "Uncommon",
+			["archetype"] = "Bush",
+			["price"] = 26,
+			["seconds"] = 77,
+			["yieldCount"] = 3,
+			["value"] = 29,
+			["hue"] = 0.959,
+			["level"] = 3,
+		},
+		{
+			["id"] = "p09",
+			["name"] = "Amber Lily",
+			["biome"] = 2,
+			["rarity"] = "Uncommon",
+			["archetype"] = "Aquatic",
+			["price"] = 29,
+			["seconds"] = 83,
+			["yieldCount"] = 3,
+			["value"] = 32,
+			["hue"] = 0.096,
+			["level"] = 3,
+		},
+		{
+			["id"] = "p10",
+			["name"] = "Twinkle Moss",
+			["biome"] = 2,
+			["rarity"] = "Uncommon",
+			["archetype"] = "Exotic",
+			["price"] = 32,
+			["seconds"] = 89,
+			["yieldCount"] = 3,
+			["value"] = 35,
+			["hue"] = 0.233,
+			["level"] = 3,
+		},
+		{
+			["id"] = "p11",
+			["name"] = "Crystal Orchid",
+			["biome"] = 3,
+			["rarity"] = "Rare",
+			["archetype"] = "Crystal",
+			["price"] = 32,
+			["seconds"] = 105,
+			["yieldCount"] = 4,
+			["value"] = 38,
+			["hue"] = 0.37,
+			["level"] = 5,
+		},
+		{
+			["id"] = "p12",
+			["name"] = "Ember Fern",
+			["biome"] = 3,
+			["rarity"] = "Rare",
+			["archetype"] = "Vine",
+			["price"] = 35,
+			["seconds"] = 111,
+			["yieldCount"] = 4,
+			["value"] = 41,
+			["hue"] = 0.507,
+			["level"] = 5,
+		},
+		{
+			["id"] = "p13",
+			["name"] = "Frost Lily",
+			["biome"] = 3,
+			["rarity"] = "Rare",
+			["archetype"] = "Flower",
+			["price"] = 38,
+			["seconds"] = 117,
+			["yieldCount"] = 4,
+			["value"] = 44,
+			["hue"] = 0.644,
+			["level"] = 5,
+		},
+		{
+			["id"] = "p14",
+			["name"] = "Cloud Vine",
+			["biome"] = 3,
+			["rarity"] = "Rare",
+			["archetype"] = "Vine",
+			["price"] = 41,
+			["seconds"] = 123,
+			["yieldCount"] = 4,
+			["value"] = 47,
+			["hue"] = 0.781,
+			["level"] = 5,
+		},
+		{
+			["id"] = "p15",
+			["name"] = "Echo Mushroom",
+			["biome"] = 3,
+			["rarity"] = "Rare",
+			["archetype"] = "Mushroom",
+			["price"] = 44,
+			["seconds"] = 129,
+			["yieldCount"] = 4,
+			["value"] = 50,
+			["hue"] = 0.918,
+			["level"] = 5,
+		},
+		{
+			["id"] = "p16",
+			["name"] = "Thunder Blossom",
+			["biome"] = 4,
+			["rarity"] = "Epic",
+			["archetype"] = "Exotic",
+			["price"] = 44,
+			["seconds"] = 145,
+			["yieldCount"] = 5,
+			["value"] = 53,
+			["hue"] = 0.055,
+			["level"] = 7,
+		},
+		{
+			["id"] = "p17",
+			["name"] = "Aurora Lotus",
+			["biome"] = 4,
+			["rarity"] = "Epic",
+			["archetype"] = "Aquatic",
+			["price"] = 47,
+			["seconds"] = 151,
+			["yieldCount"] = 5,
+			["value"] = 56,
+			["hue"] = 0.192,
+			["level"] = 7,
+		},
+		{
+			["id"] = "p18",
+			["name"] = "Phantom Rose",
+			["biome"] = 4,
+			["rarity"] = "Epic",
+			["archetype"] = "Flower",
+			["price"] = 50,
+			["seconds"] = 157,
+			["yieldCount"] = 5,
+			["value"] = 59,
+			["hue"] = 0.329,
+			["level"] = 7,
+		},
+		{
+			["id"] = "p19",
+			["name"] = "Solar Orchid",
+			["biome"] = 4,
+			["rarity"] = "Epic",
+			["archetype"] = "Flower",
+			["price"] = 53,
+			["seconds"] = 163,
+			["yieldCount"] = 5,
+			["value"] = 62,
+			["hue"] = 0.466,
+			["level"] = 7,
+		},
+		{
+			["id"] = "p20",
+			["name"] = "Starberry",
+			["biome"] = 4,
+			["rarity"] = "Epic",
+			["archetype"] = "Bush",
+			["price"] = 56,
+			["seconds"] = 169,
+			["yieldCount"] = 5,
+			["value"] = 65,
+			["hue"] = 0.603,
+			["level"] = 7,
+		},
+		{
+			["id"] = "p21",
+			["name"] = "Celestial Lotus",
+			["biome"] = 5,
+			["rarity"] = "Legendary",
+			["archetype"] = "Aquatic",
+			["price"] = 56,
+			["seconds"] = 185,
+			["yieldCount"] = 6,
+			["value"] = 68,
+			["hue"] = 0.74,
+			["level"] = 9,
+		},
+		{
+			["id"] = "p22",
+			["name"] = "Void Orchid",
+			["biome"] = 5,
+			["rarity"] = "Legendary",
+			["archetype"] = "Crystal",
+			["price"] = 59,
+			["seconds"] = 191,
+			["yieldCount"] = 6,
+			["value"] = 71,
+			["hue"] = 0.877,
+			["level"] = 9,
+		},
+		{
+			["id"] = "p23",
+			["name"] = "Phoenix Bloom",
+			["biome"] = 5,
+			["rarity"] = "Legendary",
+			["archetype"] = "Flower",
+			["price"] = 62,
+			["seconds"] = 197,
+			["yieldCount"] = 6,
+			["value"] = 74,
+			["hue"] = 0.014,
+			["level"] = 9,
+		},
+		{
+			["id"] = "p24",
+			["name"] = "Dragon Root",
+			["biome"] = 5,
+			["rarity"] = "Legendary",
+			["archetype"] = "Cactus",
+			["price"] = 65,
+			["seconds"] = 203,
+			["yieldCount"] = 6,
+			["value"] = 77,
+			["hue"] = 0.151,
+			["level"] = 9,
+		},
+		{
+			["id"] = "p25",
+			["name"] = "Prism Tree",
+			["biome"] = 5,
+			["rarity"] = "Legendary",
+			["archetype"] = "Tree",
+			["price"] = 68,
+			["seconds"] = 209,
+			["yieldCount"] = 6,
+			["value"] = 80,
+			["hue"] = 0.288,
+			["level"] = 9,
+		},
+		{
+			["id"] = "p26",
+			["name"] = "Genesis Flower",
+			["biome"] = 6,
+			["rarity"] = "Mythic",
+			["archetype"] = "Exotic",
+			["price"] = 68,
+			["seconds"] = 225,
+			["yieldCount"] = 7,
+			["value"] = 83,
+			["hue"] = 0.425,
+			["level"] = 11,
+		},
+		{
+			["id"] = "p27",
+			["name"] = "Infinite Bloom",
+			["biome"] = 6,
+			["rarity"] = "Mythic",
+			["archetype"] = "Flower",
+			["price"] = 71,
+			["seconds"] = 231,
+			["yieldCount"] = 7,
+			["value"] = 86,
+			["hue"] = 0.562,
+			["level"] = 11,
+		},
+		{
+			["id"] = "p28",
+			["name"] = "Astral Heart",
+			["biome"] = 6,
+			["rarity"] = "Mythic",
+			["archetype"] = "Exotic",
+			["price"] = 74,
+			["seconds"] = 237,
+			["yieldCount"] = 7,
+			["value"] = 89,
+			["hue"] = 0.699,
+			["level"] = 11,
+		},
+		{
+			["id"] = "p29",
+			["name"] = "Chrono Orchid",
+			["biome"] = 6,
+			["rarity"] = "Mythic",
+			["archetype"] = "Flower",
+			["price"] = 77,
+			["seconds"] = 243,
+			["yieldCount"] = 7,
+			["value"] = 92,
+			["hue"] = 0.836,
+			["level"] = 11,
+		},
+		{
+			["id"] = "p30",
+			["name"] = "Reality Vine",
+			["biome"] = 6,
+			["rarity"] = "Mythic",
+			["archetype"] = "Vine",
+			["price"] = 80,
+			["seconds"] = 249,
+			["yieldCount"] = 7,
+			["value"] = 95,
+			["hue"] = 0.973,
+			["level"] = 11,
+		},
+		{
+			["id"] = "p31",
+			["name"] = "Dewbell",
+			["biome"] = 1,
+			["rarity"] = "Common",
+			["archetype"] = "Flower",
+			["price"] = 8,
+			["seconds"] = 25,
+			["yieldCount"] = 2,
+			["value"] = 8,
+			["hue"] = 0.11,
+			["level"] = 1,
+		},
+		{
+			["id"] = "p32",
+			["name"] = "Copper Clover",
+			["biome"] = 1,
+			["rarity"] = "Common",
+			["archetype"] = "Bush",
+			["price"] = 11,
+			["seconds"] = 31,
+			["yieldCount"] = 2,
+			["value"] = 11,
+			["hue"] = 0.247,
+			["level"] = 1,
+		},
+		{
+			["id"] = "p33",
+			["name"] = "Coral Willow",
+			["biome"] = 2,
+			["rarity"] = "Uncommon",
+			["archetype"] = "Tree",
+			["price"] = 26,
+			["seconds"] = 77,
+			["yieldCount"] = 3,
+			["value"] = 29,
+			["hue"] = 0.384,
+			["level"] = 3,
+		},
+		{
+			["id"] = "p34",
+			["name"] = "Opal Cap",
+			["biome"] = 3,
+			["rarity"] = "Uncommon",
+			["archetype"] = "Mushroom",
+			["price"] = 29,
+			["seconds"] = 83,
+			["yieldCount"] = 3,
+			["value"] = 32,
+			["hue"] = 0.521,
+			["level"] = 5,
+		},
+		{
+			["id"] = "p35",
+			["name"] = "Cinder Aloe",
+			["biome"] = 4,
+			["rarity"] = "Rare",
+			["archetype"] = "Cactus",
+			["price"] = 44,
+			["seconds"] = 129,
+			["yieldCount"] = 4,
+			["value"] = 50,
+			["hue"] = 0.658,
+			["level"] = 7,
+		},
+		{
+			["id"] = "p36",
+			["name"] = "Snowdrop Palm",
+			["biome"] = 5,
+			["rarity"] = "Rare",
+			["archetype"] = "Tree",
+			["price"] = 32,
+			["seconds"] = 105,
+			["yieldCount"] = 4,
+			["value"] = 38,
+			["hue"] = 0.795,
+			["level"] = 9,
+		},
+		{
+			["id"] = "p37",
+			["name"] = "Nebula Reed",
+			["biome"] = 6,
+			["rarity"] = "Epic",
+			["archetype"] = "Aquatic",
+			["price"] = 47,
+			["seconds"] = 151,
+			["yieldCount"] = 5,
+			["value"] = 56,
+			["hue"] = 0.932,
+			["level"] = 11,
+		},
+		{
+			["id"] = "p38",
+			["name"] = "Glass Poppy",
+			["biome"] = 3,
+			["rarity"] = "Epic",
+			["archetype"] = "Crystal",
+			["price"] = 50,
+			["seconds"] = 157,
+			["yieldCount"] = 5,
+			["value"] = 59,
+			["hue"] = 0.069,
+			["level"] = 5,
+		},
+		{
+			["id"] = "p39",
+			["name"] = "Dusk Fig",
+			["biome"] = 2,
+			["rarity"] = "Legendary",
+			["archetype"] = "Tree",
+			["price"] = 65,
+			["seconds"] = 203,
+			["yieldCount"] = 6,
+			["value"] = 77,
+			["hue"] = 0.206,
+			["level"] = 3,
+		},
+		{
+			["id"] = "p40",
+			["name"] = "Comet Peony",
+			["biome"] = 6,
+			["rarity"] = "Legendary",
+			["archetype"] = "Flower",
+			["price"] = 68,
+			["seconds"] = 209,
+			["yieldCount"] = 6,
+			["value"] = 80,
+			["hue"] = 0.343,
+			["level"] = 11,
+		},
+	},
+	["biomes"] = {
+		"Green Meadows",
+		"Mushroom Forest",
+		"Crystal Valley",
+		"Volcanic Greenhouse",
+		"Frozen Oasis",
+		"Cosmic Conservatory",
+	},
+	["expansions"] = { 12, 24, 48, 72, 96 },
+	["maxPlayers"] = 8,
+	["offlineCap"] = 28800,
+	["inventoryCap"] = 400,
+	["weather"] = { "Sunny", "Rain", "Storm", "Fog", "Frost", "Meteor Shower", "Aurora", "Pollen Wind" },
+	["mutations"] = {
+		{
+			["id"] = "Golden",
+			["name"] = "Golden",
+			["probability"] = 0.018,
+			["value"] = 0.15,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 0,
+		},
+		{
+			["id"] = "Silver",
+			["name"] = "Silver",
+			["probability"] = 0.013333,
+			["value"] = 0.21,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 0,
+		},
+		{
+			["id"] = "Rainbow",
+			["name"] = "Rainbow",
+			["probability"] = 0.010588,
+			["value"] = 0.27,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 0,
+		},
+		{
+			["id"] = "Crystal",
+			["name"] = "Crystal",
+			["probability"] = 0.00878,
+			["value"] = 0.33,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 0,
+		},
+		{
+			["id"] = "Neon",
+			["name"] = "Neon",
+			["probability"] = 0.0075,
+			["value"] = 0.39,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 0,
+		},
+		{
+			["id"] = "Frozen",
+			["name"] = "Frozen",
+			["probability"] = 0.006545,
+			["value"] = 0.45,
+			["size"] = 1,
+			["growth"] = 0.85,
+			["yieldBonus"] = 0,
+			["biome"] = 6,
+		},
+		{
+			["id"] = "Burning",
+			["name"] = "Burning",
+			["probability"] = 0.005806,
+			["value"] = 0.51,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 1,
+		},
+		{
+			["id"] = "Glowing",
+			["name"] = "Glowing",
+			["probability"] = 0.005217,
+			["value"] = 0.57,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 2,
+		},
+		{
+			["id"] = "Giant",
+			["name"] = "Giant",
+			["probability"] = 0.004737,
+			["value"] = 0.63,
+			["size"] = 1.8,
+			["growth"] = 1,
+			["yieldBonus"] = 2,
+			["biome"] = 3,
+		},
+		{
+			["id"] = "Miniature",
+			["name"] = "Miniature",
+			["probability"] = 0.004337,
+			["value"] = 0.69,
+			["size"] = 0.55,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 4,
+		},
+		{
+			["id"] = "Shadow",
+			["name"] = "Shadow",
+			["probability"] = 0.004,
+			["value"] = 0.75,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 5,
+		},
+		{
+			["id"] = "Celestial",
+			["name"] = "Celestial",
+			["probability"] = 0.003711,
+			["value"] = 0.81,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 6,
+		},
+		{
+			["id"] = "Toxic",
+			["name"] = "Toxic",
+			["probability"] = 0.003462,
+			["value"] = 0.87,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 1,
+		},
+		{
+			["id"] = "Electric",
+			["name"] = "Electric",
+			["probability"] = 0.003243,
+			["value"] = 0.93,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 2,
+		},
+		{
+			["id"] = "Lunar",
+			["name"] = "Lunar",
+			["probability"] = 0.003051,
+			["value"] = 0.99,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 3,
+		},
+		{
+			["id"] = "Solar",
+			["name"] = "Solar",
+			["probability"] = 0.00288,
+			["value"] = 1.05,
+			["size"] = 1,
+			["growth"] = 1.15,
+			["yieldBonus"] = 0,
+			["biome"] = 4,
+		},
+		{
+			["id"] = "Phantom",
+			["name"] = "Phantom",
+			["probability"] = 0.002727,
+			["value"] = 1.11,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 5,
+		},
+		{
+			["id"] = "Prismatic",
+			["name"] = "Prismatic",
+			["probability"] = 0.00259,
+			["value"] = 1.17,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 6,
+		},
+		{
+			["id"] = "Ancient",
+			["name"] = "Ancient",
+			["probability"] = 0.002466,
+			["value"] = 1.23,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 1,
+		},
+		{
+			["id"] = "Cosmic",
+			["name"] = "Cosmic",
+			["probability"] = 0.002353,
+			["value"] = 1.29,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 2,
+		},
+		{
+			["id"] = "Radioactive",
+			["name"] = "Radioactive",
+			["probability"] = 0.00225,
+			["value"] = 1.35,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 3,
+		},
+		{
+			["id"] = "Dreamlike",
+			["name"] = "Dreamlike",
+			["probability"] = 0.002156,
+			["value"] = 1.41,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 4,
+		},
+		{
+			["id"] = "Void",
+			["name"] = "Void",
+			["probability"] = 0.002069,
+			["value"] = 1.47,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 5,
+		},
+		{
+			["id"] = "Genesis",
+			["name"] = "Genesis",
+			["probability"] = 0.001989,
+			["value"] = 1.53,
+			["size"] = 1,
+			["growth"] = 1,
+			["yieldBonus"] = 0,
+			["biome"] = 6,
+		},
+	},
+	["research"] = {
+		{ ["id"] = "Genetics1", ["branch"] = "Genetics", ["tier"] = 1, ["cost"] = 8, ["requires"] = "" },
+		{ ["id"] = "Genetics2", ["branch"] = "Genetics", ["tier"] = 2, ["cost"] = 16, ["requires"] = "Genetics1" },
+		{ ["id"] = "Genetics3", ["branch"] = "Genetics", ["tier"] = 3, ["cost"] = 24, ["requires"] = "Genetics2" },
+		{ ["id"] = "Genetics4", ["branch"] = "Genetics", ["tier"] = 4, ["cost"] = 32, ["requires"] = "Genetics3" },
+		{ ["id"] = "Genetics5", ["branch"] = "Genetics", ["tier"] = 5, ["cost"] = 40, ["requires"] = "Genetics4" },
+		{ ["id"] = "Genetics6", ["branch"] = "Genetics", ["tier"] = 6, ["cost"] = 48, ["requires"] = "Genetics5" },
+		{ ["id"] = "Cultivation1", ["branch"] = "Cultivation", ["tier"] = 1, ["cost"] = 8, ["requires"] = "" },
+		{
+			["id"] = "Cultivation2",
+			["branch"] = "Cultivation",
+			["tier"] = 2,
+			["cost"] = 16,
+			["requires"] = "Cultivation1",
+		},
+		{
+			["id"] = "Cultivation3",
+			["branch"] = "Cultivation",
+			["tier"] = 3,
+			["cost"] = 24,
+			["requires"] = "Cultivation2",
+		},
+		{
+			["id"] = "Cultivation4",
+			["branch"] = "Cultivation",
+			["tier"] = 4,
+			["cost"] = 32,
+			["requires"] = "Cultivation3",
+		},
+		{
+			["id"] = "Cultivation5",
+			["branch"] = "Cultivation",
+			["tier"] = 5,
+			["cost"] = 40,
+			["requires"] = "Cultivation4",
+		},
+		{
+			["id"] = "Cultivation6",
+			["branch"] = "Cultivation",
+			["tier"] = 6,
+			["cost"] = 48,
+			["requires"] = "Cultivation5",
+		},
+		{ ["id"] = "Botany1", ["branch"] = "Botany", ["tier"] = 1, ["cost"] = 8, ["requires"] = "" },
+		{ ["id"] = "Botany2", ["branch"] = "Botany", ["tier"] = 2, ["cost"] = 16, ["requires"] = "Botany1" },
+		{ ["id"] = "Botany3", ["branch"] = "Botany", ["tier"] = 3, ["cost"] = 24, ["requires"] = "Botany2" },
+		{ ["id"] = "Botany4", ["branch"] = "Botany", ["tier"] = 4, ["cost"] = 32, ["requires"] = "Botany3" },
+		{ ["id"] = "Botany5", ["branch"] = "Botany", ["tier"] = 5, ["cost"] = 40, ["requires"] = "Botany4" },
+		{ ["id"] = "Botany6", ["branch"] = "Botany", ["tier"] = 6, ["cost"] = 48, ["requires"] = "Botany5" },
+		{ ["id"] = "Automation1", ["branch"] = "Automation", ["tier"] = 1, ["cost"] = 8, ["requires"] = "" },
+		{
+			["id"] = "Automation2",
+			["branch"] = "Automation",
+			["tier"] = 2,
+			["cost"] = 16,
+			["requires"] = "Automation1",
+		},
+		{
+			["id"] = "Automation3",
+			["branch"] = "Automation",
+			["tier"] = 3,
+			["cost"] = 24,
+			["requires"] = "Automation2",
+		},
+		{
+			["id"] = "Automation4",
+			["branch"] = "Automation",
+			["tier"] = 4,
+			["cost"] = 32,
+			["requires"] = "Automation3",
+		},
+		{
+			["id"] = "Automation5",
+			["branch"] = "Automation",
+			["tier"] = 5,
+			["cost"] = 40,
+			["requires"] = "Automation4",
+		},
+		{
+			["id"] = "Automation6",
+			["branch"] = "Automation",
+			["tier"] = 6,
+			["cost"] = 48,
+			["requires"] = "Automation5",
+		},
+		{ ["id"] = "Economy1", ["branch"] = "Economy", ["tier"] = 1, ["cost"] = 8, ["requires"] = "" },
+		{ ["id"] = "Economy2", ["branch"] = "Economy", ["tier"] = 2, ["cost"] = 16, ["requires"] = "Economy1" },
+		{ ["id"] = "Economy3", ["branch"] = "Economy", ["tier"] = 3, ["cost"] = 24, ["requires"] = "Economy2" },
+		{ ["id"] = "Economy4", ["branch"] = "Economy", ["tier"] = 4, ["cost"] = 32, ["requires"] = "Economy3" },
+		{ ["id"] = "Economy5", ["branch"] = "Economy", ["tier"] = 5, ["cost"] = 40, ["requires"] = "Economy4" },
+		{ ["id"] = "Economy6", ["branch"] = "Economy", ["tier"] = 6, ["cost"] = 48, ["requires"] = "Economy5" },
+	},
+}
+]]></string>
+        </Properties>
+      </Item>
+      <Item class="ModuleScript" referent="4">
+        <Properties>
+          <string name="Name">Genetics</string>
+          <string name="Source"><![CDATA[--!strict
+local G = {}
+G.genes = { "color", "size", "speed", "yield", "resistance", "affinity", "light", "stability" }
+export type Genome = { [string]: { number } }
+function G.create(random: () -> number): Genome
+	local genome = {}
+	for _, key in G.genes do
+		genome[key] = { math.floor(random() * 4), math.floor(random() * 4) }
+	end
+	return genome
+end
+function G.phenotype(genome: Genome): { [string]: number }
+	local result = {}
+	for _, key in G.genes do
+		local pair = genome[key]
+		-- Allele 3 dominates; other combinations express their mean.
+		result[key] = if pair[1] == 3 or pair[2] == 3 then 3 else (pair[1] + pair[2]) / 2
+	end
+	return result
+end
+function G.cross(a: Genome, b: Genome, random: () -> number): Genome
+	local result = {}
+	for _, key in G.genes do
+		local pair = { a[key][if random() < 0.5 then 1 else 2], b[key][if random() < 0.5 then 1 else 2] }
+		if random() < 0.025 then
+			pair[if random() < 0.5 then 1 else 2] = math.floor(random() * 4)
+		end
+		result[key] = pair
+	end
+	return result
+end
+return G
+]]></string>
+        </Properties>
+      </Item>
+      <Item class="ModuleScript" referent="5">
+        <Properties>
+          <string name="Name">Localization</string>
+          <string name="Source"><![CDATA[--!strict
+return {
+	en = {
+		title = "MUTATION GARDEN",
+		subtitle = "GENETIC PARADISE",
+		garden = "Garden",
+		shop = "Seeds",
+		inventory = "Specimens",
+		research = "Research",
+		collection = "Collection",
+		quests = "Quests",
+		plant = "Plant",
+		water = "Water",
+		harvest = "Harvest",
+		sell = "Sell",
+		cross = "Cross selected",
+		expand = "Expand garden",
+		claim = "Claim reward",
+		loading = "Loading your garden…",
+	},
+	ru = {
+		title = "САД МУТАЦИЙ",
+		subtitle = "ГЕНЕТИЧЕСКИЙ РАЙ",
+		garden = "Сад",
+		shop = "Семена",
+		inventory = "Образцы",
+		research = "Исследования",
+		collection = "Коллекция",
+		quests = "Задания",
+		plant = "Посадить",
+		water = "Полить",
+		harvest = "Собрать",
+		sell = "Продать",
+		cross = "Скрестить выбранные",
+		expand = "Расширить сад",
+		claim = "Получить награду",
+		loading = "Загрузка сада…",
+	},
+}
+]]></string>
+        </Properties>
+      </Item>
+      <Item class="ModuleScript" referent="6">
+        <Properties>
+          <string name="Name">Protocol</string>
+          <string name="Source"><![CDATA[--!strict
+local Protocol = {}
+local fields: { [string]: { string } } = {
+	Buy = { "id" },
+	Plant = { "id", "cell" },
+	Water = { "id" },
+	Replant = { "id", "cell" },
+	Harvest = { "id" },
+	Sell = { "id" },
+	Favorite = { "id" },
+	Cross = { "id", "other" },
+	Research = { "id" },
+	Expand = {},
+	Quest = {},
+	Sync = {},
+}
+function Protocol.valid(action: any, args: any): boolean
+	if type(action) ~= "string" or type(args) ~= "table" then
+		return false
+	end
+	local allowed = fields[action]
+	if not allowed then
+		return false
+	end
+	local seen = 0
+	for k, v in args do
+		seen += 1
+		if seen > 2 or type(k) ~= "string" or not table.find(allowed, k) then
+			return false
+		end
+		if k == "cell" then
+			if type(v) ~= "number" or v ~= v or v % 1 ~= 0 or v < 1 or v > 96 then
+				return false
+			end
+		elseif type(v) ~= "string" or #v < 1 or #v > 64 then
+			return false
+		end
+	end
+	for _, k in allowed do
+		if args[k] == nil then
+			return false
+		end
+	end
+	return true
+end
+return Protocol
+]]></string>
+        </Properties>
+      </Item>
+      <Item class="ModuleScript" referent="7">
+        <Properties>
+          <string name="Name">Simulation</string>
+          <string name="Source"><![CDATA[--!nocheck
+-- Pure authoritative state transitions. No yields, network, instances or client time.
+local S = {}
+function S.new(catalog, genetics, random, uuid)
+	local api = {}
+	local species = {}
+	for _, c in catalog.plants do
+		species[c.id] = c
+	end
+	local function count(t)
+		local n = 0
+		for _ in t do
+			n += 1
+		end
+		return n
+	end
+	function api.profile()
+		return {
+			version = 1,
+			coins = 100,
+			rp = 0,
+			xp = 0,
+			seeds = { p01 = 6, p02 = 4 },
+			plants = {},
+			harvest = {},
+			research = {},
+			collection = {},
+			quest = 0,
+			questClaim = 0,
+			expansion = 1,
+			lastExperiment = 0,
+			tutorial = 1,
+			settings = { language = "en", effects = true },
+			savedAt = 0,
+		}
+	end
+	function api.validate(p)
+		if type(p) ~= "table" or p.version ~= 1 then
+			return false
+		end
+		for _, k in { "coins", "rp", "xp", "quest", "questClaim", "expansion", "lastExperiment", "tutorial", "savedAt" } do
+			if type(p[k]) ~= "number" or p[k] ~= p[k] or p[k] < 0 or p[k] == math.huge then
+				return false
+			end
+		end
+		if p.expansion % 1 ~= 0 or p.expansion < 1 or p.expansion > 5 then
+			return false
+		end
+		for _, k in { "seeds", "plants", "harvest", "research", "collection", "settings" } do
+			if type(p[k]) ~= "table" then
+				return false
+			end
+		end
+		for id, n in p.seeds do
+			if not species[id] or type(n) ~= "number" or n < 0 or n % 1 ~= 0 or n > 10000 then
+				return false
+			end
+		end
+		for _, group in { p.plants, p.harvest } do
+			if count(group) > catalog.inventoryCap then
+				return false
+			end
+			for id, plant in group do
+				if
+					type(id) ~= "string"
+					or type(plant) ~= "table"
+					or not species[plant.species]
+					or type(plant.genome) ~= "table"
+				then
+					return false
+				end
+				for _, g in genetics.genes do
+					local pair = plant.genome[g]
+					if type(pair) ~= "table" then
+						return false
+					end
+					for i = 1, 2 do
+						local v = pair[i]
+						if type(v) ~= "number" or v % 1 ~= 0 or v < 0 or v > 3 then
+							return false
+						end
+					end
+				end
+				for _, k in { "progress", "updated", "waterUntil", "cell", "seed" } do
+					local v = plant[k]
+					if type(v) ~= "number" or v ~= v or v < 0 or v == math.huge then
+						return false
+					end
+				end
+				if plant.id ~= id or plant.progress > 1 or plant.cell % 1 ~= 0 or plant.cell > 96 then
+					return false
+				end
+				if
+					group == p.harvest
+					and (
+						type(plant.amount) ~= "number"
+						or plant.amount % 1 ~= 0
+						or plant.amount < 1
+						or plant.amount > 100
+					)
+				then
+					return false
+				end
+				if type(plant.mutations) ~= "table" then
+					return false
+				end
+				local seen = {}
+				for _, m in plant.mutations do
+					local known = false
+					for _, cfg in catalog.mutations do
+						if cfg.id == m then
+							known = true
+						end
+					end
+					if not known or seen[m] then
+						return false
+					end
+					seen[m] = true
+				end
+				if #plant.mutations > 3 or (seen.Giant and seen.Miniature) then
+					return false
+				end
+			end
+		end
+		local cells = {}
+		for _, plant in p.plants do
+			if plant.cell < 1 or plant.cell > catalog.expansions[p.expansion] or cells[plant.cell] then
+				return false
+			end
+			cells[plant.cell] = true
+		end
+		return true
+	end
+	function api.level(p)
+		return 1 + math.floor(p.xp / 50)
+	end
+	function api.biome(p)
+		local n = 1
+		for i = 1, 5 do
+			if p.research["Botany" .. i] then
+				n = i + 1
+			end
+		end
+		return n
+	end
+	function api.advance(p, now, offline)
+		for _, plant in p.plants do
+			local c = species[plant.species]
+			local ph = genetics.phenotype(plant.genome)
+			local dt = math.max(0, now - plant.updated)
+			if offline then
+				dt = math.min(dt, catalog.offlineCap)
+			end
+			local wet = math.clamp(plant.waterUntil - plant.updated, 0, dt)
+			-- Each automation tier improves a specific part of unattended care.
+			if p.research.Automation1 then
+				wet = dt * 0.25
+			end
+			if p.research.Automation2 then
+				wet = dt * 0.5
+			end
+			if p.research.Automation3 then
+				wet = dt * 0.75
+			end
+			if p.research.Automation4 then
+				wet = dt
+			end
+			local bonus = 0
+			for i = 1, 6 do
+				if p.research["Cultivation" .. i] then
+					bonus += 0.06
+				end
+			end
+			local speed = 1
+				+ ph.speed * 0.1
+				+ bonus
+				+ (if p.research.Automation5 then 0.1 else 0)
+				+ (if p.research.Automation6 then 0.15 else 0)
+			for _, m in plant.mutations do
+				for _, cfg in catalog.mutations do
+					if cfg.id == m then
+						speed *= cfg.growth
+					end
+				end
+			end
+			plant.progress = math.min(1, plant.progress + (dt + wet * 0.4) * speed / c.seconds)
+			plant.updated = math.max(plant.updated, now)
+		end
+	end
+	function api.price(plant)
+		local bonus = 1
+		for _, m in plant.mutations do
+			for _, cfg in catalog.mutations do
+				if cfg.id == m then
+					bonus += cfg.value
+				end
+			end
+		end
+		local c = species[plant.species]
+		local ph = genetics.phenotype(plant.genome)
+		return math.floor(c.value * plant.amount * math.min(4, bonus) * (1 + ph.size * 0.05))
+	end
+	function api.probability(m, plant, p, weather)
+		if m.biome ~= 0 and m.biome ~= species[plant.species].biome then
+			return 0
+		end
+		local ph = genetics.phenotype(plant.genome)
+		local research = 1
+		for i = 1, 6 do
+			if p.research["Genetics" .. i] then
+				research += 0.15
+			end
+		end
+		return math.clamp(
+			m.probability
+				* (1 + ph.affinity * 0.1)
+				* (1 - ph.resistance * 0.08)
+				* (if weather == "Aurora" then 1.5 else 1)
+				* research,
+			0,
+			0.15
+		)
+	end
+	function api.act(p, action, args, now, weather)
+		api.advance(p, now, false)
+		if action == "Buy" then
+			local c = species[args.id]
+			if not c or c.biome > api.biome(p) or c.level > api.level(p) then
+				return false, "Species locked"
+			end
+			if p.coins < c.price or (p.seeds[c.id] or 0) >= 10000 then
+				return false, "Not enough coins or stack full"
+			end
+			p.coins -= c.price
+			p.seeds[c.id] = (p.seeds[c.id] or 0) + 1
+		elseif action == "Plant" then
+			local c = species[args.id]
+			local cell = args.cell
+			if
+				not c
+				or type(cell) ~= "number"
+				or cell % 1 ~= 0
+				or cell < 1
+				or cell > catalog.expansions[p.expansion]
+				or c.biome > api.biome(p)
+			then
+				return false, "Invalid planting"
+			end
+			if (p.seeds[c.id] or 0) < 1 then
+				return false, "No seed"
+			end
+			for _, v in p.plants do
+				if v.cell == cell then
+					return false, "Cell occupied"
+				end
+			end
+			local id = uuid()
+			p.seeds[c.id] -= 1
+			p.plants[id] = {
+				id = id,
+				species = c.id,
+				cell = cell,
+				genome = genetics.create(random),
+				mutations = {},
+				seed = math.floor(random() * 1000000),
+				progress = 0,
+				updated = now,
+				waterUntil = 0,
+			}
+			p.tutorial = math.max(p.tutorial, 2)
+		elseif action == "Replant" then
+			local plant = p.harvest[args.id]
+			local cell = args.cell
+			if
+				not plant
+				or plant.favorite
+				or type(cell) ~= "number"
+				or cell % 1 ~= 0
+				or cell < 1
+				or cell > catalog.expansions[p.expansion]
+			then
+				return false, "Invalid specimen or cell"
+			end
+			for _, v in p.plants do
+				if v.cell == cell then
+					return false, "Cell occupied"
+				end
+			end
+			p.harvest[args.id] = nil
+			p.plants[args.id] = plant
+			plant.cell = cell
+			plant.progress = 0
+			plant.updated = math.max(plant.updated, now)
+			plant.waterUntil = 0
+			plant.amount = nil
+		elseif action == "Water" then
+			local plant = p.plants[args.id]
+			if not plant then
+				return false, "Plant not found"
+			end
+			plant.waterUntil = now + 120
+			p.tutorial = math.max(p.tutorial, 3)
+		elseif action == "Harvest" then
+			local plant = p.plants[args.id]
+			if not plant or plant.progress < 1 or count(p.harvest) >= catalog.inventoryCap then
+				return false, "Not ready or inventory full"
+			end
+			local selected = table.clone(plant.mutations)
+			local total = 0
+			for _, m in catalog.mutations do
+				total += api.probability(m, plant, p, weather)
+			end
+			local roll = random() * math.max(1, total)
+			for _, m in catalog.mutations do
+				roll -= api.probability(m, plant, p, weather)
+				if roll < 0 then
+					if
+						#selected < 3
+						and not table.find(selected, m.id)
+						and not (
+							(m.id == "Giant" and table.find(selected, "Miniature"))
+							or (m.id == "Miniature" and table.find(selected, "Giant"))
+						)
+					then
+						table.insert(selected, m.id)
+					end
+					break
+				end
+			end
+			plant.mutations = selected
+			plant.amount = species[plant.species].yieldCount
+				+ math.floor(genetics.phenotype(plant.genome)["yield"] * 0.5)
+			if table.find(selected, "Giant") then
+				plant.amount += 2
+			end
+			p.plants[args.id] = nil
+			p.harvest[args.id] = plant
+			p.xp += 10
+			p.quest += 1
+			if not p.collection[plant.species] then
+				p.collection[plant.species] = true
+				p.rp += (if p.research.Botany6 then 8 else 5)
+			end
+			p.rp += 1
+			p.tutorial = math.max(p.tutorial, 4)
+		elseif action == "Sell" then
+			local plant = p.harvest[args.id]
+			if not plant or plant.favorite then
+				return false, "Plant missing or protected"
+			end
+			local bonus = 0
+			for i = 1, 6 do
+				if p.research["Economy" .. i] then
+					bonus += 0.04
+				end
+			end
+			p.coins = math.min(1e9, p.coins + math.floor(api.price(plant) * (1 + bonus)))
+			p.harvest[args.id] = nil
+			p.tutorial = math.max(p.tutorial, 5)
+		elseif action == "Favorite" then
+			local plant = p.harvest[args.id]
+			if not plant then
+				return false, "Plant not found"
+			end
+			plant.favorite = not plant.favorite
+		elseif action == "Cross" then
+			local a, b = p.harvest[args.id], p.harvest[args.other]
+			if not a or not b or a == b or a.favorite or b.favorite or p.coins < 30 or now - p.lastExperiment < 15 then
+				return false, "Two unprotected parents, 30 coins and cooldown required"
+			end
+			if species[a.species].archetype ~= species[b.species].archetype then
+				return false, "Parents need matching architecture"
+			end
+			local id = uuid()
+			local child = {
+				id = id,
+				species = if random() < 0.5 then a.species else b.species,
+				genome = genetics.cross(a.genome, b.genome, random),
+				mutations = {},
+				seed = math.floor(random() * 1000000),
+				progress = 1,
+				updated = now,
+				waterUntil = 0,
+				cell = 0,
+				amount = 1,
+			}
+			p.harvest[a.id] = nil
+			p.harvest[b.id] = nil
+			p.harvest[id] = child
+			p.coins -= 30
+			p.rp += 3
+			p.lastExperiment = now
+			p.tutorial = 6
+		elseif action == "Research" then
+			local cfg = nil
+			for _, r in catalog.research do
+				if r.id == args.id then
+					cfg = r
+				end
+			end
+			if
+				not cfg
+				or p.research[cfg.id]
+				or p.rp < cfg.cost
+				or (cfg.requires ~= "" and not p.research[cfg.requires])
+			then
+				return false, "Research prerequisites missing"
+			end
+			p.rp -= cfg.cost
+			p.research[cfg.id] = true
+		elseif action == "Expand" then
+			local cost = p.expansion * 250
+			if p.expansion >= 5 or p.coins < cost then
+				return false, "Expansion unavailable"
+			end
+			p.coins -= cost
+			p.expansion += 1
+		elseif action == "Quest" then
+			local goal = (p.questClaim + 1) * 5
+			if p.quest < goal then
+				return false, "Harvest " .. goal .. " plants first"
+			end
+			p.questClaim += 1
+			p.coins += 75
+			p.rp += 5
+		else
+			return false, "Unknown action"
+		end
+		return true, "Done"
+	end
+	return api
+end
+return S
+]]></string>
+        </Properties>
+      </Item>
+    </Item>
+  </Item>
+  <Item class="ServerScriptService" referent="8">
+    <Properties>
+      <string name="Name">ServerScriptService</string>
+    </Properties>
+    <Item class="Folder" referent="9">
+      <Properties>
+        <string name="Name">Garden</string>
+      </Properties>
+      <Item class="Script" referent="10">
+        <Properties>
+          <string name="Name">Bootstrap</string>
+          <token name="RunContext">0</token>
+          <string name="Source"><![CDATA[--!nocheck
+local Players = game:GetService("Players")
+local RS = game:GetService("ReplicatedStorage")
+local HttpService = game:GetService("HttpService")
+local Shared = RS:WaitForChild("Shared")
+local Catalog = require(Shared.Catalog)
+local Genetics = require(Shared.Genetics)
+local Protocol = require(Shared.Protocol)
+local rng = Random.new()
+local sim = require(Shared.Simulation).new(Catalog, Genetics, function()
+	return rng:NextNumber()
+end, function()
+	return HttpService:GenerateGUID(false)
+end)
+local profiles = require(script.Parent.Profiles).new(sim)
+local world = require(script.Parent.World).new(Catalog)
+local remote = Instance.new("RemoteFunction")
+remote.Name = "GardenRequest"
+remote.Parent = RS
+local slots = {}
+local rates = {}
+local safe = {}
+local closing = false
+local weather = "Sunny"
+local weatherUntil = os.time() + 300
+local function teleport(player, character)
+	local slot = slots[player]
+	local root = character:WaitForChild("HumanoidRootPart", 10)
+	if root and slot then
+		character:PivotTo(CFrame.new(world.plots[slot].center + Vector3.new(0, 6, 30)))
+	end
+end
+local function join(player)
+	if closing then
+		player:Kick("Server closing. Please reconnect.")
+		return
+	end
+	local p = profiles:load(player)
+	if not p then
+		player:Kick(
+			"Your garden could not be loaded safely. Enable Studio API access for testing, or try again shortly."
+		)
+		return
+	end
+	if player.Parent ~= Players then
+		profiles:save(player, true)
+		return
+	end
+	local slot = world:claim(player)
+	if not slot then
+		profiles:save(player, true)
+		player:Kick("All eight gardens are occupied.")
+		return
+	end
+	slots[player] = slot
+	safe[player] = true
+	player.CharacterAdded:Connect(function(c)
+		teleport(player, c)
+	end)
+	if player.Character then
+		task.spawn(teleport, player, player.Character)
+	end
+	world:render(slot, p, sim, Genetics)
+end
+local function leave(player)
+	safe[player] = nil
+	-- Wait for an in-flight autosave before final save; only our own bounded operation.
+	local deadline = os.clock() + 20
+	while profiles.busy[player] and os.clock() < deadline do
+		task.wait(0.1)
+	end
+	local saved = false
+	for _ = 1, 3 do
+		if profiles:save(player, true) then
+			saved = true
+			break
+		end
+		task.wait(1)
+	end
+	if not saved then
+		warn("Garden save failed; session lease will expire", player.UserId)
+	end
+	if slots[player] then
+		world:release(slots[player])
+		slots[player] = nil
+	end
+	profiles.loaded[player] = nil
+	rates[player] = nil
+end
+remote.OnServerInvoke = function(player, action, args)
+	local t = os.clock()
+	local rate = rates[player] or { tokens = 12, time = t }
+	rates[player] = rate
+	rate.tokens = math.min(12, rate.tokens + (t - rate.time) * 4)
+	rate.time = t
+	if rate.tokens < 1 then
+		return { ok = false, message = "Please slow down" }
+	end
+	rate.tokens -= 1
+	if not Protocol.valid(action, args) then
+		return { ok = false, message = "Invalid request" }
+	end
+	local p = profiles.loaded[player]
+	if closing or not p or not safe[player] or not slots[player] then
+		return { ok = false, message = "Garden unavailable" }
+	end
+	if action ~= "Sync" then
+		local root = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+		if not root or (root.Position - world.plots[slots[player]].center).Magnitude > 85 then
+			return { ok = false, message = "Return to your garden to manage it" }
+		end
+	end
+	local ok, message = true, "Ready"
+	if action ~= "Sync" then
+		local success, a, b = pcall(sim.act, p, action, args, os.time(), weather)
+		if not success then
+			warn("Garden action failed", action, a)
+			safe[player] = nil
+			return { ok = false, message = "Garden paused for safety. Reconnect." }
+		end
+		ok, message = a, b
+	else
+		sim.advance(p, os.time(), false)
+	end
+	world:render(slots[player], p, sim, Genetics)
+	return {
+		ok = ok,
+		message = message,
+		profile = p,
+		slot = slots[player],
+		weather = weather,
+		weatherUntil = weatherUntil,
+	}
+end
+Players.PlayerAdded:Connect(join)
+Players.PlayerRemoving:Connect(leave)
+for _, p in Players:GetPlayers() do
+	task.spawn(join, p)
+end
+-- One scheduler per server; growth is analytical, models rebuild only on stage changes.
+task.spawn(function()
+	local nextSave = os.time() + 60
+	while not closing do
+		task.wait(2)
+		local now = os.time()
+		if now >= weatherUntil then
+			weather = Catalog.weather[rng:NextInteger(1, #Catalog.weather)]
+			weatherUntil = now + 300
+		end
+		for player, p in profiles.loaded do
+			if slots[player] and safe[player] then
+				sim.advance(p, now, false)
+				if weather == "Rain" then
+					for _, plant in p.plants do
+						plant.waterUntil = now + 4
+					end
+				end
+				world:render(slots[player], p, sim, Genetics)
+				if now >= nextSave then
+					task.spawn(function()
+						if not profiles:save(player, false) then
+							safe[player] = nil
+							player:Kick("Saving unavailable. Reconnect shortly to protect your progress.")
+						end
+					end)
+				end
+			end
+		end
+		if now >= nextSave then
+			nextSave = now + 60
+		end
+	end
+end)
+game:BindToClose(function()
+	closing = true
+	local pending = 0
+	for _, player in Players:GetPlayers() do
+		pending += 1
+		task.spawn(function()
+			leave(player)
+			pending -= 1
+		end)
+	end
+	local deadline = os.clock() + 28
+	while pending > 0 and os.clock() < deadline do
+		task.wait(0.1)
+	end
+end)
+]]></string>
+        </Properties>
+      </Item>
+      <Item class="ModuleScript" referent="11">
+        <Properties>
+          <string name="Name">Profiles</string>
+          <string name="Source"><![CDATA[--!nocheck
+local DataStoreService = game:GetService("DataStoreService")
+local HttpService = game:GetService("HttpService")
+local Profiles = {}
+Profiles.__index = Profiles
+function Profiles.new(sim)
+	return setmetatable({
+		store = DataStoreService:GetDataStore("MutationGarden_v1"),
+		sim = sim,
+		loaded = {},
+		token = game.JobId .. HttpService:GenerateGUID(false),
+		busy = {},
+	}, Profiles)
+end
+function Profiles:load(player)
+	local key = tostring(player.UserId)
+	local now = os.time()
+	local accepted = false
+	local ok, record = pcall(function()
+		return self.store:UpdateAsync(key, function(old)
+			accepted = false
+			if old and old.lock and old.lock.token ~= self.token and old.lock.expires > now then
+				return nil
+			end
+			local data = if old then old.data else self.sim.profile()
+			if not self.sim.validate(data) then
+				return nil
+			end
+			accepted = true
+			return { data = data, lock = { token = self.token, expires = now + 180 } }
+		end)
+	end)
+	if not ok or not accepted or not record then
+		return nil
+	end
+	local p = record.data
+	self.sim.advance(p, now, true)
+	self.loaded[player] = p
+	return p
+end
+function Profiles:save(player, release)
+	if self.busy[player] then
+		return false
+	end
+	local p = self.loaded[player]
+	if not p then
+		return false
+	end
+	self.busy[player] = true
+	local snapshot = HttpService:JSONDecode(HttpService:JSONEncode(p))
+	snapshot.savedAt = os.time()
+	local wrote = false
+	local ok = pcall(function()
+		self.store:UpdateAsync(tostring(player.UserId), function(old)
+			wrote = false
+			if not old or not old.lock or old.lock.token ~= self.token then
+				return nil
+			end
+			wrote = true
+			return { data = snapshot, lock = if release then nil else { token = self.token, expires = os.time() + 180 } }
+		end)
+	end)
+	self.busy[player] = nil
+	if release and ok and wrote then
+		self.loaded[player] = nil
+	end
+	return ok and wrote
+end
+return Profiles
+]]></string>
+        </Properties>
+      </Item>
+      <Item class="ModuleScript" referent="12">
+        <Properties>
+          <string name="Name">World</string>
+          <string name="Source"><![CDATA[--!nocheck
+local World = {}
+World.__index = World
+local function part(parent, name, size, position, color, shape)
+	local p = Instance.new("Part")
+	p.Name = name
+	p.Anchored = true
+	p.Size = size
+	p.Position = position
+	p.Color = color
+	p.Material = Enum.Material.SmoothPlastic
+	if shape then
+		p.Shape = shape
+	end
+	p.TopSurface = Enum.SurfaceType.Smooth
+	p.Parent = parent
+	return p
+end
+local function label(p, text)
+	local g = Instance.new("BillboardGui")
+	g.Size = UDim2.fromOffset(220, 45)
+	g.StudsOffset = Vector3.new(0, 4, 0)
+	g.MaxDistance = 110
+	g.Parent = p
+	local t = Instance.new("TextLabel")
+	t.Size = UDim2.fromScale(1, 1)
+	t.BackgroundTransparency = 1
+	t.Text = text
+	t.TextColor3 = Color3.fromRGB(250, 247, 222)
+	t.TextStrokeTransparency = 0.4
+	t.TextScaled = true
+	t.Font = Enum.Font.GothamBold
+	t.Parent = g
+end
+function World.new(catalog)
+	local self = setmetatable({ catalog = catalog, plots = {}, visuals = {}, stages = {} }, World)
+	local folder = Instance.new("Folder")
+	folder.Name = "MutationGarden"
+	folder.Parent = workspace
+	self.root = folder
+	part(folder, "Island", Vector3.new(480, 12, 480), Vector3.new(0, -7, 0), Color3.fromRGB(107, 155, 119))
+	part(folder, "Plaza", Vector3.new(70, 1, 70), Vector3.new(0, 0, 0), Color3.fromRGB(215, 200, 171))
+	local spawn = Instance.new("SpawnLocation")
+	spawn.Anchored = true
+	spawn.Size = Vector3.new(8, 1, 8)
+	spawn.Position = Vector3.new(0, 2, 0)
+	spawn.Neutral = true
+	spawn.Parent = folder
+	for i, name in
+		{ "Seed Shop", "Genetics Lab", "Research Center", "Quest Lodge", "Trade Pavilion", "Botanical Museum" }
+	do
+		local a = i * math.pi / 3
+		local pos = Vector3.new(math.cos(a) * 48, 5, math.sin(a) * 48)
+		part(folder, name, Vector3.new(16, 10, 13), pos, Color3.fromHSV(i / 6, 0.25, 0.85))
+		local roof =
+			part(folder, "Roof", Vector3.new(19, 3, 16), pos + Vector3.new(0, 7, 0), Color3.fromRGB(88, 123, 112))
+		label(roof, name)
+	end
+	for i, name in catalog.biomes do
+		local a = (i - 1) * math.pi / 3
+		local pos = Vector3.new(math.cos(a) * 190, 0, math.sin(a) * 190)
+		part(folder, name, Vector3.new(60, 1, 60), pos, Color3.fromHSV(i / 6, 0.25, 0.65))
+		local sign = part(
+			folder,
+			"Biome marker",
+			Vector3.new(2, 10, 2),
+			pos + Vector3.new(0, 5, 0),
+			Color3.fromHSV(i / 6, 0.5, 0.9)
+		)
+		label(sign, name)
+		for j = 1, 9 do
+			local x = pos + Vector3.new((j % 3 - 1) * 15, 4, (math.floor(j / 3) - 1) * 14)
+			local deco = part(
+				folder,
+				"Biome flora",
+				Vector3.new(4, 8 + j % 3, 4),
+				x,
+				Color3.fromHSV(i / 6, 0.4, 0.8),
+				if i == 2 then Enum.PartType.Ball else Enum.PartType.Block
+			)
+			if i == 3 or i == 6 then
+				deco.Material = Enum.Material.Neon
+			end
+		end
+	end
+	for i = 1, catalog.maxPlayers do
+		local a = (i - 1) * math.pi / 4
+		local center = Vector3.new(math.cos(a) * 110, 1, math.sin(a) * 110)
+		local model = Instance.new("Model")
+		model.Name = "Garden" .. i
+		model.Parent = folder
+		part(model, "Lawn", Vector3.new(50, 1, 65), center, Color3.fromRGB(138, 178, 125))
+		local marker = part(
+			model,
+			"Mailbox",
+			Vector3.new(3, 3, 2),
+			center + Vector3.new(-22, 3, -28),
+			Color3.fromRGB(208, 177, 150)
+		)
+		label(marker, "Available garden")
+		part(model, "Storage", Vector3.new(7, 5, 6), center + Vector3.new(17, 3, -27), Color3.fromRGB(156, 116, 81))
+		local glass = part(
+			model,
+			"Greenhouse",
+			Vector3.new(13, 8, 8),
+			center + Vector3.new(0, 5, -27),
+			Color3.fromRGB(175, 226, 222)
+		)
+		glass.Transparency = 0.65
+		glass.CanCollide = false
+		self.plots[i] = { model = model, center = center, marker = marker, cells = {} }
+	end
+	return self
+end
+function World:claim(player)
+	for i, p in self.plots do
+		if not p.owner then
+			p.owner = player
+			p.model:SetAttribute("Owner", player.UserId)
+			p.marker:FindFirstChildOfClass("BillboardGui").TextLabel.Text = player.DisplayName .. "'s garden"
+			return i
+		end
+	end
+	return nil
+end
+function World:cell(plot, index)
+	return plot.center + Vector3.new(((index - 1) % 8 - 3.5) * 5, 1, (math.floor((index - 1) / 8) - 5) * 4.5)
+end
+function World:release(index)
+	local p = self.plots[index]
+	p.owner = nil
+	p.model:SetAttribute("Owner", nil)
+	p.marker:FindFirstChildOfClass("BillboardGui").TextLabel.Text = "Available garden"
+	for _, c in p.cells do
+		c:Destroy()
+	end
+	p.cells = {}
+	for id, model in self.visuals do
+		if model.Parent == p.model then
+			model:Destroy()
+			self.visuals[id] = nil
+			self.stages[id] = nil
+		end
+	end
+end
+function World:model(plant, cfg, position, stage, parent, phenotype)
+	local m = Instance.new("Model")
+	m.Name = plant.id
+	m.Parent = parent
+	local rng = Random.new(plant.seed)
+	local scale = (0.3 + stage * 0.19) * (0.8 + phenotype.size * 0.15)
+	local color = Color3.fromHSV((cfg.hue + phenotype.color * 0.025) % 1, 0.55, 0.92)
+	for _, mutation in plant.mutations do
+		if mutation == "Giant" then
+			scale *= 1.8
+		elseif mutation == "Miniature" then
+			scale *= 0.55
+		end
+	end
+	local function add(name, size, offset, c, shape)
+		local p = part(m, name, size * scale, position + offset * scale, c, shape)
+		p.CanCollide = false
+		p.CanTouch = false
+		if phenotype.light >= 3 or #plant.mutations > 0 then
+			p.Material = Enum.Material.Neon
+		end
+		return p
+	end
+	local green = Color3.fromRGB(66, 123, 87)
+	local arch = cfg.archetype
+	if stage == 0 then
+		add("Seed", Vector3.new(0.6, 0.4, 0.6), Vector3.new(0, 0.2, 0), color, Enum.PartType.Ball)
+		return m
+	end
+	add("Stem", Vector3.new(0.35, 3, 0.35), Vector3.new(0, 1.5, 0), green)
+	if arch == "Tree" then
+		for j = 1, 3 do
+			add(
+				"Canopy",
+				Vector3.new(3.6, 2.2, 3),
+				Vector3.new((j - 2) * 1.1, 3 + j * 0.5, 0),
+				color,
+				Enum.PartType.Ball
+			)
+		end
+	elseif arch == "Mushroom" then
+		add("Cap", Vector3.new(4, 1, 4), Vector3.new(0, 3, 0), color, Enum.PartType.Ball)
+	elseif arch == "Cactus" then
+		add("Column", Vector3.new(1.3, 4, 1.3), Vector3.new(0, 2, 0), color)
+		for j = -1, 1, 2 do
+			add("Arm", Vector3.new(1, 1, 1), Vector3.new(j * 1.2, 2.2, 0), green)
+			add("Finger", Vector3.new(0.6, 2, 0.6), Vector3.new(j * 1.5, 3, 0), color)
+		end
+	elseif arch == "Crystal" then
+		for j = 1, 4 do
+			local p = add("Shard", Vector3.new(0.8, 2 + j * 0.5, 0.8), Vector3.new((j - 2) * 0.6, 1.8, 0), color)
+			p.CFrame *= CFrame.Angles(0, 0, (j - 2) * 0.2)
+		end
+	elseif arch == "Vine" then
+		for j = 1, 6 do
+			add(
+				"Leaf",
+				Vector3.new(1, 0.3, 1.6),
+				Vector3.new(math.sin(j) * 1.1, j * 0.5, math.cos(j)),
+				color,
+				Enum.PartType.Ball
+			)
+		end
+	elseif arch == "Bush" then
+		for j = 1, 5 do
+			add(
+				"Foliage",
+				Vector3.new(2, 1.7, 2),
+				Vector3.new(rng:NextNumber(-1, 1), rng:NextNumber(1, 2.5), rng:NextNumber(-1, 1)),
+				color,
+				Enum.PartType.Ball
+			)
+		end
+	elseif arch == "Aquatic" then
+		add("Pad", Vector3.new(3, 0.15, 3), Vector3.new(0, 0.2, 0), green, Enum.PartType.Cylinder)
+		for j = 1, 4 do
+			add(
+				"Bloom",
+				Vector3.new(0.6, 1.4, 0.6),
+				Vector3.new(math.cos(j) * 0.6, 2.5, math.sin(j) * 0.6),
+				color,
+				Enum.PartType.Ball
+			)
+		end
+	elseif arch == "Exotic" then
+		for j = 1, 5 do
+			add(
+				"Orbit",
+				Vector3.new(0.8, 0.8, 0.8),
+				Vector3.new(math.cos(j) * 1.4, 1 + j * 0.5, math.sin(j) * 1.4),
+				color,
+				Enum.PartType.Ball
+			)
+		end
+	else
+		for j = 1, 5 do
+			local a = j * math.pi * 2 / 5
+			add(
+				"Petal",
+				Vector3.new(1.5, 0.5, 1.5),
+				Vector3.new(math.cos(a), 3, math.sin(a)),
+				color,
+				Enum.PartType.Ball
+			)
+		end
+		add(
+			"Heart",
+			Vector3.new(0.9, 0.6, 0.9),
+			Vector3.new(0, 3.2, 0),
+			Color3.fromRGB(255, 220, 120),
+			Enum.PartType.Ball
+		)
+	end
+	return m
+end
+function World:render(index, profile, sim, genetics)
+	local plot = self.plots[index]
+	for i = 1, self.catalog.expansions[profile.expansion] do
+		if not plot.cells[i] then
+			local cell =
+				part(plot.model, "Soil" .. i, Vector3.new(4.4, 0.3, 4), self:cell(plot, i), Color3.fromRGB(105, 78, 59))
+			cell:SetAttribute("Cell", i)
+			cell:SetAttribute("Owner", plot.owner.UserId)
+			plot.cells[i] = cell
+		end
+	end
+	for id, m in self.visuals do
+		if m.Parent == plot.model and not profile.plants[id] then
+			m:Destroy()
+			self.visuals[id] = nil
+			self.stages[id] = nil
+		end
+	end
+	for id, plant in profile.plants do
+		local stage = math.min(4, math.floor(plant.progress * 4))
+		if self.stages[id] ~= stage then
+			if self.visuals[id] then
+				self.visuals[id]:Destroy()
+			end
+			local cfg
+			for _, c in self.catalog.plants do
+				if c.id == plant.species then
+					cfg = c
+				end
+			end
+			self.visuals[id] = self:model(
+				plant,
+				cfg,
+				self:cell(plot, plant.cell) + Vector3.new(0, 0.3, 0),
+				stage,
+				plot.model,
+				genetics.phenotype(plant.genome)
+			)
+			self.stages[id] = stage
+		end
+	end
+end
+return World
+]]></string>
+        </Properties>
+      </Item>
+    </Item>
+  </Item>
+  <Item class="StarterPlayer" referent="13">
+    <Properties>
+      <string name="Name">StarterPlayer</string>
+    </Properties>
+    <Item class="StarterPlayerScripts" referent="14">
+      <Properties>
+        <string name="Name">StarterPlayerScripts</string>
+      </Properties>
+      <Item class="Folder" referent="15">
+        <Properties>
+          <string name="Name">Garden</string>
+        </Properties>
+        <Item class="LocalScript" referent="16">
+          <Properties>
+            <string name="Name">Bootstrap</string>
+            <string name="Source"><![CDATA[--!nocheck
+local Players = game:GetService("Players")
+local RS = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+local player = Players.LocalPlayer
+local Catalog = require(RS:WaitForChild("Shared").Catalog)
+local Languages = require(RS.Shared.Localization)
+local remote = RS:WaitForChild("GardenRequest")
+local language = "en"
+local page = "garden"
+local profile = nil
+local selectedSeed = "p01"
+local parents = {}
+local busy = false
+local effects = true
+local gui = Instance.new("ScreenGui")
+gui.Name = "MutationGarden"
+gui.ResetOnSpawn = false
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = player:WaitForChild("PlayerGui")
+local function create(class, parent, props)
+	local o = Instance.new(class)
+	for k, v in props do
+		o[k] = v
+	end
+	o.Parent = parent
+	return o
+end
+local cream = Color3.fromRGB(244, 238, 214)
+local green = Color3.fromRGB(28, 53, 47)
+local accent = Color3.fromRGB(183, 221, 144)
+local panel = create("Frame", gui, {
+	Size = UDim2.new(0.92, 0, 0.72, 0),
+	Position = UDim2.fromScale(0.04, 0.24),
+	BackgroundColor3 = green,
+	BackgroundTransparency = 0.04,
+})
+create("UICorner", panel, { CornerRadius = UDim.new(0, 18) })
+local limit = create("UISizeConstraint", panel, { MaxSize = Vector2.new(1000, 700), MinSize = Vector2.new(260, 180) })
+local title = create("TextLabel", gui, {
+	Position = UDim2.fromScale(0.04, 0.02),
+	Size = UDim2.new(0.7, 0, 0, 35),
+	BackgroundTransparency = 1,
+	Text = "MUTATION GARDEN",
+	TextColor3 = cream,
+	TextStrokeTransparency = 0.4,
+	Font = Enum.Font.GothamBold,
+	TextSize = 24,
+	TextXAlignment = Enum.TextXAlignment.Left,
+})
+local status = create("TextLabel", gui, {
+	Position = UDim2.fromScale(0.04, 0.09),
+	Size = UDim2.new(0.92, 0, 0, 40),
+	BackgroundColor3 = green,
+	TextColor3 = cream,
+	Font = Enum.Font.Gotham,
+	TextSize = 15,
+	TextWrapped = true,
+	Text = Languages.en.loading,
+})
+local notice = create("TextLabel", panel, {
+	Size = UDim2.new(1, -24, 0, 46),
+	Position = UDim2.fromOffset(12, 5),
+	BackgroundTransparency = 1,
+	TextColor3 = accent,
+	TextSize = 15,
+	TextWrapped = true,
+	Font = Enum.Font.Gotham,
+	Text = "",
+})
+local tabs = create("ScrollingFrame", gui, {
+	Position = UDim2.fromScale(0.04, 0.17),
+	Size = UDim2.new(0.92, 0, 0, 44),
+	BackgroundTransparency = 1,
+	CanvasSize = UDim2.new(),
+	AutomaticCanvasSize = Enum.AutomaticSize.X,
+	ScrollingDirection = Enum.ScrollingDirection.X,
+	ScrollBarThickness = 2,
+})
+create(
+	"UIListLayout",
+	tabs,
+	{ FillDirection = Enum.FillDirection.Horizontal, Padding = UDim.new(0, 6), SortOrder = Enum.SortOrder.LayoutOrder }
+)
+local content = create("ScrollingFrame", panel, {
+	Position = UDim2.fromOffset(12, 55),
+	Size = UDim2.new(1, -24, 1, -68),
+	BackgroundTransparency = 1,
+	CanvasSize = UDim2.new(),
+	AutomaticCanvasSize = Enum.AutomaticSize.Y,
+	ScrollBarThickness = 5,
+})
+local layout = create("UIListLayout", content, { Padding = UDim.new(0, 8), SortOrder = Enum.SortOrder.LayoutOrder })
+local render, request
+local function text(s)
+	return create("TextLabel", content, {
+		Size = UDim2.new(1, -8, 0, 48),
+		BackgroundTransparency = 1,
+		Text = s,
+		TextColor3 = cream,
+		Font = Enum.Font.Gotham,
+		TextSize = 15,
+		TextWrapped = true,
+		TextXAlignment = Enum.TextXAlignment.Left,
+	})
+end
+local function button(parent, s, fn, width)
+	local b = create("TextButton", parent, {
+		Size = UDim2.new(if width then 0 else 1, if width then width else -8, 0, 44),
+		BackgroundColor3 = accent,
+		TextColor3 = green,
+		Text = s,
+		TextSize = 15,
+		TextWrapped = true,
+		Font = Enum.Font.GothamMedium,
+		AutoButtonColor = true,
+	})
+	create("UICorner", b, { CornerRadius = UDim.new(0, 9) })
+	b.Activated:Connect(fn)
+	return b
+end
+local function name(id)
+	for _, c in Catalog.plants do
+		if c.id == id then
+			return c.name
+		end
+	end
+	return id
+end
+request = function(action, args)
+	if busy then
+		return
+	end
+	busy = true
+	local ok, result = pcall(function()
+		return remote:InvokeServer(action, args or {})
+	end)
+	busy = false
+	if not ok then
+		notice.Text = "Connection interrupted. Try again."
+		return
+	end
+	notice.Text = result.message
+	if result.profile then
+		profile = result.profile
+		status.Text = string.format(
+			"%d Coins  •  %d RP  •  Level %d  •  %s",
+			profile.coins,
+			profile.rp,
+			1 + math.floor(profile.xp / 50),
+			result.weather
+		)
+		render()
+	end
+end
+local function sorted(t)
+	local keys = {}
+	for k in t do
+		table.insert(keys, k)
+	end
+	table.sort(keys)
+	return keys
+end
+render = function()
+	for _, c in content:GetChildren() do
+		if c ~= layout then
+			c:Destroy()
+		end
+	end
+	if not profile then
+		text(Languages[language].loading)
+		return
+	end
+	local L = Languages[language]
+	if page == "garden" then
+		local hints = {
+			"Choose a seed, then an empty garden cell.",
+			"Water your first plant.",
+			"Watch it grow, then harvest.",
+			"Sell a specimen or keep two matching architectures for the lab.",
+			"Cross two specimens in the lab.",
+			"Experiment, research and discover all 40 species.",
+		}
+		text(hints[math.min(6, profile.tutorial)])
+		for _, id in sorted(profile.seeds) do
+			if profile.seeds[id] > 0 then
+				local seed = id
+				button(
+					content,
+					(if selectedSeed == id then "✓ " else "") .. name(id) .. " ×" .. profile.seeds[id],
+					function()
+						selectedSeed = seed
+						render()
+					end
+				)
+			end
+		end
+		local occupied = {}
+		for id, p in profile.plants do
+			occupied[p.cell] = id
+		end
+		for cell = 1, Catalog.expansions[profile.expansion] do
+			local index = cell
+			local id = occupied[cell]
+			if id then
+				local plant = profile.plants[id]
+				local ready = plant.progress >= 1
+				button(
+					content,
+					string.format(
+						"%02d · %s · %d%% · %s",
+						cell,
+						name(plant.species),
+						math.floor(plant.progress * 100),
+						if ready then L.harvest else L.water
+					),
+					function()
+						request(if ready then "Harvest" else "Water", { id = id })
+					end
+				)
+			else
+				button(content, string.format("%02d · %s %s", cell, L.plant, name(selectedSeed)), function()
+					request("Plant", { id = selectedSeed, cell = index })
+				end)
+			end
+		end
+	elseif page == "shop" then
+		for _, cfg in Catalog.plants do
+			local c = cfg
+			button(
+				content,
+				string.format("%s · %s · %d coins · %ds · Lv%d", c.name, c.rarity, c.price, c.seconds, c.level),
+				function()
+					request("Buy", { id = c.id })
+				end
+			)
+		end
+	elseif page == "inventory" then
+		text("Tap to select parents. ★ protects from sale and crossing. Sale needs a second tap.")
+		button(content, L.cross .. " (" .. #parents .. "/2) · 30 Coins", function()
+			if #parents == 2 then
+				local a, b = parents[1], parents[2]
+				parents = {}
+				request("Cross", { id = a, other = b })
+			else
+				notice.Text = "Select two specimens first"
+			end
+		end)
+		if next(profile.harvest) == nil then
+			text("No specimens yet. Harvest your first plant.")
+		end
+		for _, id in sorted(profile.harvest) do
+			local key = id
+			local plant = profile.harvest[id]
+			button(
+				content,
+				(if table.find(parents, id) then "✓ " else "")
+					.. name(plant.species)
+					.. " · "
+					.. table.concat(plant.mutations, ", "),
+				function()
+					local i = table.find(parents, key)
+					if i then
+						table.remove(parents, i)
+					elseif #parents < 2 then
+						table.insert(parents, key)
+					end
+					render()
+				end
+			)
+			button(content, (if plant.favorite then "★ " else "☆ ") .. "Protect / unprotect", function()
+				request("Favorite", { id = key })
+			end)
+			button(content, "Replant in first free cell", function()
+				local occupied = {}
+				for _, v in profile.plants do
+					occupied[v.cell] = true
+				end
+				for cell = 1, Catalog.expansions[profile.expansion] do
+					if not occupied[cell] then
+						request("Replant", { id = key, cell = cell })
+						return
+					end
+				end
+				notice.Text = "No free cell"
+			end)
+			local confirm = false
+			local b
+			b = button(content, L.sell, function()
+				if not confirm then
+					confirm = true
+					b.Text = "Confirm sale"
+				else
+					request("Sell", { id = key })
+				end
+			end)
+		end
+	elseif page == "research" then
+		text(
+			"Branches: mutation odds, growth, biome unlocks, automated care and sale bonuses. Research each branch in order."
+		)
+		for _, cfg in Catalog.research do
+			local r = cfg
+			button(
+				content,
+				(if profile.research[r.id] then "✓ " else "")
+					.. r.id
+					.. " · "
+					.. r.cost
+					.. " RP · requires "
+					.. r.requires,
+				function()
+					request("Research", { id = r.id })
+				end
+			)
+		end
+	elseif page == "collection" then
+		for _, c in Catalog.plants do
+			text(
+				if profile.collection[c.id]
+					then c.name .. " · " .. c.rarity .. " · " .. Catalog.biomes[c.biome]
+					else "??? · " .. Catalog.biomes[c.biome]
+			)
+		end
+	elseif page == "quests" then
+		text(
+			string.format(
+				"Harvest contract: %d / %d. Reward: 75 Coins + 5 RP",
+				profile.quest,
+				(profile.questClaim + 1) * 5
+			)
+		)
+		button(content, L.claim, function()
+			request("Quest", {})
+		end)
+	elseif page == "settings" then
+		button(content, "English / Русский", function()
+			language = if language == "en" then "ru" else "en"
+			render()
+		end)
+		button(content, "UI animations: " .. tostring(effects), function()
+			effects = not effects
+			render()
+		end)
+		button(content, L.expand .. " · " .. tostring(profile.expansion * 250) .. " Coins", function()
+			request("Expand", {})
+		end)
+		text(
+			"Walk around to visit other gardens. Only owners can manage them. Purchases and trading are not enabled in this build."
+		)
+	end
+end
+for i, key in { "garden", "shop", "inventory", "research", "collection", "quests", "settings" } do
+	local k = key
+	local b = button(tabs, Languages.en[key] or "Settings", function()
+		page = k
+		render()
+		if effects then
+			panel.BackgroundTransparency = 0.25
+			TweenService:Create(panel, TweenInfo.new(0.15), { BackgroundTransparency = 0.04 }):Play()
+		end
+	end, 110)
+	b.LayoutOrder = i
+end
+button(gui, "☰", function()
+	panel.Visible = not panel.Visible
+end, 44).Position = UDim2.new(1, -60, 0, 10)
+request("Sync", {})
+task.spawn(function()
+	while gui.Parent do
+		task.wait(4)
+		if not busy then
+			request("Sync", {})
+		end
+	end
+end)
+]]></string>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+  </Item>
+  <Item class="Workspace" referent="17">
+    <Properties>
+      <string name="Name">Workspace</string>
+      <bool name="FilteringEnabled">true</bool>
+      <bool name="NeedsPivotMigration">false</bool>
+      <bool name="StreamingEnabled">true</bool>
+    </Properties>
+  </Item>
+</roblox>
