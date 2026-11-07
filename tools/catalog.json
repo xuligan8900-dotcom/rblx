@@ -1,0 +1,1006 @@
+{
+  "plants": [
+    {
+      "id": "p01",
+      "name": "Sunny Daisy",
+      "biome": 1,
+      "rarity": "Common",
+      "archetype": "Flower",
+      "price": 8,
+      "seconds": 25,
+      "yieldCount": 2,
+      "value": 8,
+      "hue": 0.0,
+      "level": 1
+    },
+    {
+      "id": "p02",
+      "name": "Mint Sprout",
+      "biome": 1,
+      "rarity": "Common",
+      "archetype": "Bush",
+      "price": 11,
+      "seconds": 31,
+      "yieldCount": 2,
+      "value": 11,
+      "hue": 0.137,
+      "level": 1
+    },
+    {
+      "id": "p03",
+      "name": "Pebble Cactus",
+      "biome": 1,
+      "rarity": "Common",
+      "archetype": "Cactus",
+      "price": 14,
+      "seconds": 37,
+      "yieldCount": 2,
+      "value": 14,
+      "hue": 0.274,
+      "level": 1
+    },
+    {
+      "id": "p04",
+      "name": "Honey Tulip",
+      "biome": 1,
+      "rarity": "Common",
+      "archetype": "Flower",
+      "price": 17,
+      "seconds": 43,
+      "yieldCount": 2,
+      "value": 17,
+      "hue": 0.411,
+      "level": 1
+    },
+    {
+      "id": "p05",
+      "name": "Soft Fern",
+      "biome": 1,
+      "rarity": "Common",
+      "archetype": "Vine",
+      "price": 20,
+      "seconds": 49,
+      "yieldCount": 2,
+      "value": 20,
+      "hue": 0.548,
+      "level": 1
+    },
+    {
+      "id": "p06",
+      "name": "Blueberry Lantern",
+      "biome": 2,
+      "rarity": "Uncommon",
+      "archetype": "Bush",
+      "price": 20,
+      "seconds": 65,
+      "yieldCount": 3,
+      "value": 23,
+      "hue": 0.685,
+      "level": 3
+    },
+    {
+      "id": "p07",
+      "name": "Velvet Rose",
+      "biome": 2,
+      "rarity": "Uncommon",
+      "archetype": "Flower",
+      "price": 23,
+      "seconds": 71,
+      "yieldCount": 3,
+      "value": 26,
+      "hue": 0.822,
+      "level": 3
+    },
+    {
+      "id": "p08",
+      "name": "Moon Mint",
+      "biome": 2,
+      "rarity": "Uncommon",
+      "archetype": "Bush",
+      "price": 26,
+      "seconds": 77,
+      "yieldCount": 3,
+      "value": 29,
+      "hue": 0.959,
+      "level": 3
+    },
+    {
+      "id": "p09",
+      "name": "Amber Lily",
+      "biome": 2,
+      "rarity": "Uncommon",
+      "archetype": "Aquatic",
+      "price": 29,
+      "seconds": 83,
+      "yieldCount": 3,
+      "value": 32,
+      "hue": 0.096,
+      "level": 3
+    },
+    {
+      "id": "p10",
+      "name": "Twinkle Moss",
+      "biome": 2,
+      "rarity": "Uncommon",
+      "archetype": "Exotic",
+      "price": 32,
+      "seconds": 89,
+      "yieldCount": 3,
+      "value": 35,
+      "hue": 0.233,
+      "level": 3
+    },
+    {
+      "id": "p11",
+      "name": "Crystal Orchid",
+      "biome": 3,
+      "rarity": "Rare",
+      "archetype": "Crystal",
+      "price": 32,
+      "seconds": 105,
+      "yieldCount": 4,
+      "value": 38,
+      "hue": 0.37,
+      "level": 5
+    },
+    {
+      "id": "p12",
+      "name": "Ember Fern",
+      "biome": 3,
+      "rarity": "Rare",
+      "archetype": "Vine",
+      "price": 35,
+      "seconds": 111,
+      "yieldCount": 4,
+      "value": 41,
+      "hue": 0.507,
+      "level": 5
+    },
+    {
+      "id": "p13",
+      "name": "Frost Lily",
+      "biome": 3,
+      "rarity": "Rare",
+      "archetype": "Flower",
+      "price": 38,
+      "seconds": 117,
+      "yieldCount": 4,
+      "value": 44,
+      "hue": 0.644,
+      "level": 5
+    },
+    {
+      "id": "p14",
+      "name": "Cloud Vine",
+      "biome": 3,
+      "rarity": "Rare",
+      "archetype": "Vine",
+      "price": 41,
+      "seconds": 123,
+      "yieldCount": 4,
+      "value": 47,
+      "hue": 0.781,
+      "level": 5
+    },
+    {
+      "id": "p15",
+      "name": "Echo Mushroom",
+      "biome": 3,
+      "rarity": "Rare",
+      "archetype": "Mushroom",
+      "price": 44,
+      "seconds": 129,
+      "yieldCount": 4,
+      "value": 50,
+      "hue": 0.918,
+      "level": 5
+    },
+    {
+      "id": "p16",
+      "name": "Thunder Blossom",
+      "biome": 4,
+      "rarity": "Epic",
+      "archetype": "Exotic",
+      "price": 44,
+      "seconds": 145,
+      "yieldCount": 5,
+      "value": 53,
+      "hue": 0.055,
+      "level": 7
+    },
+    {
+      "id": "p17",
+      "name": "Aurora Lotus",
+      "biome": 4,
+      "rarity": "Epic",
+      "archetype": "Aquatic",
+      "price": 47,
+      "seconds": 151,
+      "yieldCount": 5,
+      "value": 56,
+      "hue": 0.192,
+      "level": 7
+    },
+    {
+      "id": "p18",
+      "name": "Phantom Rose",
+      "biome": 4,
+      "rarity": "Epic",
+      "archetype": "Flower",
+      "price": 50,
+      "seconds": 157,
+      "yieldCount": 5,
+      "value": 59,
+      "hue": 0.329,
+      "level": 7
+    },
+    {
+      "id": "p19",
+      "name": "Solar Orchid",
+      "biome": 4,
+      "rarity": "Epic",
+      "archetype": "Flower",
+      "price": 53,
+      "seconds": 163,
+      "yieldCount": 5,
+      "value": 62,
+      "hue": 0.466,
+      "level": 7
+    },
+    {
+      "id": "p20",
+      "name": "Starberry",
+      "biome": 4,
+      "rarity": "Epic",
+      "archetype": "Bush",
+      "price": 56,
+      "seconds": 169,
+      "yieldCount": 5,
+      "value": 65,
+      "hue": 0.603,
+      "level": 7
+    },
+    {
+      "id": "p21",
+      "name": "Celestial Lotus",
+      "biome": 5,
+      "rarity": "Legendary",
+      "archetype": "Aquatic",
+      "price": 56,
+      "seconds": 185,
+      "yieldCount": 6,
+      "value": 68,
+      "hue": 0.74,
+      "level": 9
+    },
+    {
+      "id": "p22",
+      "name": "Void Orchid",
+      "biome": 5,
+      "rarity": "Legendary",
+      "archetype": "Crystal",
+      "price": 59,
+      "seconds": 191,
+      "yieldCount": 6,
+      "value": 71,
+      "hue": 0.877,
+      "level": 9
+    },
+    {
+      "id": "p23",
+      "name": "Phoenix Bloom",
+      "biome": 5,
+      "rarity": "Legendary",
+      "archetype": "Flower",
+      "price": 62,
+      "seconds": 197,
+      "yieldCount": 6,
+      "value": 74,
+      "hue": 0.014,
+      "level": 9
+    },
+    {
+      "id": "p24",
+      "name": "Dragon Root",
+      "biome": 5,
+      "rarity": "Legendary",
+      "archetype": "Cactus",
+      "price": 65,
+      "seconds": 203,
+      "yieldCount": 6,
+      "value": 77,
+      "hue": 0.151,
+      "level": 9
+    },
+    {
+      "id": "p25",
+      "name": "Prism Tree",
+      "biome": 5,
+      "rarity": "Legendary",
+      "archetype": "Tree",
+      "price": 68,
+      "seconds": 209,
+      "yieldCount": 6,
+      "value": 80,
+      "hue": 0.288,
+      "level": 9
+    },
+    {
+      "id": "p26",
+      "name": "Genesis Flower",
+      "biome": 6,
+      "rarity": "Mythic",
+      "archetype": "Exotic",
+      "price": 68,
+      "seconds": 225,
+      "yieldCount": 7,
+      "value": 83,
+      "hue": 0.425,
+      "level": 11
+    },
+    {
+      "id": "p27",
+      "name": "Infinite Bloom",
+      "biome": 6,
+      "rarity": "Mythic",
+      "archetype": "Flower",
+      "price": 71,
+      "seconds": 231,
+      "yieldCount": 7,
+      "value": 86,
+      "hue": 0.562,
+      "level": 11
+    },
+    {
+      "id": "p28",
+      "name": "Astral Heart",
+      "biome": 6,
+      "rarity": "Mythic",
+      "archetype": "Exotic",
+      "price": 74,
+      "seconds": 237,
+      "yieldCount": 7,
+      "value": 89,
+      "hue": 0.699,
+      "level": 11
+    },
+    {
+      "id": "p29",
+      "name": "Chrono Orchid",
+      "biome": 6,
+      "rarity": "Mythic",
+      "archetype": "Flower",
+      "price": 77,
+      "seconds": 243,
+      "yieldCount": 7,
+      "value": 92,
+      "hue": 0.836,
+      "level": 11
+    },
+    {
+      "id": "p30",
+      "name": "Reality Vine",
+      "biome": 6,
+      "rarity": "Mythic",
+      "archetype": "Vine",
+      "price": 80,
+      "seconds": 249,
+      "yieldCount": 7,
+      "value": 95,
+      "hue": 0.973,
+      "level": 11
+    },
+    {
+      "id": "p31",
+      "name": "Dewbell",
+      "biome": 1,
+      "rarity": "Common",
+      "archetype": "Flower",
+      "price": 8,
+      "seconds": 25,
+      "yieldCount": 2,
+      "value": 8,
+      "hue": 0.11,
+      "level": 1
+    },
+    {
+      "id": "p32",
+      "name": "Copper Clover",
+      "biome": 1,
+      "rarity": "Common",
+      "archetype": "Bush",
+      "price": 11,
+      "seconds": 31,
+      "yieldCount": 2,
+      "value": 11,
+      "hue": 0.247,
+      "level": 1
+    },
+    {
+      "id": "p33",
+      "name": "Coral Willow",
+      "biome": 2,
+      "rarity": "Uncommon",
+      "archetype": "Tree",
+      "price": 26,
+      "seconds": 77,
+      "yieldCount": 3,
+      "value": 29,
+      "hue": 0.384,
+      "level": 3
+    },
+    {
+      "id": "p34",
+      "name": "Opal Cap",
+      "biome": 3,
+      "rarity": "Uncommon",
+      "archetype": "Mushroom",
+      "price": 29,
+      "seconds": 83,
+      "yieldCount": 3,
+      "value": 32,
+      "hue": 0.521,
+      "level": 5
+    },
+    {
+      "id": "p35",
+      "name": "Cinder Aloe",
+      "biome": 4,
+      "rarity": "Rare",
+      "archetype": "Cactus",
+      "price": 44,
+      "seconds": 129,
+      "yieldCount": 4,
+      "value": 50,
+      "hue": 0.658,
+      "level": 7
+    },
+    {
+      "id": "p36",
+      "name": "Snowdrop Palm",
+      "biome": 5,
+      "rarity": "Rare",
+      "archetype": "Tree",
+      "price": 32,
+      "seconds": 105,
+      "yieldCount": 4,
+      "value": 38,
+      "hue": 0.795,
+      "level": 9
+    },
+    {
+      "id": "p37",
+      "name": "Nebula Reed",
+      "biome": 6,
+      "rarity": "Epic",
+      "archetype": "Aquatic",
+      "price": 47,
+      "seconds": 151,
+      "yieldCount": 5,
+      "value": 56,
+      "hue": 0.932,
+      "level": 11
+    },
+    {
+      "id": "p38",
+      "name": "Glass Poppy",
+      "biome": 3,
+      "rarity": "Epic",
+      "archetype": "Crystal",
+      "price": 50,
+      "seconds": 157,
+      "yieldCount": 5,
+      "value": 59,
+      "hue": 0.069,
+      "level": 5
+    },
+    {
+      "id": "p39",
+      "name": "Dusk Fig",
+      "biome": 2,
+      "rarity": "Legendary",
+      "archetype": "Tree",
+      "price": 65,
+      "seconds": 203,
+      "yieldCount": 6,
+      "value": 77,
+      "hue": 0.206,
+      "level": 3
+    },
+    {
+      "id": "p40",
+      "name": "Comet Peony",
+      "biome": 6,
+      "rarity": "Legendary",
+      "archetype": "Flower",
+      "price": 68,
+      "seconds": 209,
+      "yieldCount": 6,
+      "value": 80,
+      "hue": 0.343,
+      "level": 11
+    }
+  ],
+  "biomes": [
+    "Green Meadows",
+    "Mushroom Forest",
+    "Crystal Valley",
+    "Volcanic Greenhouse",
+    "Frozen Oasis",
+    "Cosmic Conservatory"
+  ],
+  "expansions": [
+    12,
+    24,
+    48,
+    72,
+    96
+  ],
+  "maxPlayers": 8,
+  "offlineCap": 28800,
+  "inventoryCap": 400,
+  "weather": [
+    "Sunny",
+    "Rain",
+    "Storm",
+    "Fog",
+    "Frost",
+    "Meteor Shower",
+    "Aurora",
+    "Pollen Wind"
+  ],
+  "mutations": [
+    {
+      "id": "Golden",
+      "name": "Golden",
+      "probability": 0.018,
+      "value": 0.15,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 0
+    },
+    {
+      "id": "Silver",
+      "name": "Silver",
+      "probability": 0.013333,
+      "value": 0.21,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 0
+    },
+    {
+      "id": "Rainbow",
+      "name": "Rainbow",
+      "probability": 0.010588,
+      "value": 0.27,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 0
+    },
+    {
+      "id": "Crystal",
+      "name": "Crystal",
+      "probability": 0.00878,
+      "value": 0.33,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 0
+    },
+    {
+      "id": "Neon",
+      "name": "Neon",
+      "probability": 0.0075,
+      "value": 0.39,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 0
+    },
+    {
+      "id": "Frozen",
+      "name": "Frozen",
+      "probability": 0.006545,
+      "value": 0.45,
+      "size": 1,
+      "growth": 0.85,
+      "yieldBonus": 0,
+      "biome": 6
+    },
+    {
+      "id": "Burning",
+      "name": "Burning",
+      "probability": 0.005806,
+      "value": 0.51,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 1
+    },
+    {
+      "id": "Glowing",
+      "name": "Glowing",
+      "probability": 0.005217,
+      "value": 0.57,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 2
+    },
+    {
+      "id": "Giant",
+      "name": "Giant",
+      "probability": 0.004737,
+      "value": 0.63,
+      "size": 1.8,
+      "growth": 1,
+      "yieldBonus": 2,
+      "biome": 3
+    },
+    {
+      "id": "Miniature",
+      "name": "Miniature",
+      "probability": 0.004337,
+      "value": 0.69,
+      "size": 0.55,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 4
+    },
+    {
+      "id": "Shadow",
+      "name": "Shadow",
+      "probability": 0.004,
+      "value": 0.75,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 5
+    },
+    {
+      "id": "Celestial",
+      "name": "Celestial",
+      "probability": 0.003711,
+      "value": 0.81,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 6
+    },
+    {
+      "id": "Toxic",
+      "name": "Toxic",
+      "probability": 0.003462,
+      "value": 0.87,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 1
+    },
+    {
+      "id": "Electric",
+      "name": "Electric",
+      "probability": 0.003243,
+      "value": 0.93,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 2
+    },
+    {
+      "id": "Lunar",
+      "name": "Lunar",
+      "probability": 0.003051,
+      "value": 0.99,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 3
+    },
+    {
+      "id": "Solar",
+      "name": "Solar",
+      "probability": 0.00288,
+      "value": 1.05,
+      "size": 1,
+      "growth": 1.15,
+      "yieldBonus": 0,
+      "biome": 4
+    },
+    {
+      "id": "Phantom",
+      "name": "Phantom",
+      "probability": 0.002727,
+      "value": 1.11,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 5
+    },
+    {
+      "id": "Prismatic",
+      "name": "Prismatic",
+      "probability": 0.00259,
+      "value": 1.17,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 6
+    },
+    {
+      "id": "Ancient",
+      "name": "Ancient",
+      "probability": 0.002466,
+      "value": 1.23,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 1
+    },
+    {
+      "id": "Cosmic",
+      "name": "Cosmic",
+      "probability": 0.002353,
+      "value": 1.29,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 2
+    },
+    {
+      "id": "Radioactive",
+      "name": "Radioactive",
+      "probability": 0.00225,
+      "value": 1.35,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 3
+    },
+    {
+      "id": "Dreamlike",
+      "name": "Dreamlike",
+      "probability": 0.002156,
+      "value": 1.41,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 4
+    },
+    {
+      "id": "Void",
+      "name": "Void",
+      "probability": 0.002069,
+      "value": 1.47,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 5
+    },
+    {
+      "id": "Genesis",
+      "name": "Genesis",
+      "probability": 0.001989,
+      "value": 1.53,
+      "size": 1,
+      "growth": 1,
+      "yieldBonus": 0,
+      "biome": 6
+    }
+  ],
+  "research": [
+    {
+      "id": "Genetics1",
+      "branch": "Genetics",
+      "tier": 1,
+      "cost": 8,
+      "requires": ""
+    },
+    {
+      "id": "Genetics2",
+      "branch": "Genetics",
+      "tier": 2,
+      "cost": 16,
+      "requires": "Genetics1"
+    },
+    {
+      "id": "Genetics3",
+      "branch": "Genetics",
+      "tier": 3,
+      "cost": 24,
+      "requires": "Genetics2"
+    },
+    {
+      "id": "Genetics4",
+      "branch": "Genetics",
+      "tier": 4,
+      "cost": 32,
+      "requires": "Genetics3"
+    },
+    {
+      "id": "Genetics5",
+      "branch": "Genetics",
+      "tier": 5,
+      "cost": 40,
+      "requires": "Genetics4"
+    },
+    {
+      "id": "Genetics6",
+      "branch": "Genetics",
+      "tier": 6,
+      "cost": 48,
+      "requires": "Genetics5"
+    },
+    {
+      "id": "Cultivation1",
+      "branch": "Cultivation",
+      "tier": 1,
+      "cost": 8,
+      "requires": ""
+    },
+    {
+      "id": "Cultivation2",
+      "branch": "Cultivation",
+      "tier": 2,
+      "cost": 16,
+      "requires": "Cultivation1"
+    },
+    {
+      "id": "Cultivation3",
+      "branch": "Cultivation",
+      "tier": 3,
+      "cost": 24,
+      "requires": "Cultivation2"
+    },
+    {
+      "id": "Cultivation4",
+      "branch": "Cultivation",
+      "tier": 4,
+      "cost": 32,
+      "requires": "Cultivation3"
+    },
+    {
+      "id": "Cultivation5",
+      "branch": "Cultivation",
+      "tier": 5,
+      "cost": 40,
+      "requires": "Cultivation4"
+    },
+    {
+      "id": "Cultivation6",
+      "branch": "Cultivation",
+      "tier": 6,
+      "cost": 48,
+      "requires": "Cultivation5"
+    },
+    {
+      "id": "Botany1",
+      "branch": "Botany",
+      "tier": 1,
+      "cost": 8,
+      "requires": ""
+    },
+    {
+      "id": "Botany2",
+      "branch": "Botany",
+      "tier": 2,
+      "cost": 16,
+      "requires": "Botany1"
+    },
+    {
+      "id": "Botany3",
+      "branch": "Botany",
+      "tier": 3,
+      "cost": 24,
+      "requires": "Botany2"
+    },
+    {
+      "id": "Botany4",
+      "branch": "Botany",
+      "tier": 4,
+      "cost": 32,
+      "requires": "Botany3"
+    },
+    {
+      "id": "Botany5",
+      "branch": "Botany",
+      "tier": 5,
+      "cost": 40,
+      "requires": "Botany4"
+    },
+    {
+      "id": "Botany6",
+      "branch": "Botany",
+      "tier": 6,
+      "cost": 48,
+      "requires": "Botany5"
+    },
+    {
+      "id": "Automation1",
+      "branch": "Automation",
+      "tier": 1,
+      "cost": 8,
+      "requires": ""
+    },
+    {
+      "id": "Automation2",
+      "branch": "Automation",
+      "tier": 2,
+      "cost": 16,
+      "requires": "Automation1"
+    },
+    {
+      "id": "Automation3",
+      "branch": "Automation",
+      "tier": 3,
+      "cost": 24,
+      "requires": "Automation2"
+    },
+    {
+      "id": "Automation4",
+      "branch": "Automation",
+      "tier": 4,
+      "cost": 32,
+      "requires": "Automation3"
+    },
+    {
+      "id": "Automation5",
+      "branch": "Automation",
+      "tier": 5,
+      "cost": 40,
+      "requires": "Automation4"
+    },
+    {
+      "id": "Automation6",
+      "branch": "Automation",
+      "tier": 6,
+      "cost": 48,
+      "requires": "Automation5"
+    },
+    {
+      "id": "Economy1",
+      "branch": "Economy",
+      "tier": 1,
+      "cost": 8,
+      "requires": ""
+    },
+    {
+      "id": "Economy2",
+      "branch": "Economy",
+      "tier": 2,
+      "cost": 16,
+      "requires": "Economy1"
+    },
+    {
+      "id": "Economy3",
+      "branch": "Economy",
+      "tier": 3,
+      "cost": 24,
+      "requires": "Economy2"
+    },
+    {
+      "id": "Economy4",
+      "branch": "Economy",
+      "tier": 4,
+      "cost": 32,
+      "requires": "Economy3"
+    },
+    {
+      "id": "Economy5",
+      "branch": "Economy",
+      "tier": 5,
+      "cost": 40,
+      "requires": "Economy4"
+    },
+    {
+      "id": "Economy6",
+      "branch": "Economy",
+      "tier": 6,
+      "cost": 48,
+      "requires": "Economy5"
+    }
+  ]
+}

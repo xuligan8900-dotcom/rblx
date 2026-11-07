@@ -1,0 +1,35 @@
+{
+  "name": "MutationGarden",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Shared": {
+        "$path": "src/shared"
+      }
+    },
+    "ServerScriptService": {
+      "Garden": {
+        "$path": "src/server"
+      }
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Garden": {
+          "$path": "src/client"
+        }
+      }
+    },
+    "Workspace": {
+      "$properties": {
+        "StreamingEnabled": true,
+        "FilteringEnabled": true
+      }
+    },
+    "Lighting": {
+      "$properties": {
+        "ClockTime": 14,
+        "Brightness": 2
+      }
+    }
+  }
+}
