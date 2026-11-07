@@ -29,7 +29,7 @@ local function create(class, parent, props)
 end
 local cream = Color3.fromRGB(244, 238, 214)
 local green = Color3.fromRGB(28, 53, 47)
-local accent = Color3.fromRGB(183, 221, 144)
+local accent = Color3.fromRGB(181, 197, 170)
 local panel = create("Frame", gui, {
 	Size = UDim2.new(0.34, 0, 0.65, 0),
 	AnchorPoint = Vector2.new(1, 0),
@@ -38,7 +38,8 @@ local panel = create("Frame", gui, {
 	BackgroundColor3 = green,
 	BackgroundTransparency = 0.04,
 })
-create("UICorner", panel, { CornerRadius = UDim.new(0, 18) })
+create("UICorner", panel, { CornerRadius = UDim.new(0, 14) })
+create("UIStroke", panel, { Color = Color3.fromRGB(157, 174, 149), Transparency = 0.45, Thickness = 1 })
 local limit = create("UISizeConstraint", panel, { MaxSize = Vector2.new(420, 650), MinSize = Vector2.new(285, 170) })
 local title = create("TextLabel", gui, {
 	Position = UDim2.fromOffset(20, 8),
@@ -123,6 +124,7 @@ local function button(parent, s, fn, width)
 		AutoButtonColor = true,
 	})
 	create("UICorner", b, { CornerRadius = UDim.new(0, 9) })
+	create("UIStroke", b, { Color = Color3.fromRGB(85, 110, 87), Transparency = 0.6, Thickness = 1 })
 	b.Activated:Connect(fn)
 	return b
 end
