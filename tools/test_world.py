@@ -28,6 +28,9 @@ function object:Destroy() self.destroyed=true; if self.Parent then for i,c in se
 local mt={__index=function(t,k) return object[k] or t.properties[k] end,__newindex=function(t,k,v) t.properties[k]=v; if k=="Parent" and v then table.insert(v.children,t); if t.ClassName=="TextLabel" then v.TextLabel=t end end end}
 Instance={new=function(class) return setmetatable({ClassName=class,children={},attributes={},properties={CFrame=CFrame.new()}},mt) end}
 workspace=Instance.new("Workspace")
+local terrain=Instance.new("Terrain"); terrain.Parent=workspace
+local terrainCalls=0
+function object:FillBall(pos,radius,material) assert(radius>0 and radius<40); terrainCalls+=1 end
 local lighting=Instance.new("Lighting")
 local game={GetService=function() return lighting end}
 local function loadWorld()
@@ -39,6 +42,7 @@ local Genetics=require("../src/shared/Genetics")
 local sim=require("../src/shared/Simulation").new(Catalog,Genetics,function() return .4 end,function() return "id" end)
 local world=loadWorld().new(Catalog)
 assert(#world.plots==8)
+assert(terrainCalls==28,"Expected 28 terrain hill fills")
 local player={UserId=42,DisplayName="Gardener"}
 local index=world:claim(player); assert(index==1 and player.RespawnLocation==world.plots[1].spawn)
 local p=sim.profile(); world:render(index,p,sim,Genetics)

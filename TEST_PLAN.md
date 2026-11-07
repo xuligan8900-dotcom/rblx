@@ -26,3 +26,9 @@ Three additional mocked-service checks execute the real Profiles source: unpubli
 PASS: four mocked-world checks for all 96 cell positions inside plot bounds, ownership attributes and stage-only rebuilds, construction of all 40 species at five stages, and plot release cleanup. Existing 20 domain and 3 profile mode checks still pass (27 total).
 
 NOT RUN: rendered appearance, actual raycast coordinates at different GUI insets, mouse/touch interaction and Highlight display, proximity prompts, garden spawn/camera, and mobile drawer layout. In Studio, open the new file, Play, confirm spawn at owned plot, choose Plant then click nearby soil, switch to Water and finally Harvest. Verify another player's beds cannot be changed and long-distance farming fails. Confirm My garden works from the hub and respawn returns to the assigned plot. Check each shop counter and all old menus.
+
+## Localization regression
+
+PASS: EN/RU key parity for 203 entries, matching format arguments, coverage of all current catalogs and locale detection; validated server-side preference updates; actual client script callbacks under UI/service mocks update tabs, controls, shop, world labels and prompts in both directions. These are not visual Studio tests. Total current test groups: 30.
+
+NOT RUN: open v4 in Studio, press RU, verify every menu and world prompt, return to EN, test two clients with different languages, check narrow-screen wrapping, then verify manual selection survives a real DataStore save/rejoin. Local unpublished sessions intentionally reset settings. Review Future lighting, detailed-leaf trees, Terrain perimeter hills and runtime costs on actual devices. No graphical acceptance is claimed.

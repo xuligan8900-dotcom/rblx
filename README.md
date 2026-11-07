@@ -39,3 +39,7 @@ The HUD now opens with the world visible. Select Plant/Water/Harvest in the bott
 The world now has framed greenhouses, garden fences/hedges, raised-bed edges, trees, flowers, pathways, a fountain and walk-in shop buildings. This is procedural primitive art, not a Studio-verified final art pass.
 
 The latest art revision is in downloads/MutationGarden-v3.zip (open MutationGarden-v3.rbxlx). It uses built-in Roblox limestone/sandstone/plaster/wood/glass/fabric materials, softer foliage and a consistent botanical-garden palette. Source rebuilds still produce build/MutationGarden.rbxlx. Review the actual rendering in Studio; automated tests are not visual acceptance.
+
+## Russian interface update
+
+Use the RU button at the top right to switch the current interface to Russian (the button then reads EN). The same switch is in Settings. Existing tabs, tools, hints, plant names, shop/research/collection, notifications, world signs and prompts now use centralized EN/RU keys. A manual language choice is saved in the profile when real DataStore saves are available. Unpublished local test mode resets preferences when stopped. Initial language follows the Roblox player's locale. The current download is downloads/MutationGarden-v4.zip containing MutationGarden-v4.rbxlx.

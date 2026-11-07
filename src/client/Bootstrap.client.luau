@@ -6,7 +6,17 @@ local player = Players.LocalPlayer
 local Catalog = require(RS:WaitForChild("Shared").Catalog)
 local Languages = require(RS.Shared.Localization)
 local remote = RS:WaitForChild("GardenRequest")
-local language = "en"
+local language = Languages.language(player.LocaleId)
+local function tr(key, ...)
+	return Languages.text(language, key, ...)
+end
+local lastWeather = "Sunny"
+local temporary = false
+local lastNotice = "ready"
+local refreshChrome
+local toolButtons, tabButtons = {}, {}
+local menuButton, home, hint, languageButton, toast
+local localizationLoaded = false
 local page = "garden"
 local tool = "Plant"
 local profile = nil
@@ -45,7 +55,7 @@ local title = create("TextLabel", gui, {
 	Position = UDim2.fromOffset(20, 8),
 	Size = UDim2.new(0.7, 0, 0, 35),
 	BackgroundTransparency = 1,
-	Text = "MUTATION GARDEN",
+	Text = tr("title"),
 	TextColor3 = cream,
 	TextStrokeTransparency = 0.4,
 	Font = Enum.Font.GothamBold,
@@ -60,7 +70,7 @@ local status = create("TextLabel", gui, {
 	Font = Enum.Font.Gotham,
 	TextSize = 13,
 	TextWrapped = true,
-	Text = Languages.en.loading,
+	Text = tr("loading"),
 })
 local notice = create("TextLabel", panel, {
 	Size = UDim2.new(1, -24, 0, 46),
@@ -129,12 +139,14 @@ local function button(parent, s, fn, width)
 	return b
 end
 local function name(id)
-	for _, c in Catalog.plants do
-		if c.id == id then
-			return c.name
-		end
+	return tr(id)
+end
+local function mutations(list)
+	local names = {}
+	for _, id in list do
+		table.insert(names, tr(id))
 	end
-	return id
+	return table.concat(names, ", ")
 end
 request = function(action, args)
 	if busy then
@@ -146,26 +158,38 @@ request = function(action, args)
 	end)
 	busy = false
 	if not ok then
-		notice.Text = "Connection interrupted. Try again."
+		lastNotice = "network_error"
+		notice.Text = tr(lastNotice)
 		return
 	end
-	if action ~= "Sync" then
-		notice.Text = result.message
+	if action ~= "Sync" or not result.ok then
+		lastNotice = result.message
 	end
 	if result.profile then
-		if result.temporary then
-			title.Text = "MUTATION GARDEN · LOCAL TEST (NO SAVES)"
-		end
 		profile = result.profile
-		status.Text = (if result.temporary then "Test · " else "")
-			.. string.format(
-				"%d Coins  ·  %d RP  ·  Lv %d  ·  %s",
-				profile.coins,
-				profile.rp,
-				1 + math.floor(profile.xp / 50),
-				result.weather
-			)
+		if not localizationLoaded then
+			localizationLoaded = true
+			if
+				profile.settings.languageChosen
+				and (profile.settings.language == "ru" or profile.settings.language == "en")
+			then
+				language = profile.settings.language
+			end
+		end
+		effects = profile.settings.effects ~= false
+		temporary = result.temporary
+		lastWeather = result.weather
 		render()
+	end
+	notice.Text = tr(lastNotice)
+	if toast and action ~= "Sync" then
+		local message = tr(lastNotice)
+		toast.Text = message
+		task.delay(5, function()
+			if toast.Text == message then
+				toast.Text = ""
+			end
+		end)
 	end
 end
 local function sorted(t)
@@ -175,6 +199,14 @@ local function sorted(t)
 	end
 	table.sort(keys)
 	return keys
+end
+local function switchLanguage()
+	if busy then
+		return
+	end
+	language = if language == "en" then "ru" else "en"
+	render()
+	request("Settings", { id = "language", value = language })
 end
 render = function()
 	for _, c in content:GetChildren() do
@@ -187,16 +219,11 @@ render = function()
 		return
 	end
 	local L = Languages[language]
+	if refreshChrome then
+		refreshChrome()
+	end
 	if page == "garden" then
-		local hints = {
-			"Choose a seed, then click a soil square in the world.",
-			"Water your first plant.",
-			"Watch it grow, then harvest.",
-			"Sell a specimen or keep two matching architectures for the lab.",
-			"Cross two specimens in the lab.",
-			"Experiment, research and discover all 40 species.",
-		}
-		text(hints[math.min(6, profile.tutorial)])
+		text(tr("tutorial" .. math.clamp(profile.tutorial, 1, 6)))
 		for _, id in sorted(profile.seeds) do
 			if profile.seeds[id] > 0 then
 				local seed = id
@@ -212,33 +239,27 @@ render = function()
 				)
 			end
 		end
-		text(
-			"Close this panel and click a soil square in your garden. Use Water while growing, then Harvest when ready."
-		)
+		text(tr("garden_help"))
 	elseif page == "shop" then
 		for _, cfg in Catalog.plants do
 			local c = cfg
-			button(
-				content,
-				string.format("%s · %s · %d coins · %ds · Lv%d", c.name, c.rarity, c.price, c.seconds, c.level),
-				function()
-					request("Buy", { id = c.id })
-				end
-			)
+			button(content, tr("shop_item", name(c.id), tr(c.rarity), c.price, c.seconds, c.level), function()
+				request("Buy", { id = c.id })
+			end)
 		end
 	elseif page == "inventory" then
-		text("Tap to select parents. ★ protects from sale and crossing. Sale needs a second tap.")
-		button(content, L.cross .. " (" .. #parents .. "/2) · 30 Coins", function()
+		text(tr("inventory_help"))
+		button(content, tr("cross_cost", L.cross, #parents), function()
 			if #parents == 2 then
 				local a, b = parents[1], parents[2]
 				parents = {}
 				request("Cross", { id = a, other = b })
 			else
-				notice.Text = "Select two specimens first"
+				notice.Text = tr("select_parents")
 			end
 		end)
 		if next(profile.harvest) == nil then
-			text("No specimens yet. Harvest your first plant.")
+			text(tr("inventory_empty"))
 		end
 		for _, id in sorted(profile.harvest) do
 			local key = id
@@ -248,7 +269,7 @@ render = function()
 				(if table.find(parents, id) then "✓ " else "")
 					.. name(plant.species)
 					.. " · "
-					.. table.concat(plant.mutations, ", "),
+					.. mutations(plant.mutations),
 				function()
 					local i = table.find(parents, key)
 					if i then
@@ -259,10 +280,10 @@ render = function()
 					render()
 				end
 			)
-			button(content, (if plant.favorite then "★ " else "☆ ") .. "Protect / unprotect", function()
+			button(content, (if plant.favorite then "★ " else "☆ ") .. tr("protect"), function()
 				request("Favorite", { id = key })
 			end)
-			button(content, "Replant in first free cell", function()
+			button(content, tr("replant"), function()
 				local occupied = {}
 				for _, v in profile.plants do
 					occupied[v.cell] = true
@@ -273,33 +294,27 @@ render = function()
 						return
 					end
 				end
-				notice.Text = "No free cell"
+				notice.Text = tr("no_cell")
 			end)
 			local confirm = false
 			local b
 			b = button(content, L.sell, function()
 				if not confirm then
 					confirm = true
-					b.Text = "Confirm sale"
+					b.Text = tr("confirm_sale")
 				else
 					request("Sell", { id = key })
 				end
 			end)
 		end
 	elseif page == "research" then
-		text(
-			"Branches: mutation odds, growth, biome unlocks, automated care and sale bonuses. Research each branch in order."
-		)
+		text(tr("research_help"))
 		for _, cfg in Catalog.research do
 			local r = cfg
 			button(
 				content,
 				(if profile.research[r.id] then "✓ " else "")
-					.. r.id
-					.. " · "
-					.. r.cost
-					.. " RP · requires "
-					.. r.requires,
+					.. tr("research_item", tr(r.id), r.cost, if r.requires == "" then tr("none") else tr(r.requires)),
 				function()
 					request("Research", { id = r.id })
 				end
@@ -309,41 +324,29 @@ render = function()
 		for _, c in Catalog.plants do
 			text(
 				if profile.collection[c.id]
-					then c.name .. " · " .. c.rarity .. " · " .. Catalog.biomes[c.biome]
-					else "??? · " .. Catalog.biomes[c.biome]
+					then name(c.id) .. " · " .. tr(c.rarity) .. " · " .. tr(Catalog.biomes[c.biome])
+					else "??? · " .. tr(Catalog.biomes[c.biome])
 			)
 		end
 	elseif page == "quests" then
-		text(
-			string.format(
-				"Harvest contract: %d / %d. Reward: 75 Coins + 5 RP",
-				profile.quest,
-				(profile.questClaim + 1) * 5
-			)
-		)
+		text(tr("quest_progress", profile.quest, (profile.questClaim + 1) * 5))
 		button(content, L.claim, function()
 			request("Quest", {})
 		end)
 	elseif page == "settings" then
-		button(content, "English / Русский", function()
-			language = if language == "en" then "ru" else "en"
-			render()
+		button(content, tr("language"), switchLanguage)
+		button(content, tr("animations", tr(if effects then "on" else "off")), function()
+			request("Settings", { id = "effects", value = if effects then "off" else "on" })
 		end)
-		button(content, "UI animations: " .. tostring(effects), function()
-			effects = not effects
-			render()
-		end)
-		button(content, L.expand .. " · " .. tostring(profile.expansion * 250) .. " Coins", function()
+		button(content, tr("expand_cost", L.expand, profile.expansion * 250), function()
 			request("Expand", {})
 		end)
-		text(
-			"Walk around to visit other gardens. Only owners can manage them. Purchases and trading are not enabled in this build."
-		)
+		text(tr("visit_help"))
 	end
 end
 for i, key in { "garden", "shop", "inventory", "research", "collection", "quests", "settings" } do
 	local k = key
-	local b = button(tabs, Languages.en[key] or "Settings", function()
+	local b = button(tabs, tr(key), function()
 		local same = page == k
 		page = k
 		panel.Visible = not (same and panel.Visible)
@@ -354,10 +357,14 @@ for i, key in { "garden", "shop", "inventory", "research", "collection", "quests
 		end
 	end, 95)
 	b.LayoutOrder = i
+	tabButtons[key] = b
 end
-button(gui, "Menu", function()
+menuButton = button(gui, tr("menu"), function()
 	panel.Visible = not panel.Visible
-end, 70).Position = UDim2.new(1, -90, 0, 8)
+end, 70)
+menuButton.Position = UDim2.new(1, -90, 0, 8)
+languageButton = button(gui, "RU", switchLanguage, 60)
+languageButton.Position = UDim2.new(1, -158, 0, 8)
 local UserInputService = game:GetService("UserInputService")
 local ProximityPromptService = game:GetService("ProximityPromptService")
 local actionbar = create("Frame", gui, {
@@ -367,24 +374,36 @@ local actionbar = create("Frame", gui, {
 	BackgroundTransparency = 1,
 })
 create("UIListLayout", actionbar, { FillDirection = Enum.FillDirection.Horizontal, Padding = UDim.new(0, 6) })
-local toolButtons = {}
+
 for _, mode in { "Plant", "Water", "Harvest" } do
 	local m = mode
-	toolButtons[m] = button(actionbar, m, function()
+	toolButtons[m] = button(actionbar, tr(string.lower(m)), function()
 		tool = m
 		panel.Visible = false
 	end, 98)
 end
-local hint = create("TextLabel", gui, {
+hint = create("TextLabel", gui, {
 	AnchorPoint = Vector2.new(0.5, 1),
 	Position = UDim2.new(0.5, 0, 1, -121),
 	Size = UDim2.new(0.85, 0, 0, 32),
 	BackgroundTransparency = 1,
-	Text = "Choose a tool, then click your garden soil",
+	Text = tr("tool_hint"),
 	TextColor3 = cream,
 	TextStrokeTransparency = 0.25,
 	Font = Enum.Font.GothamMedium,
 	TextSize = 15,
+})
+toast = create("TextLabel", gui, {
+	AnchorPoint = Vector2.new(0.5, 0),
+	Position = UDim2.new(0.5, 0, 0, 84),
+	Size = UDim2.new(0.8, 0, 0, 42),
+	BackgroundTransparency = 1,
+	Text = "",
+	TextColor3 = cream,
+	TextStrokeTransparency = 0.2,
+	TextWrapped = true,
+	TextSize = 16,
+	Font = Enum.Font.GothamMedium,
 })
 local highlight = Instance.new("Highlight")
 highlight.FillTransparency = 0.65
@@ -432,9 +451,7 @@ local function actAt(position)
 	elseif id and tool ~= "Plant" then
 		request(tool, { id = id })
 	else
-		hint.Text = if id
-			then "This square is occupied. Choose Water or Harvest."
-			else "Choose Plant for an empty square."
+		hint.Text = if id then tr("occupied_hint") else tr("empty_hint")
 	end
 end
 UserInputService.InputBegan:Connect(function(input, processed)
@@ -458,11 +475,64 @@ ProximityPromptService.PromptTriggered:Connect(function(pr, who)
 		render()
 	end
 end)
-local home = button(gui, "My garden", function()
+home = button(gui, tr("home"), function()
 	request("Home", {})
 	panel.Visible = false
 end, 110)
 home.Position = UDim2.new(1, -130, 0, 62)
+local function localizeWorldObject(obj)
+	if obj:IsA("TextLabel") and obj:GetAttribute("LocaleKey") then
+		local arg = obj:GetAttribute("LocaleArg")
+		obj.Text = if arg then tr(obj:GetAttribute("LocaleKey"), arg) else tr(obj:GetAttribute("LocaleKey"))
+	elseif obj:IsA("ProximityPrompt") and obj:GetAttribute("GardenScreen") then
+		obj.ObjectText = tr("station_" .. obj:GetAttribute("GardenScreen"))
+		obj.ActionText = tr("open")
+	end
+end
+local function refreshWorld()
+	local world = workspace:FindFirstChild("MutationGarden")
+	if world then
+		for _, obj in world:GetDescendants() do
+			localizeWorldObject(obj)
+		end
+	end
+end
+local worldLanguage = nil
+refreshChrome = function()
+	title.Text = tr("title") .. (if temporary then " · " .. tr("local_test") else "")
+	status.Text = tr("status", profile.coins, profile.rp, 1 + math.floor(profile.xp / 50), tr(lastWeather))
+	notice.Text = tr(lastNotice)
+	menuButton.Text = tr("menu")
+	languageButton.Text = if language == "ru" then "EN" else "RU"
+	home.Text = tr("home")
+	for key, b in tabButtons do
+		b.Text = tr(key)
+	end
+	for mode, b in toolButtons do
+		b.Text = tr(string.lower(mode))
+	end
+	hint.Text = tr("tool_hint")
+	if worldLanguage ~= language then
+		worldLanguage = language
+		refreshWorld()
+	end
+end
+local function watchWorld(obj)
+	if obj:IsA("TextLabel") then
+		obj:GetAttributeChangedSignal("LocaleKey"):Connect(function()
+			localizeWorldObject(obj)
+		end)
+		obj:GetAttributeChangedSignal("LocaleArg"):Connect(function()
+			localizeWorldObject(obj)
+		end)
+	end
+	task.defer(localizeWorldObject, obj)
+end
+local world = workspace:WaitForChild("MutationGarden")
+for _, obj in world:GetDescendants() do
+	watchWorld(obj)
+end
+world.DescendantAdded:Connect(watchWorld)
 task.spawn(function()
 	while gui.Parent do
 		task.wait(0.12)
@@ -483,8 +553,13 @@ task.spawn(function()
 					end
 				end
 				hint.Text = if plant
-					then string.format("%s · %d%% · %s", name(plant.species), math.floor(plant.progress * 100), tool)
-					else "Plant " .. name(selectedSeed) .. " · Click soil"
+					then tr(
+						"hover_growing",
+						name(plant.species),
+						math.floor(plant.progress * 100),
+						tr(string.lower(tool))
+					)
+					else tr("hover_plant", name(selectedSeed))
 			end
 		else
 			highlight.Adornee = nil

@@ -30,7 +30,7 @@ function S.new(catalog, genetics, random, uuid)
 			expansion = 1,
 			lastExperiment = 0,
 			tutorial = 1,
-			settings = { language = "en", effects = true },
+			settings = { language = "auto", effects = true },
 			savedAt = 0,
 		}
 	end
@@ -50,6 +50,17 @@ function S.new(catalog, genetics, random, uuid)
 			if type(p[k]) ~= "table" then
 				return false
 			end
+		end
+		if
+			p.settings.language ~= nil
+			and p.settings.language ~= "en"
+			and p.settings.language ~= "ru"
+			and p.settings.language ~= "auto"
+		then
+			return false
+		end
+		if p.settings.effects ~= nil and type(p.settings.effects) ~= "boolean" then
+			return false
 		end
 		for id, n in p.seeds do
 			if not species[id] or type(n) ~= "number" or n < 0 or n % 1 ~= 0 or n > 10000 then
@@ -226,10 +237,10 @@ function S.new(catalog, genetics, random, uuid)
 		if action == "Buy" then
 			local c = species[args.id]
 			if not c or c.biome > api.biome(p) or c.level > api.level(p) then
-				return false, "Species locked"
+				return false, "error_species_locked"
 			end
 			if p.coins < c.price or (p.seeds[c.id] or 0) >= 10000 then
-				return false, "Not enough coins or stack full"
+				return false, "error_coins_stack"
 			end
 			p.coins -= c.price
 			p.seeds[c.id] = (p.seeds[c.id] or 0) + 1
@@ -244,14 +255,14 @@ function S.new(catalog, genetics, random, uuid)
 				or cell > catalog.expansions[p.expansion]
 				or c.biome > api.biome(p)
 			then
-				return false, "Invalid planting"
+				return false, "error_planting"
 			end
 			if (p.seeds[c.id] or 0) < 1 then
-				return false, "No seed"
+				return false, "error_no_seed"
 			end
 			for _, v in p.plants do
 				if v.cell == cell then
-					return false, "Cell occupied"
+					return false, "error_cell_occupied"
 				end
 			end
 			local id = uuid()
@@ -279,11 +290,11 @@ function S.new(catalog, genetics, random, uuid)
 				or cell < 1
 				or cell > catalog.expansions[p.expansion]
 			then
-				return false, "Invalid specimen or cell"
+				return false, "error_specimen_cell"
 			end
 			for _, v in p.plants do
 				if v.cell == cell then
-					return false, "Cell occupied"
+					return false, "error_cell_occupied"
 				end
 			end
 			p.harvest[args.id] = nil
@@ -296,14 +307,14 @@ function S.new(catalog, genetics, random, uuid)
 		elseif action == "Water" then
 			local plant = p.plants[args.id]
 			if not plant then
-				return false, "Plant not found"
+				return false, "error_plant_missing"
 			end
 			plant.waterUntil = now + 120
 			p.tutorial = math.max(p.tutorial, 3)
 		elseif action == "Harvest" then
 			local plant = p.plants[args.id]
 			if not plant or plant.progress < 1 or count(p.harvest) >= catalog.inventoryCap then
-				return false, "Not ready or inventory full"
+				return false, "error_harvest"
 			end
 			local selected = table.clone(plant.mutations)
 			local total = 0
@@ -346,7 +357,7 @@ function S.new(catalog, genetics, random, uuid)
 		elseif action == "Sell" then
 			local plant = p.harvest[args.id]
 			if not plant or plant.favorite then
-				return false, "Plant missing or protected"
+				return false, "error_protected"
 			end
 			local bonus = 0
 			for i = 1, 6 do
@@ -360,16 +371,16 @@ function S.new(catalog, genetics, random, uuid)
 		elseif action == "Favorite" then
 			local plant = p.harvest[args.id]
 			if not plant then
-				return false, "Plant not found"
+				return false, "error_plant_missing"
 			end
 			plant.favorite = not plant.favorite
 		elseif action == "Cross" then
 			local a, b = p.harvest[args.id], p.harvest[args.other]
 			if not a or not b or a == b or a.favorite or b.favorite or p.coins < 30 or now - p.lastExperiment < 15 then
-				return false, "Two unprotected parents, 30 coins and cooldown required"
+				return false, "error_cross_requirements"
 			end
 			if species[a.species].archetype ~= species[b.species].archetype then
-				return false, "Parents need matching architecture"
+				return false, "error_incompatible"
 			end
 			local id = uuid()
 			local child = {
@@ -404,29 +415,38 @@ function S.new(catalog, genetics, random, uuid)
 				or p.rp < cfg.cost
 				or (cfg.requires ~= "" and not p.research[cfg.requires])
 			then
-				return false, "Research prerequisites missing"
+				return false, "error_research"
 			end
 			p.rp -= cfg.cost
 			p.research[cfg.id] = true
 		elseif action == "Expand" then
 			local cost = p.expansion * 250
 			if p.expansion >= 5 or p.coins < cost then
-				return false, "Expansion unavailable"
+				return false, "error_expansion"
 			end
 			p.coins -= cost
 			p.expansion += 1
+		elseif action == "Settings" then
+			if args.id == "language" and (args.value == "ru" or args.value == "en") then
+				p.settings.language = args.value
+				p.settings.languageChosen = true
+			elseif args.id == "effects" and (args.value == "on" or args.value == "off") then
+				p.settings.effects = args.value == "on"
+			else
+				return false, "error_settings"
+			end
 		elseif action == "Quest" then
 			local goal = (p.questClaim + 1) * 5
 			if p.quest < goal then
-				return false, "Harvest " .. goal .. " plants first"
+				return false, "error_quest"
 			end
 			p.questClaim += 1
 			p.coins += 75
 			p.rp += 5
 		else
-			return false, "Unknown action"
+			return false, "error_action"
 		end
-		return true, "Done"
+		return true, "done"
 	end
 	return api
 end

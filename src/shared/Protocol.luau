@@ -14,6 +14,7 @@ local fields: { [string]: { string } } = {
 	Quest = {},
 	Sync = {},
 	Home = {},
+	Settings = { "id", "value" },
 }
 function Protocol.valid(action: any, args: any): boolean
 	if type(action) ~= "string" or type(args) ~= "table" then

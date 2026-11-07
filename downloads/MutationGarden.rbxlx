@@ -4,6 +4,7 @@
       <string name="Name">Lighting</string>
       <float name="Brightness">2</float>
       <float name="ClockTime">14</float>
+      <token name="Technology">4</token>
     </Properties>
   </Item>
   <Item class="ReplicatedStorage" referent="1">
@@ -934,44 +935,429 @@ return G
         <Properties>
           <string name="Name">Localization</string>
           <string name="Source"><![CDATA[--!strict
-return {
-	en = {
-		title = "MUTATION GARDEN",
-		subtitle = "GENETIC PARADISE",
-		garden = "Garden",
-		shop = "Seeds",
-		inventory = "Specimens",
-		research = "Research",
-		collection = "Collection",
-		quests = "Quests",
-		plant = "Plant",
-		water = "Water",
-		harvest = "Harvest",
-		sell = "Sell",
-		cross = "Cross selected",
-		expand = "Expand garden",
-		claim = "Claim reward",
-		loading = "Loading your garden…",
-	},
-	ru = {
-		title = "САД МУТАЦИЙ",
-		subtitle = "ГЕНЕТИЧЕСКИЙ РАЙ",
-		garden = "Сад",
-		shop = "Семена",
-		inventory = "Образцы",
-		research = "Исследования",
-		collection = "Коллекция",
-		quests = "Задания",
-		plant = "Посадить",
-		water = "Полить",
-		harvest = "Собрать",
-		sell = "Продать",
-		cross = "Скрестить выбранные",
-		expand = "Расширить сад",
-		claim = "Получить награду",
-		loading = "Загрузка сада…",
-	},
+local L = {}
+L.en = {
+	["title"] = "MUTATION GARDEN",
+	["subtitle"] = "GENETIC PARADISE",
+	["garden"] = "Garden",
+	["shop"] = "Seeds",
+	["inventory"] = "Specimens",
+	["research"] = "Research",
+	["collection"] = "Collection",
+	["quests"] = "Quests",
+	["settings"] = "Settings",
+	["plant"] = "Plant",
+	["water"] = "Water",
+	["harvest"] = "Harvest",
+	["sell"] = "Sell",
+	["cross"] = "Cross selected",
+	["expand"] = "Expand garden",
+	["claim"] = "Claim reward",
+	["loading"] = "Loading your garden…",
+	["menu"] = "Menu",
+	["home"] = "My garden",
+	["local_test"] = "LOCAL TEST — NO SAVES",
+	["status"] = "%d Coins · %d RP · Lv %d · %s",
+	["tutorial1"] = "Choose a seed, then click a soil square in the world.",
+	["tutorial2"] = "Water your first plant.",
+	["tutorial3"] = "Wait for your plant to grow, then harvest it.",
+	["tutorial4"] = "Sell a specimen or keep two matching types for crossing.",
+	["tutorial5"] = "Cross two specimens in the lab.",
+	["tutorial6"] = "Experiment, research and discover all 40 species.",
+	["garden_help"] = "Close this panel and click your soil. Water while growing; harvest when ready.",
+	["shop_item"] = "%s · %s · %d coins · %ds · Lv%d",
+	["inventory_help"] = "Select two parents. A star protects a specimen from sale and crossing. Confirm sales with a second tap.",
+	["cross_cost"] = "%s (%d/2) · 30 Coins",
+	["select_parents"] = "Select two specimens first",
+	["inventory_empty"] = "No specimens yet. Harvest your first plant.",
+	["protect"] = "Protect / unprotect",
+	["replant"] = "Replant in the first free cell",
+	["no_cell"] = "No free cell",
+	["confirm_sale"] = "Confirm sale",
+	["research_help"] = "Branches improve mutations, growth, biome access, care and sale value. Research each branch in order.",
+	["research_item"] = "%s · %d RP · requires %s",
+	["none"] = "none",
+	["quest_progress"] = "Harvest contract: %d / %d. Reward: 75 Coins + 5 RP",
+	["language"] = "Language: English → Русский",
+	["animations"] = "UI animations: %s",
+	["on"] = "on",
+	["off"] = "off",
+	["expand_cost"] = "%s · %d Coins",
+	["visit_help"] = "Visit other gardens on foot. Only owners may manage them. Purchases and trading are unavailable in this build.",
+	["tool_hint"] = "Choose a tool, then click your garden soil",
+	["occupied_hint"] = "This square is occupied. Choose Water or Harvest.",
+	["empty_hint"] = "Choose Plant for an empty square.",
+	["hover_plant"] = "Plant %s · Click soil",
+	["hover_growing"] = "%s · %d%% · %s",
+	["network_error"] = "Connection interrupted. Try again.",
+	["done"] = "Done",
+	["ready"] = "Ready",
+	["error_species_locked"] = "Species locked",
+	["error_coins_stack"] = "Not enough coins or stack full",
+	["error_planting"] = "Invalid planting",
+	["error_no_seed"] = "No seed",
+	["error_cell_occupied"] = "Cell occupied",
+	["error_specimen_cell"] = "Invalid specimen or cell",
+	["error_plant_missing"] = "Plant not found",
+	["error_harvest"] = "Not ready or inventory full",
+	["error_protected"] = "Plant missing or protected",
+	["error_cross_requirements"] = "Two unprotected parents, 30 coins and a 15-second cooldown required",
+	["error_incompatible"] = "Parents need matching architecture",
+	["error_research"] = "Research prerequisites missing",
+	["error_expansion"] = "Expansion unavailable",
+	["error_quest"] = "Harvest more plants to claim the next reward",
+	["error_action"] = "Unknown action",
+	["error_settings"] = "Invalid setting",
+	["error_rate"] = "Please slow down",
+	["error_request"] = "Invalid request",
+	["error_unavailable"] = "Garden unavailable",
+	["error_distance"] = "Walk closer to your garden bed",
+	["error_paused"] = "Garden paused for safety. Reconnect.",
+	["kick_closing"] = "Server closing. Please reconnect.",
+	["kick_load"] = "Your garden could not be loaded safely. Enable Studio API access for testing or try again later.",
+	["kick_full"] = "All eight gardens are occupied.",
+	["kick_save"] = "Saving unavailable. Reconnect shortly to protect your progress.",
+	["owner_garden"] = "%s's garden",
+	["unclaimed"] = "Unclaimed garden",
+	["open"] = "Open",
+	["inspect"] = "Inspect specimens",
+	["station_shop"] = "Willow Seeds",
+	["station_inventory"] = "Genetics Atelier",
+	["station_research"] = "Research Library",
+	["station_quests"] = "Garden Contracts",
+	["station_collection"] = "Botanical Museum",
+	["p01"] = "Sunny Daisy",
+	["p02"] = "Mint Sprout",
+	["p03"] = "Pebble Cactus",
+	["p04"] = "Honey Tulip",
+	["p05"] = "Soft Fern",
+	["p06"] = "Blueberry Lantern",
+	["p07"] = "Velvet Rose",
+	["p08"] = "Moon Mint",
+	["p09"] = "Amber Lily",
+	["p10"] = "Twinkle Moss",
+	["p11"] = "Crystal Orchid",
+	["p12"] = "Ember Fern",
+	["p13"] = "Frost Lily",
+	["p14"] = "Cloud Vine",
+	["p15"] = "Echo Mushroom",
+	["p16"] = "Thunder Blossom",
+	["p17"] = "Aurora Lotus",
+	["p18"] = "Phantom Rose",
+	["p19"] = "Solar Orchid",
+	["p20"] = "Starberry",
+	["p21"] = "Celestial Lotus",
+	["p22"] = "Void Orchid",
+	["p23"] = "Phoenix Bloom",
+	["p24"] = "Dragon Root",
+	["p25"] = "Prism Tree",
+	["p26"] = "Genesis Flower",
+	["p27"] = "Infinite Bloom",
+	["p28"] = "Astral Heart",
+	["p29"] = "Chrono Orchid",
+	["p30"] = "Reality Vine",
+	["p31"] = "Dewbell",
+	["p32"] = "Copper Clover",
+	["p33"] = "Coral Willow",
+	["p34"] = "Opal Cap",
+	["p35"] = "Cinder Aloe",
+	["p36"] = "Snowdrop Palm",
+	["p37"] = "Nebula Reed",
+	["p38"] = "Glass Poppy",
+	["p39"] = "Dusk Fig",
+	["p40"] = "Comet Peony",
+	["Green Meadows"] = "Green Meadows",
+	["Mushroom Forest"] = "Mushroom Forest",
+	["Crystal Valley"] = "Crystal Valley",
+	["Volcanic Greenhouse"] = "Volcanic Greenhouse",
+	["Frozen Oasis"] = "Frozen Oasis",
+	["Cosmic Conservatory"] = "Cosmic Conservatory",
+	["Sunny"] = "Sunny",
+	["Rain"] = "Rain",
+	["Storm"] = "Storm",
+	["Fog"] = "Fog",
+	["Frost"] = "Frost",
+	["Meteor Shower"] = "Meteor Shower",
+	["Aurora"] = "Aurora",
+	["Pollen Wind"] = "Pollen Wind",
+	["Common"] = "Common",
+	["Uncommon"] = "Uncommon",
+	["Rare"] = "Rare",
+	["Epic"] = "Epic",
+	["Legendary"] = "Legendary",
+	["Mythic"] = "Mythic",
+	["Golden"] = "Golden",
+	["Silver"] = "Silver",
+	["Rainbow"] = "Rainbow",
+	["Crystal"] = "Crystal",
+	["Neon"] = "Neon",
+	["Frozen"] = "Frozen",
+	["Burning"] = "Burning",
+	["Glowing"] = "Glowing",
+	["Giant"] = "Giant",
+	["Miniature"] = "Miniature",
+	["Shadow"] = "Shadow",
+	["Celestial"] = "Celestial",
+	["Toxic"] = "Toxic",
+	["Electric"] = "Electric",
+	["Lunar"] = "Lunar",
+	["Solar"] = "Solar",
+	["Phantom"] = "Phantom",
+	["Prismatic"] = "Prismatic",
+	["Ancient"] = "Ancient",
+	["Cosmic"] = "Cosmic",
+	["Radioactive"] = "Radioactive",
+	["Dreamlike"] = "Dreamlike",
+	["Void"] = "Void",
+	["Genesis"] = "Genesis",
+	["Genetics1"] = "Genetics 1",
+	["Genetics2"] = "Genetics 2",
+	["Genetics3"] = "Genetics 3",
+	["Genetics4"] = "Genetics 4",
+	["Genetics5"] = "Genetics 5",
+	["Genetics6"] = "Genetics 6",
+	["Cultivation1"] = "Cultivation 1",
+	["Cultivation2"] = "Cultivation 2",
+	["Cultivation3"] = "Cultivation 3",
+	["Cultivation4"] = "Cultivation 4",
+	["Cultivation5"] = "Cultivation 5",
+	["Cultivation6"] = "Cultivation 6",
+	["Botany1"] = "Botany 1",
+	["Botany2"] = "Botany 2",
+	["Botany3"] = "Botany 3",
+	["Botany4"] = "Botany 4",
+	["Botany5"] = "Botany 5",
+	["Botany6"] = "Botany 6",
+	["Automation1"] = "Automation 1",
+	["Automation2"] = "Automation 2",
+	["Automation3"] = "Automation 3",
+	["Automation4"] = "Automation 4",
+	["Automation5"] = "Automation 5",
+	["Automation6"] = "Automation 6",
+	["Economy1"] = "Economy 1",
+	["Economy2"] = "Economy 2",
+	["Economy3"] = "Economy 3",
+	["Economy4"] = "Economy 4",
+	["Economy5"] = "Economy 5",
+	["Economy6"] = "Economy 6",
 }
+L.ru = {
+	["title"] = "САД МУТАЦИЙ",
+	["subtitle"] = "ГЕНЕТИЧЕСКИЙ РАЙ",
+	["garden"] = "Сад",
+	["shop"] = "Семена",
+	["inventory"] = "Растения",
+	["research"] = "Исследования",
+	["collection"] = "Коллекция",
+	["quests"] = "Задания",
+	["settings"] = "Настройки",
+	["plant"] = "Посадить",
+	["water"] = "Полить",
+	["harvest"] = "Собрать",
+	["sell"] = "Продать",
+	["cross"] = "Скрестить выбранные",
+	["expand"] = "Расширить участок",
+	["claim"] = "Получить награду",
+	["loading"] = "Загрузка сада…",
+	["menu"] = "Меню",
+	["home"] = "Мой участок",
+	["local_test"] = "ЛОКАЛЬНЫЙ ТЕСТ — БЕЗ СОХРАНЕНИЙ",
+	["status"] = "%d монет · %d ОИ · Ур. %d · %s",
+	["tutorial1"] = "Выберите семена, затем нажмите на землю своей грядки.",
+	["tutorial2"] = "Полейте первое растение.",
+	["tutorial3"] = "Дождитесь созревания и соберите растение.",
+	["tutorial4"] = "Продайте растение или оставьте два растения похожего типа для скрещивания.",
+	["tutorial5"] = "Скрестите два растения в лаборатории.",
+	["tutorial6"] = "Экспериментируйте и откройте все 40 видов растений.",
+	["garden_help"] = "Закройте меню и нажмите на землю своей грядки. Поливайте растущие растения и собирайте созревшие.",
+	["shop_item"] = "%s · %s · %d монет · %d с · Ур.%d",
+	["inventory_help"] = "Выберите двух родителей. Звезда защищает растение от продажи и скрещивания. Продажу нужно подтвердить повторным нажатием.",
+	["cross_cost"] = "%s (%d/2) · 30 монет",
+	["select_parents"] = "Сначала выберите два растения",
+	["inventory_empty"] = "Пока нет собранных растений. Соберите первый урожай.",
+	["protect"] = "Защитить / снять защиту",
+	["replant"] = "Посадить на свободную клетку",
+	["no_cell"] = "Нет свободной клетки",
+	["confirm_sale"] = "Подтвердить продажу",
+	["research_help"] = "Ветки улучшают мутации, рост, доступ к биомам, уход и продажу. Изучайте каждую ветку по порядку.",
+	["research_item"] = "%s · %d ОИ · требуется: %s",
+	["none"] = "нет",
+	["quest_progress"] = "Задание: собрать %d / %d растений. Награда: 75 монет и 5 ОИ",
+	["language"] = "Язык: Русский → English",
+	["animations"] = "Анимации меню: %s",
+	["on"] = "вкл.",
+	["off"] = "выкл.",
+	["expand_cost"] = "%s · %d монет",
+	["visit_help"] = "Чужие сады можно посещать пешком, изменять их может только хозяин. Покупки за Robux и обмены в этой версии недоступны.",
+	["tool_hint"] = "Выберите инструмент и нажмите на свою грядку",
+	["occupied_hint"] = "Здесь уже есть растение. Выберите «Полить» или «Собрать».",
+	["empty_hint"] = "Для пустой клетки выберите «Посадить».",
+	["hover_plant"] = "Посадить: %s · Нажмите на землю",
+	["hover_growing"] = "%s · %d%% · %s",
+	["network_error"] = "Соединение прервано. Попробуйте ещё раз.",
+	["done"] = "Готово",
+	["ready"] = "Готово",
+	["error_species_locked"] = "Вид пока не открыт",
+	["error_coins_stack"] = "Недостаточно монет или достигнут предел семян",
+	["error_planting"] = "Нельзя посадить в это место",
+	["error_no_seed"] = "Нет семян",
+	["error_cell_occupied"] = "Клетка уже занята",
+	["error_specimen_cell"] = "Растение защищено или клетка недоступна",
+	["error_plant_missing"] = "Растение не найдено",
+	["error_harvest"] = "Растение не созрело или инвентарь заполнен",
+	["error_protected"] = "Растение отсутствует или защищено",
+	["error_cross_requirements"] = "Нужны два незащищённых растения, 30 монет и 15 секунд между опытами",
+	["error_incompatible"] = "Выберите родителей одинакового типа",
+	["error_research"] = "Недостаточно очков или не выполнены условия исследования",
+	["error_expansion"] = "Недостаточно монет или участок уже максимального размера",
+	["error_quest"] = "Соберите больше растений для следующей награды",
+	["error_action"] = "Неизвестное действие",
+	["error_settings"] = "Недопустимая настройка",
+	["error_rate"] = "Слишком много запросов. Подождите.",
+	["error_request"] = "Недопустимый запрос",
+	["error_unavailable"] = "Сад ещё загружается или недоступен",
+	["error_distance"] = "Подойдите ближе к своей грядке",
+	["error_paused"] = "Работа сада приостановлена для защиты прогресса. Перезайдите.",
+	["kick_closing"] = "Сервер закрывается. Пожалуйста, перезайдите.",
+	["kick_load"] = "Не удалось безопасно загрузить сад. Для тестирования сохранений включите доступ к API в Studio или попробуйте позже.",
+	["kick_full"] = "Все восемь участков заняты.",
+	["kick_save"] = "Сохранения недоступны. Перезайдите немного позже, чтобы защитить прогресс.",
+	["owner_garden"] = "Сад игрока %s",
+	["unclaimed"] = "Свободный участок",
+	["open"] = "Открыть",
+	["inspect"] = "Осмотреть растения",
+	["station_shop"] = "Семенная лавка",
+	["station_inventory"] = "Лаборатория генетики",
+	["station_research"] = "Центр исследований",
+	["station_quests"] = "Задания садовода",
+	["station_collection"] = "Ботанический музей",
+	["p01"] = "Солнечная ромашка",
+	["p02"] = "Росток мяты",
+	["p03"] = "Каменный кактус",
+	["p04"] = "Медовый тюльпан",
+	["p05"] = "Нежный папоротник",
+	["p06"] = "Черничный фонарик",
+	["p07"] = "Бархатная роза",
+	["p08"] = "Лунная мята",
+	["p09"] = "Янтарная лилия",
+	["p10"] = "Мерцающий мох",
+	["p11"] = "Кристальная орхидея",
+	["p12"] = "Угольный папоротник",
+	["p13"] = "Морозная лилия",
+	["p14"] = "Облачная лоза",
+	["p15"] = "Гриб эха",
+	["p16"] = "Грозовой цветок",
+	["p17"] = "Лотос сияния",
+	["p18"] = "Призрачная роза",
+	["p19"] = "Солнечная орхидея",
+	["p20"] = "Звёздная ягода",
+	["p21"] = "Небесный лотос",
+	["p22"] = "Орхидея пустоты",
+	["p23"] = "Цветок феникса",
+	["p24"] = "Драконий корень",
+	["p25"] = "Призматическое дерево",
+	["p26"] = "Цветок начала",
+	["p27"] = "Бесконечный цветок",
+	["p28"] = "Астральное сердце",
+	["p29"] = "Орхидея времени",
+	["p30"] = "Лоза реальности",
+	["p31"] = "Росистый колокольчик",
+	["p32"] = "Медный клевер",
+	["p33"] = "Коралловая ива",
+	["p34"] = "Опаловый гриб",
+	["p35"] = "Угольное алоэ",
+	["p36"] = "Снежная пальма",
+	["p37"] = "Тростник туманности",
+	["p38"] = "Стеклянный мак",
+	["p39"] = "Сумеречный инжир",
+	["p40"] = "Кометный пион",
+	["Green Meadows"] = "Зелёные луга",
+	["Mushroom Forest"] = "Грибной лес",
+	["Crystal Valley"] = "Кристальная долина",
+	["Volcanic Greenhouse"] = "Вулканическая оранжерея",
+	["Frozen Oasis"] = "Морозный оазис",
+	["Cosmic Conservatory"] = "Космическая теплица",
+	["Sunny"] = "Солнечно",
+	["Rain"] = "Дождь",
+	["Storm"] = "Гроза",
+	["Fog"] = "Туман",
+	["Frost"] = "Заморозки",
+	["Meteor Shower"] = "Метеорный дождь",
+	["Aurora"] = "Полярное сияние",
+	["Pollen Wind"] = "Ветер пыльцы",
+	["Common"] = "Обычное",
+	["Uncommon"] = "Необычное",
+	["Rare"] = "Редкое",
+	["Epic"] = "Эпическое",
+	["Legendary"] = "Легендарное",
+	["Mythic"] = "Мифическое",
+	["Golden"] = "Золотая",
+	["Silver"] = "Серебряная",
+	["Rainbow"] = "Радужная",
+	["Crystal"] = "Кристальная",
+	["Neon"] = "Неоновая",
+	["Frozen"] = "Морозная",
+	["Burning"] = "Пылающая",
+	["Glowing"] = "Светящаяся",
+	["Giant"] = "Гигантская",
+	["Miniature"] = "Миниатюрная",
+	["Shadow"] = "Теневая",
+	["Celestial"] = "Небесная",
+	["Toxic"] = "Ядовитая",
+	["Electric"] = "Электрическая",
+	["Lunar"] = "Лунная",
+	["Solar"] = "Солнечная",
+	["Phantom"] = "Призрачная",
+	["Prismatic"] = "Призматическая",
+	["Ancient"] = "Древняя",
+	["Cosmic"] = "Космическая",
+	["Radioactive"] = "Радиоактивная",
+	["Dreamlike"] = "Сновидческая",
+	["Void"] = "Пустотная",
+	["Genesis"] = "Изначальная",
+	["Genetics1"] = "Генетика 1",
+	["Genetics2"] = "Генетика 2",
+	["Genetics3"] = "Генетика 3",
+	["Genetics4"] = "Генетика 4",
+	["Genetics5"] = "Генетика 5",
+	["Genetics6"] = "Генетика 6",
+	["Cultivation1"] = "Растениеводство 1",
+	["Cultivation2"] = "Растениеводство 2",
+	["Cultivation3"] = "Растениеводство 3",
+	["Cultivation4"] = "Растениеводство 4",
+	["Cultivation5"] = "Растениеводство 5",
+	["Cultivation6"] = "Растениеводство 6",
+	["Botany1"] = "Ботаника 1",
+	["Botany2"] = "Ботаника 2",
+	["Botany3"] = "Ботаника 3",
+	["Botany4"] = "Ботаника 4",
+	["Botany5"] = "Ботаника 5",
+	["Botany6"] = "Ботаника 6",
+	["Automation1"] = "Автоматизация 1",
+	["Automation2"] = "Автоматизация 2",
+	["Automation3"] = "Автоматизация 3",
+	["Automation4"] = "Автоматизация 4",
+	["Automation5"] = "Автоматизация 5",
+	["Automation6"] = "Автоматизация 6",
+	["Economy1"] = "Экономика 1",
+	["Economy2"] = "Экономика 2",
+	["Economy3"] = "Экономика 3",
+	["Economy4"] = "Экономика 4",
+	["Economy5"] = "Экономика 5",
+	["Economy6"] = "Экономика 6",
+}
+function L.language(locale: string?): string
+	return if locale and string.lower(string.sub(locale, 1, 2)) == "ru" then "ru" else "en"
+end
+function L.text(language: string, key: string, ...: any): string
+	local dictionary = if language == "ru" then L.ru else L.en
+	local value = dictionary[key] or L.en[key] or key
+	if select("#", ...) > 0 then
+		return string.format(value, ...)
+	end
+	return value
+end
+return L
 ]]></string>
         </Properties>
       </Item>
@@ -994,6 +1380,7 @@ local fields: { [string]: { string } } = {
 	Quest = {},
 	Sync = {},
 	Home = {},
+	Settings = { "id", "value" },
 }
 function Protocol.valid(action: any, args: any): boolean
 	if type(action) ~= "string" or type(args) ~= "table" then
@@ -1063,7 +1450,7 @@ function S.new(catalog, genetics, random, uuid)
 			expansion = 1,
 			lastExperiment = 0,
 			tutorial = 1,
-			settings = { language = "en", effects = true },
+			settings = { language = "auto", effects = true },
 			savedAt = 0,
 		}
 	end
@@ -1083,6 +1470,17 @@ function S.new(catalog, genetics, random, uuid)
 			if type(p[k]) ~= "table" then
 				return false
 			end
+		end
+		if
+			p.settings.language ~= nil
+			and p.settings.language ~= "en"
+			and p.settings.language ~= "ru"
+			and p.settings.language ~= "auto"
+		then
+			return false
+		end
+		if p.settings.effects ~= nil and type(p.settings.effects) ~= "boolean" then
+			return false
 		end
 		for id, n in p.seeds do
 			if not species[id] or type(n) ~= "number" or n < 0 or n % 1 ~= 0 or n > 10000 then
@@ -1259,10 +1657,10 @@ function S.new(catalog, genetics, random, uuid)
 		if action == "Buy" then
 			local c = species[args.id]
 			if not c or c.biome > api.biome(p) or c.level > api.level(p) then
-				return false, "Species locked"
+				return false, "error_species_locked"
 			end
 			if p.coins < c.price or (p.seeds[c.id] or 0) >= 10000 then
-				return false, "Not enough coins or stack full"
+				return false, "error_coins_stack"
 			end
 			p.coins -= c.price
 			p.seeds[c.id] = (p.seeds[c.id] or 0) + 1
@@ -1277,14 +1675,14 @@ function S.new(catalog, genetics, random, uuid)
 				or cell > catalog.expansions[p.expansion]
 				or c.biome > api.biome(p)
 			then
-				return false, "Invalid planting"
+				return false, "error_planting"
 			end
 			if (p.seeds[c.id] or 0) < 1 then
-				return false, "No seed"
+				return false, "error_no_seed"
 			end
 			for _, v in p.plants do
 				if v.cell == cell then
-					return false, "Cell occupied"
+					return false, "error_cell_occupied"
 				end
 			end
 			local id = uuid()
@@ -1312,11 +1710,11 @@ function S.new(catalog, genetics, random, uuid)
 				or cell < 1
 				or cell > catalog.expansions[p.expansion]
 			then
-				return false, "Invalid specimen or cell"
+				return false, "error_specimen_cell"
 			end
 			for _, v in p.plants do
 				if v.cell == cell then
-					return false, "Cell occupied"
+					return false, "error_cell_occupied"
 				end
 			end
 			p.harvest[args.id] = nil
@@ -1329,14 +1727,14 @@ function S.new(catalog, genetics, random, uuid)
 		elseif action == "Water" then
 			local plant = p.plants[args.id]
 			if not plant then
-				return false, "Plant not found"
+				return false, "error_plant_missing"
 			end
 			plant.waterUntil = now + 120
 			p.tutorial = math.max(p.tutorial, 3)
 		elseif action == "Harvest" then
 			local plant = p.plants[args.id]
 			if not plant or plant.progress < 1 or count(p.harvest) >= catalog.inventoryCap then
-				return false, "Not ready or inventory full"
+				return false, "error_harvest"
 			end
 			local selected = table.clone(plant.mutations)
 			local total = 0
@@ -1379,7 +1777,7 @@ function S.new(catalog, genetics, random, uuid)
 		elseif action == "Sell" then
 			local plant = p.harvest[args.id]
 			if not plant or plant.favorite then
-				return false, "Plant missing or protected"
+				return false, "error_protected"
 			end
 			local bonus = 0
 			for i = 1, 6 do
@@ -1393,16 +1791,16 @@ function S.new(catalog, genetics, random, uuid)
 		elseif action == "Favorite" then
 			local plant = p.harvest[args.id]
 			if not plant then
-				return false, "Plant not found"
+				return false, "error_plant_missing"
 			end
 			plant.favorite = not plant.favorite
 		elseif action == "Cross" then
 			local a, b = p.harvest[args.id], p.harvest[args.other]
 			if not a or not b or a == b or a.favorite or b.favorite or p.coins < 30 or now - p.lastExperiment < 15 then
-				return false, "Two unprotected parents, 30 coins and cooldown required"
+				return false, "error_cross_requirements"
 			end
 			if species[a.species].archetype ~= species[b.species].archetype then
-				return false, "Parents need matching architecture"
+				return false, "error_incompatible"
 			end
 			local id = uuid()
 			local child = {
@@ -1437,29 +1835,38 @@ function S.new(catalog, genetics, random, uuid)
 				or p.rp < cfg.cost
 				or (cfg.requires ~= "" and not p.research[cfg.requires])
 			then
-				return false, "Research prerequisites missing"
+				return false, "error_research"
 			end
 			p.rp -= cfg.cost
 			p.research[cfg.id] = true
 		elseif action == "Expand" then
 			local cost = p.expansion * 250
 			if p.expansion >= 5 or p.coins < cost then
-				return false, "Expansion unavailable"
+				return false, "error_expansion"
 			end
 			p.coins -= cost
 			p.expansion += 1
+		elseif action == "Settings" then
+			if args.id == "language" and (args.value == "ru" or args.value == "en") then
+				p.settings.language = args.value
+				p.settings.languageChosen = true
+			elseif args.id == "effects" and (args.value == "on" or args.value == "off") then
+				p.settings.effects = args.value == "on"
+			else
+				return false, "error_settings"
+			end
 		elseif action == "Quest" then
 			local goal = (p.questClaim + 1) * 5
 			if p.quest < goal then
-				return false, "Harvest " .. goal .. " plants first"
+				return false, "error_quest"
 			end
 			p.questClaim += 1
 			p.coins += 75
 			p.rp += 5
 		else
-			return false, "Unknown action"
+			return false, "error_action"
 		end
-		return true, "Done"
+		return true, "done"
 	end
 	return api
 end
@@ -1489,6 +1896,7 @@ local Shared = RS:WaitForChild("Shared")
 local Catalog = require(Shared.Catalog)
 local Genetics = require(Shared.Genetics)
 local Protocol = require(Shared.Protocol)
+local Localization = require(Shared.Localization)
 local rng = Random.new()
 local sim = require(Shared.Simulation).new(Catalog, Genetics, function()
 	return rng:NextNumber()
@@ -1496,6 +1904,13 @@ end, function()
 	return HttpService:GenerateGUID(false)
 end)
 local profiles = require(script.Parent.Profiles).new(sim)
+local function playerText(player, key)
+	local p = profiles.loaded[player]
+	local language = if p and p.settings.languageChosen
+		then p.settings.language
+		else Localization.language(player.LocaleId)
+	return Localization.text(language, key)
+end
 local world = require(script.Parent.World).new(Catalog)
 local remote = Instance.new("RemoteFunction")
 remote.Name = "GardenRequest"
@@ -1516,14 +1931,12 @@ local function teleport(player, character)
 end
 local function join(player)
 	if closing then
-		player:Kick("Server closing. Please reconnect.")
+		player:Kick(playerText(player, "kick_closing"))
 		return
 	end
 	local p = profiles:load(player)
 	if not p then
-		player:Kick(
-			"Your garden could not be loaded safely. Enable Studio API access for testing, or try again shortly."
-		)
+		player:Kick(playerText(player, "kick_load"))
 		return
 	end
 	if player.Parent ~= Players then
@@ -1533,7 +1946,7 @@ local function join(player)
 	local slot = world:claim(player)
 	if not slot then
 		profiles:save(player, true)
-		player:Kick("All eight gardens are occupied.")
+		player:Kick(playerText(player, "kick_full"))
 		return
 	end
 	slots[player] = slot
@@ -1578,15 +1991,15 @@ remote.OnServerInvoke = function(player, action, args)
 	rate.tokens = math.min(12, rate.tokens + (t - rate.time) * 4)
 	rate.time = t
 	if rate.tokens < 1 then
-		return { ok = false, message = "Please slow down" }
+		return { ok = false, message = "error_rate" }
 	end
 	rate.tokens -= 1
 	if not Protocol.valid(action, args) then
-		return { ok = false, message = "Invalid request" }
+		return { ok = false, message = "error_request" }
 	end
 	local p = profiles.loaded[player]
 	if closing or not p or not safe[player] or not slots[player] then
-		return { ok = false, message = "Garden unavailable" }
+		return { ok = false, message = "error_unavailable" }
 	end
 	local farming = action == "Plant" or action == "Replant" or action == "Water" or action == "Harvest"
 	if farming then
@@ -1597,10 +2010,10 @@ remote.OnServerInvoke = function(player, action, args)
 			cell = plant and plant.cell
 		end
 		if not root or (cell and (root.Position - world:cell(world.plots[slots[player]], cell)).Magnitude > 25) then
-			return { ok = false, message = "Walk closer to your garden bed" }
+			return { ok = false, message = "error_distance" }
 		end
 	end
-	local ok, message = true, "Ready"
+	local ok, message = true, "ready"
 	if action == "Home" then
 		if player.Character then
 			teleport(player, player.Character)
@@ -1610,7 +2023,7 @@ remote.OnServerInvoke = function(player, action, args)
 		if not success then
 			warn("Garden action failed", action, a)
 			safe[player] = nil
-			return { ok = false, message = "Garden paused for safety. Reconnect." }
+			return { ok = false, message = "error_paused" }
 		end
 		ok, message = a, b
 	else
@@ -1655,7 +2068,7 @@ task.spawn(function()
 					task.spawn(function()
 						if not profiles:save(player, false) then
 							safe[player] = nil
-							player:Kick("Saving unavailable. Reconnect shortly to protect your progress.")
+							player:Kick(playerText(player, "kick_save"))
 						end
 					end)
 				end
@@ -1830,6 +2243,15 @@ local function label(p, text)
 	t.BackgroundColor3 = C.roof
 	t.BackgroundTransparency = 0.08
 	t.Text = text
+	local keys = {
+		["Unclaimed garden"] = "unclaimed",
+		["Willow Seeds"] = "station_shop",
+		["Genetics Atelier"] = "station_inventory",
+		["Research Library"] = "station_research",
+		["Garden Contracts"] = "station_quests",
+		["Botanical Museum"] = "station_collection",
+	}
+	t:SetAttribute("LocaleKey", keys[text] or text)
 	t.TextColor3 = C.cream
 	t.TextSize = 13
 	t.Font = Enum.Font.GothamMedium
@@ -1877,25 +2299,32 @@ local function tree(parent, pos, scale, hue)
 		local a = j * 2.399
 		local endPoint = pos + Vector3.new(math.cos(a) * 3, 7 + j * 0.7, math.sin(a) * 3) * scale
 		beam(treeModel, pos + Vector3.new(0, 4 + j * 0.4, 0) * scale, endPoint, 0.45 * scale, C.wood)
-		local crown = part(
-			treeModel,
-			"Foliage cluster",
-			Vector3.new(6.8, 4.6, 6.1) * scale,
-			endPoint + Vector3.new(0, 1.5, 0) * scale,
-			Color3.fromHSV(hue, 0.28, 0.42 + j * 0.045),
-			Enum.PartType.Ball
-		)
-		crown.CFrame *= CFrame.Angles(j * 0.25, a, j * 0.13)
-		crown.CanCollide = false
-		local tip = part(
-			treeModel,
-			"Foliage highlight",
-			Vector3.new(4.2, 2.8, 4) * scale,
-			endPoint + Vector3.new(-1, 3, -0.5) * scale,
-			Color3.fromHSV(hue, 0.26, 0.57 + j * 0.02),
-			Enum.PartType.Ball
-		)
-		tip.CanCollide = false
+		-- Small-leaf ornamental trees: visible branch structure and matte leaves.
+		for twig = 1, 5 do
+			local angle = a + twig * 2.1
+			local tip = endPoint + Vector3.new(math.cos(angle) * 1.9, (twig % 3) * 0.65, math.sin(angle) * 1.9) * scale
+			local branch = beam(treeModel, endPoint, tip, 0.13 * scale, C.wood)
+			branch.Material = Enum.Material.Wood
+			for side = -1, 1 do
+				local offset = Vector3.new(
+					math.cos(angle + 0.9) * side * 0.58,
+					0.2 + side * 0.08,
+					math.sin(angle + 0.9) * side * 0.58
+				) * scale
+				local leaf = part(
+					treeModel,
+					"Leaf",
+					Vector3.new(0.72, 0.09, 1.7) * scale,
+					tip + offset,
+					Color3.fromHSV(hue, 0.4, 0.34 + (twig % 3) * 0.045 + side * 0.025),
+					Enum.PartType.Ball
+				)
+				leaf.CFrame *= CFrame.Angles(0.18 + twig * 0.13, angle + side * 0.8, side * 0.25)
+				leaf.CanCollide = false
+				leaf.CanTouch = false
+				leaf.CanQuery = false
+			end
+		end
 	end
 	-- Buttress roots visually anchor trees instead of floating balloon canopies.
 	for j = 1, 3 do
@@ -2072,7 +2501,7 @@ function World.new(catalog)
 	folder.Parent = workspace
 	self.root = folder
 	local lighting = game:GetService("Lighting")
-	lighting.ClockTime = 16.6
+	lighting.ClockTime = 15.1
 	lighting.Brightness = 2
 	lighting.Ambient = Color3.fromRGB(66, 76, 91)
 	lighting.OutdoorAmbient = Color3.fromRGB(127, 139, 128)
@@ -2090,7 +2519,7 @@ function World.new(catalog)
 	local grade = Instance.new("ColorCorrectionEffect")
 	grade.Saturation = -0.04
 	grade.Contrast = 0.07
-	grade.TintColor = Color3.fromRGB(255, 247, 229)
+	grade.TintColor = Color3.fromRGB(255, 253, 248)
 	grade.Parent = lighting
 	local bloom = Instance.new("BloomEffect")
 	bloom.Intensity = 0.12
@@ -2172,7 +2601,7 @@ function World.new(catalog)
 		)
 	end
 	local rng = Random.new(4107)
-	for j = 1, 68 do
+	for j = 1, 38 do
 		local a = rng:NextNumber(0, math.pi * 2)
 		local radius = rng:NextNumber(192, 295)
 		local pos = Vector3.new(math.cos(a) * radius, -1, math.sin(a) * radius)
@@ -2182,15 +2611,10 @@ function World.new(catalog)
 		local a = j * 2.399
 		local radius = 270 + (j % 3) * 12
 		local pos = Vector3.new(math.cos(a) * radius, -1, math.sin(a) * radius)
-		local mound = part(
-			folder,
-			"Distant meadow hill",
-			Vector3.new(70, 22 + (j % 4) * 5, 65),
-			pos - Vector3.new(0, 9, 0),
-			Color3.fromRGB(104 + j % 3 * 5, 129, 93),
-			Enum.PartType.Ball
-		)
-		mound.Material = Enum.Material.Grass
+		local terrain = workspace:FindFirstChildOfClass("Terrain")
+		if terrain then
+			terrain:FillBall(pos - Vector3.new(0, 12, 0), 23 + j % 4 * 2, Enum.Material.Grass)
+		end
 		rock(folder, pos + Vector3.new(12, 1, 5), Vector3.new(5, 4, 6))
 	end
 	for i, name in catalog.biomes do
@@ -2375,7 +2799,10 @@ function World:claim(player)
 		if not p.owner then
 			p.owner = player
 			p.model:SetAttribute("Owner", player.UserId)
-			p.marker:FindFirstChildOfClass("BillboardGui").TextLabel.Text = player.DisplayName .. "'s garden"
+			local title = p.marker:FindFirstChildOfClass("BillboardGui").TextLabel
+			title.Text = player.DisplayName .. "'s garden"
+			title:SetAttribute("LocaleKey", "owner_garden")
+			title:SetAttribute("LocaleArg", player.DisplayName)
 			p.spawn.Enabled = true
 			player.RespawnLocation = p.spawn
 			return i
@@ -2401,7 +2828,10 @@ function World:release(index)
 	p.owner = nil
 	p.spawn.Enabled = false
 	p.model:SetAttribute("Owner", nil)
-	p.marker:FindFirstChildOfClass("BillboardGui").TextLabel.Text = "Unclaimed garden"
+	local title = p.marker:FindFirstChildOfClass("BillboardGui").TextLabel
+	title.Text = "Unclaimed garden"
+	title:SetAttribute("LocaleKey", "unclaimed")
+	title:SetAttribute("LocaleArg", nil)
 	for _, c in p.cells do
 		c:Destroy()
 	end
@@ -2634,7 +3064,17 @@ local player = Players.LocalPlayer
 local Catalog = require(RS:WaitForChild("Shared").Catalog)
 local Languages = require(RS.Shared.Localization)
 local remote = RS:WaitForChild("GardenRequest")
-local language = "en"
+local language = Languages.language(player.LocaleId)
+local function tr(key, ...)
+	return Languages.text(language, key, ...)
+end
+local lastWeather = "Sunny"
+local temporary = false
+local lastNotice = "ready"
+local refreshChrome
+local toolButtons, tabButtons = {}, {}
+local menuButton, home, hint, languageButton, toast
+local localizationLoaded = false
 local page = "garden"
 local tool = "Plant"
 local profile = nil
@@ -2673,7 +3113,7 @@ local title = create("TextLabel", gui, {
 	Position = UDim2.fromOffset(20, 8),
 	Size = UDim2.new(0.7, 0, 0, 35),
 	BackgroundTransparency = 1,
-	Text = "MUTATION GARDEN",
+	Text = tr("title"),
 	TextColor3 = cream,
 	TextStrokeTransparency = 0.4,
 	Font = Enum.Font.GothamBold,
@@ -2688,7 +3128,7 @@ local status = create("TextLabel", gui, {
 	Font = Enum.Font.Gotham,
 	TextSize = 13,
 	TextWrapped = true,
-	Text = Languages.en.loading,
+	Text = tr("loading"),
 })
 local notice = create("TextLabel", panel, {
 	Size = UDim2.new(1, -24, 0, 46),
@@ -2757,12 +3197,14 @@ local function button(parent, s, fn, width)
 	return b
 end
 local function name(id)
-	for _, c in Catalog.plants do
-		if c.id == id then
-			return c.name
-		end
+	return tr(id)
+end
+local function mutations(list)
+	local names = {}
+	for _, id in list do
+		table.insert(names, tr(id))
 	end
-	return id
+	return table.concat(names, ", ")
 end
 request = function(action, args)
 	if busy then
@@ -2774,26 +3216,38 @@ request = function(action, args)
 	end)
 	busy = false
 	if not ok then
-		notice.Text = "Connection interrupted. Try again."
+		lastNotice = "network_error"
+		notice.Text = tr(lastNotice)
 		return
 	end
-	if action ~= "Sync" then
-		notice.Text = result.message
+	if action ~= "Sync" or not result.ok then
+		lastNotice = result.message
 	end
 	if result.profile then
-		if result.temporary then
-			title.Text = "MUTATION GARDEN · LOCAL TEST (NO SAVES)"
-		end
 		profile = result.profile
-		status.Text = (if result.temporary then "Test · " else "")
-			.. string.format(
-				"%d Coins  ·  %d RP  ·  Lv %d  ·  %s",
-				profile.coins,
-				profile.rp,
-				1 + math.floor(profile.xp / 50),
-				result.weather
-			)
+		if not localizationLoaded then
+			localizationLoaded = true
+			if
+				profile.settings.languageChosen
+				and (profile.settings.language == "ru" or profile.settings.language == "en")
+			then
+				language = profile.settings.language
+			end
+		end
+		effects = profile.settings.effects ~= false
+		temporary = result.temporary
+		lastWeather = result.weather
 		render()
+	end
+	notice.Text = tr(lastNotice)
+	if toast and action ~= "Sync" then
+		local message = tr(lastNotice)
+		toast.Text = message
+		task.delay(5, function()
+			if toast.Text == message then
+				toast.Text = ""
+			end
+		end)
 	end
 end
 local function sorted(t)
@@ -2803,6 +3257,14 @@ local function sorted(t)
 	end
 	table.sort(keys)
 	return keys
+end
+local function switchLanguage()
+	if busy then
+		return
+	end
+	language = if language == "en" then "ru" else "en"
+	render()
+	request("Settings", { id = "language", value = language })
 end
 render = function()
 	for _, c in content:GetChildren() do
@@ -2815,16 +3277,11 @@ render = function()
 		return
 	end
 	local L = Languages[language]
+	if refreshChrome then
+		refreshChrome()
+	end
 	if page == "garden" then
-		local hints = {
-			"Choose a seed, then click a soil square in the world.",
-			"Water your first plant.",
-			"Watch it grow, then harvest.",
-			"Sell a specimen or keep two matching architectures for the lab.",
-			"Cross two specimens in the lab.",
-			"Experiment, research and discover all 40 species.",
-		}
-		text(hints[math.min(6, profile.tutorial)])
+		text(tr("tutorial" .. math.clamp(profile.tutorial, 1, 6)))
 		for _, id in sorted(profile.seeds) do
 			if profile.seeds[id] > 0 then
 				local seed = id
@@ -2840,33 +3297,27 @@ render = function()
 				)
 			end
 		end
-		text(
-			"Close this panel and click a soil square in your garden. Use Water while growing, then Harvest when ready."
-		)
+		text(tr("garden_help"))
 	elseif page == "shop" then
 		for _, cfg in Catalog.plants do
 			local c = cfg
-			button(
-				content,
-				string.format("%s · %s · %d coins · %ds · Lv%d", c.name, c.rarity, c.price, c.seconds, c.level),
-				function()
-					request("Buy", { id = c.id })
-				end
-			)
+			button(content, tr("shop_item", name(c.id), tr(c.rarity), c.price, c.seconds, c.level), function()
+				request("Buy", { id = c.id })
+			end)
 		end
 	elseif page == "inventory" then
-		text("Tap to select parents. ★ protects from sale and crossing. Sale needs a second tap.")
-		button(content, L.cross .. " (" .. #parents .. "/2) · 30 Coins", function()
+		text(tr("inventory_help"))
+		button(content, tr("cross_cost", L.cross, #parents), function()
 			if #parents == 2 then
 				local a, b = parents[1], parents[2]
 				parents = {}
 				request("Cross", { id = a, other = b })
 			else
-				notice.Text = "Select two specimens first"
+				notice.Text = tr("select_parents")
 			end
 		end)
 		if next(profile.harvest) == nil then
-			text("No specimens yet. Harvest your first plant.")
+			text(tr("inventory_empty"))
 		end
 		for _, id in sorted(profile.harvest) do
 			local key = id
@@ -2876,7 +3327,7 @@ render = function()
 				(if table.find(parents, id) then "✓ " else "")
 					.. name(plant.species)
 					.. " · "
-					.. table.concat(plant.mutations, ", "),
+					.. mutations(plant.mutations),
 				function()
 					local i = table.find(parents, key)
 					if i then
@@ -2887,10 +3338,10 @@ render = function()
 					render()
 				end
 			)
-			button(content, (if plant.favorite then "★ " else "☆ ") .. "Protect / unprotect", function()
+			button(content, (if plant.favorite then "★ " else "☆ ") .. tr("protect"), function()
 				request("Favorite", { id = key })
 			end)
-			button(content, "Replant in first free cell", function()
+			button(content, tr("replant"), function()
 				local occupied = {}
 				for _, v in profile.plants do
 					occupied[v.cell] = true
@@ -2901,33 +3352,27 @@ render = function()
 						return
 					end
 				end
-				notice.Text = "No free cell"
+				notice.Text = tr("no_cell")
 			end)
 			local confirm = false
 			local b
 			b = button(content, L.sell, function()
 				if not confirm then
 					confirm = true
-					b.Text = "Confirm sale"
+					b.Text = tr("confirm_sale")
 				else
 					request("Sell", { id = key })
 				end
 			end)
 		end
 	elseif page == "research" then
-		text(
-			"Branches: mutation odds, growth, biome unlocks, automated care and sale bonuses. Research each branch in order."
-		)
+		text(tr("research_help"))
 		for _, cfg in Catalog.research do
 			local r = cfg
 			button(
 				content,
 				(if profile.research[r.id] then "✓ " else "")
-					.. r.id
-					.. " · "
-					.. r.cost
-					.. " RP · requires "
-					.. r.requires,
+					.. tr("research_item", tr(r.id), r.cost, if r.requires == "" then tr("none") else tr(r.requires)),
 				function()
 					request("Research", { id = r.id })
 				end
@@ -2937,41 +3382,29 @@ render = function()
 		for _, c in Catalog.plants do
 			text(
 				if profile.collection[c.id]
-					then c.name .. " · " .. c.rarity .. " · " .. Catalog.biomes[c.biome]
-					else "??? · " .. Catalog.biomes[c.biome]
+					then name(c.id) .. " · " .. tr(c.rarity) .. " · " .. tr(Catalog.biomes[c.biome])
+					else "??? · " .. tr(Catalog.biomes[c.biome])
 			)
 		end
 	elseif page == "quests" then
-		text(
-			string.format(
-				"Harvest contract: %d / %d. Reward: 75 Coins + 5 RP",
-				profile.quest,
-				(profile.questClaim + 1) * 5
-			)
-		)
+		text(tr("quest_progress", profile.quest, (profile.questClaim + 1) * 5))
 		button(content, L.claim, function()
 			request("Quest", {})
 		end)
 	elseif page == "settings" then
-		button(content, "English / Русский", function()
-			language = if language == "en" then "ru" else "en"
-			render()
+		button(content, tr("language"), switchLanguage)
+		button(content, tr("animations", tr(if effects then "on" else "off")), function()
+			request("Settings", { id = "effects", value = if effects then "off" else "on" })
 		end)
-		button(content, "UI animations: " .. tostring(effects), function()
-			effects = not effects
-			render()
-		end)
-		button(content, L.expand .. " · " .. tostring(profile.expansion * 250) .. " Coins", function()
+		button(content, tr("expand_cost", L.expand, profile.expansion * 250), function()
 			request("Expand", {})
 		end)
-		text(
-			"Walk around to visit other gardens. Only owners can manage them. Purchases and trading are not enabled in this build."
-		)
+		text(tr("visit_help"))
 	end
 end
 for i, key in { "garden", "shop", "inventory", "research", "collection", "quests", "settings" } do
 	local k = key
-	local b = button(tabs, Languages.en[key] or "Settings", function()
+	local b = button(tabs, tr(key), function()
 		local same = page == k
 		page = k
 		panel.Visible = not (same and panel.Visible)
@@ -2982,10 +3415,14 @@ for i, key in { "garden", "shop", "inventory", "research", "collection", "quests
 		end
 	end, 95)
 	b.LayoutOrder = i
+	tabButtons[key] = b
 end
-button(gui, "Menu", function()
+menuButton = button(gui, tr("menu"), function()
 	panel.Visible = not panel.Visible
-end, 70).Position = UDim2.new(1, -90, 0, 8)
+end, 70)
+menuButton.Position = UDim2.new(1, -90, 0, 8)
+languageButton = button(gui, "RU", switchLanguage, 60)
+languageButton.Position = UDim2.new(1, -158, 0, 8)
 local UserInputService = game:GetService("UserInputService")
 local ProximityPromptService = game:GetService("ProximityPromptService")
 local actionbar = create("Frame", gui, {
@@ -2995,24 +3432,36 @@ local actionbar = create("Frame", gui, {
 	BackgroundTransparency = 1,
 })
 create("UIListLayout", actionbar, { FillDirection = Enum.FillDirection.Horizontal, Padding = UDim.new(0, 6) })
-local toolButtons = {}
+
 for _, mode in { "Plant", "Water", "Harvest" } do
 	local m = mode
-	toolButtons[m] = button(actionbar, m, function()
+	toolButtons[m] = button(actionbar, tr(string.lower(m)), function()
 		tool = m
 		panel.Visible = false
 	end, 98)
 end
-local hint = create("TextLabel", gui, {
+hint = create("TextLabel", gui, {
 	AnchorPoint = Vector2.new(0.5, 1),
 	Position = UDim2.new(0.5, 0, 1, -121),
 	Size = UDim2.new(0.85, 0, 0, 32),
 	BackgroundTransparency = 1,
-	Text = "Choose a tool, then click your garden soil",
+	Text = tr("tool_hint"),
 	TextColor3 = cream,
 	TextStrokeTransparency = 0.25,
 	Font = Enum.Font.GothamMedium,
 	TextSize = 15,
+})
+toast = create("TextLabel", gui, {
+	AnchorPoint = Vector2.new(0.5, 0),
+	Position = UDim2.new(0.5, 0, 0, 84),
+	Size = UDim2.new(0.8, 0, 0, 42),
+	BackgroundTransparency = 1,
+	Text = "",
+	TextColor3 = cream,
+	TextStrokeTransparency = 0.2,
+	TextWrapped = true,
+	TextSize = 16,
+	Font = Enum.Font.GothamMedium,
 })
 local highlight = Instance.new("Highlight")
 highlight.FillTransparency = 0.65
@@ -3060,9 +3509,7 @@ local function actAt(position)
 	elseif id and tool ~= "Plant" then
 		request(tool, { id = id })
 	else
-		hint.Text = if id
-			then "This square is occupied. Choose Water or Harvest."
-			else "Choose Plant for an empty square."
+		hint.Text = if id then tr("occupied_hint") else tr("empty_hint")
 	end
 end
 UserInputService.InputBegan:Connect(function(input, processed)
@@ -3086,11 +3533,64 @@ ProximityPromptService.PromptTriggered:Connect(function(pr, who)
 		render()
 	end
 end)
-local home = button(gui, "My garden", function()
+home = button(gui, tr("home"), function()
 	request("Home", {})
 	panel.Visible = false
 end, 110)
 home.Position = UDim2.new(1, -130, 0, 62)
+local function localizeWorldObject(obj)
+	if obj:IsA("TextLabel") and obj:GetAttribute("LocaleKey") then
+		local arg = obj:GetAttribute("LocaleArg")
+		obj.Text = if arg then tr(obj:GetAttribute("LocaleKey"), arg) else tr(obj:GetAttribute("LocaleKey"))
+	elseif obj:IsA("ProximityPrompt") and obj:GetAttribute("GardenScreen") then
+		obj.ObjectText = tr("station_" .. obj:GetAttribute("GardenScreen"))
+		obj.ActionText = tr("open")
+	end
+end
+local function refreshWorld()
+	local world = workspace:FindFirstChild("MutationGarden")
+	if world then
+		for _, obj in world:GetDescendants() do
+			localizeWorldObject(obj)
+		end
+	end
+end
+local worldLanguage = nil
+refreshChrome = function()
+	title.Text = tr("title") .. (if temporary then " · " .. tr("local_test") else "")
+	status.Text = tr("status", profile.coins, profile.rp, 1 + math.floor(profile.xp / 50), tr(lastWeather))
+	notice.Text = tr(lastNotice)
+	menuButton.Text = tr("menu")
+	languageButton.Text = if language == "ru" then "EN" else "RU"
+	home.Text = tr("home")
+	for key, b in tabButtons do
+		b.Text = tr(key)
+	end
+	for mode, b in toolButtons do
+		b.Text = tr(string.lower(mode))
+	end
+	hint.Text = tr("tool_hint")
+	if worldLanguage ~= language then
+		worldLanguage = language
+		refreshWorld()
+	end
+end
+local function watchWorld(obj)
+	if obj:IsA("TextLabel") then
+		obj:GetAttributeChangedSignal("LocaleKey"):Connect(function()
+			localizeWorldObject(obj)
+		end)
+		obj:GetAttributeChangedSignal("LocaleArg"):Connect(function()
+			localizeWorldObject(obj)
+		end)
+	end
+	task.defer(localizeWorldObject, obj)
+end
+local world = workspace:WaitForChild("MutationGarden")
+for _, obj in world:GetDescendants() do
+	watchWorld(obj)
+end
+world.DescendantAdded:Connect(watchWorld)
 task.spawn(function()
 	while gui.Parent do
 		task.wait(0.12)
@@ -3111,8 +3611,13 @@ task.spawn(function()
 					end
 				end
 				hint.Text = if plant
-					then string.format("%s · %d%% · %s", name(plant.species), math.floor(plant.progress * 100), tool)
-					else "Plant " .. name(selectedSeed) .. " · Click soil"
+					then tr(
+						"hover_growing",
+						name(plant.species),
+						math.floor(plant.progress * 100),
+						tr(string.lower(tool))
+					)
+					else tr("hover_plant", name(selectedSeed))
 			end
 		else
 			highlight.Adornee = nil

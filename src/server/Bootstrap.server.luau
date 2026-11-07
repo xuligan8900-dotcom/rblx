@@ -6,6 +6,7 @@ local Shared = RS:WaitForChild("Shared")
 local Catalog = require(Shared.Catalog)
 local Genetics = require(Shared.Genetics)
 local Protocol = require(Shared.Protocol)
+local Localization = require(Shared.Localization)
 local rng = Random.new()
 local sim = require(Shared.Simulation).new(Catalog, Genetics, function()
 	return rng:NextNumber()
@@ -13,6 +14,13 @@ end, function()
 	return HttpService:GenerateGUID(false)
 end)
 local profiles = require(script.Parent.Profiles).new(sim)
+local function playerText(player, key)
+	local p = profiles.loaded[player]
+	local language = if p and p.settings.languageChosen
+		then p.settings.language
+		else Localization.language(player.LocaleId)
+	return Localization.text(language, key)
+end
 local world = require(script.Parent.World).new(Catalog)
 local remote = Instance.new("RemoteFunction")
 remote.Name = "GardenRequest"
@@ -33,14 +41,12 @@ local function teleport(player, character)
 end
 local function join(player)
 	if closing then
-		player:Kick("Server closing. Please reconnect.")
+		player:Kick(playerText(player, "kick_closing"))
 		return
 	end
 	local p = profiles:load(player)
 	if not p then
-		player:Kick(
-			"Your garden could not be loaded safely. Enable Studio API access for testing, or try again shortly."
-		)
+		player:Kick(playerText(player, "kick_load"))
 		return
 	end
 	if player.Parent ~= Players then
@@ -50,7 +56,7 @@ local function join(player)
 	local slot = world:claim(player)
 	if not slot then
 		profiles:save(player, true)
-		player:Kick("All eight gardens are occupied.")
+		player:Kick(playerText(player, "kick_full"))
 		return
 	end
 	slots[player] = slot
@@ -95,15 +101,15 @@ remote.OnServerInvoke = function(player, action, args)
 	rate.tokens = math.min(12, rate.tokens + (t - rate.time) * 4)
 	rate.time = t
 	if rate.tokens < 1 then
-		return { ok = false, message = "Please slow down" }
+		return { ok = false, message = "error_rate" }
 	end
 	rate.tokens -= 1
 	if not Protocol.valid(action, args) then
-		return { ok = false, message = "Invalid request" }
+		return { ok = false, message = "error_request" }
 	end
 	local p = profiles.loaded[player]
 	if closing or not p or not safe[player] or not slots[player] then
-		return { ok = false, message = "Garden unavailable" }
+		return { ok = false, message = "error_unavailable" }
 	end
 	local farming = action == "Plant" or action == "Replant" or action == "Water" or action == "Harvest"
 	if farming then
@@ -114,10 +120,10 @@ remote.OnServerInvoke = function(player, action, args)
 			cell = plant and plant.cell
 		end
 		if not root or (cell and (root.Position - world:cell(world.plots[slots[player]], cell)).Magnitude > 25) then
-			return { ok = false, message = "Walk closer to your garden bed" }
+			return { ok = false, message = "error_distance" }
 		end
 	end
-	local ok, message = true, "Ready"
+	local ok, message = true, "ready"
 	if action == "Home" then
 		if player.Character then
 			teleport(player, player.Character)
@@ -127,7 +133,7 @@ remote.OnServerInvoke = function(player, action, args)
 		if not success then
 			warn("Garden action failed", action, a)
 			safe[player] = nil
-			return { ok = false, message = "Garden paused for safety. Reconnect." }
+			return { ok = false, message = "error_paused" }
 		end
 		ok, message = a, b
 	else
@@ -172,7 +178,7 @@ task.spawn(function()
 					task.spawn(function()
 						if not profiles:save(player, false) then
 							safe[player] = nil
-							player:Kick("Saving unavailable. Reconnect shortly to protect your progress.")
+							player:Kick(playerText(player, "kick_save"))
 						end
 					end)
 				end

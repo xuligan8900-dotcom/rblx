@@ -43,6 +43,15 @@ local function label(p, text)
 	t.BackgroundColor3 = C.roof
 	t.BackgroundTransparency = 0.08
 	t.Text = text
+	local keys = {
+		["Unclaimed garden"] = "unclaimed",
+		["Willow Seeds"] = "station_shop",
+		["Genetics Atelier"] = "station_inventory",
+		["Research Library"] = "station_research",
+		["Garden Contracts"] = "station_quests",
+		["Botanical Museum"] = "station_collection",
+	}
+	t:SetAttribute("LocaleKey", keys[text] or text)
 	t.TextColor3 = C.cream
 	t.TextSize = 13
 	t.Font = Enum.Font.GothamMedium
@@ -90,25 +99,32 @@ local function tree(parent, pos, scale, hue)
 		local a = j * 2.399
 		local endPoint = pos + Vector3.new(math.cos(a) * 3, 7 + j * 0.7, math.sin(a) * 3) * scale
 		beam(treeModel, pos + Vector3.new(0, 4 + j * 0.4, 0) * scale, endPoint, 0.45 * scale, C.wood)
-		local crown = part(
-			treeModel,
-			"Foliage cluster",
-			Vector3.new(6.8, 4.6, 6.1) * scale,
-			endPoint + Vector3.new(0, 1.5, 0) * scale,
-			Color3.fromHSV(hue, 0.28, 0.42 + j * 0.045),
-			Enum.PartType.Ball
-		)
-		crown.CFrame *= CFrame.Angles(j * 0.25, a, j * 0.13)
-		crown.CanCollide = false
-		local tip = part(
-			treeModel,
-			"Foliage highlight",
-			Vector3.new(4.2, 2.8, 4) * scale,
-			endPoint + Vector3.new(-1, 3, -0.5) * scale,
-			Color3.fromHSV(hue, 0.26, 0.57 + j * 0.02),
-			Enum.PartType.Ball
-		)
-		tip.CanCollide = false
+		-- Small-leaf ornamental trees: visible branch structure and matte leaves.
+		for twig = 1, 5 do
+			local angle = a + twig * 2.1
+			local tip = endPoint + Vector3.new(math.cos(angle) * 1.9, (twig % 3) * 0.65, math.sin(angle) * 1.9) * scale
+			local branch = beam(treeModel, endPoint, tip, 0.13 * scale, C.wood)
+			branch.Material = Enum.Material.Wood
+			for side = -1, 1 do
+				local offset = Vector3.new(
+					math.cos(angle + 0.9) * side * 0.58,
+					0.2 + side * 0.08,
+					math.sin(angle + 0.9) * side * 0.58
+				) * scale
+				local leaf = part(
+					treeModel,
+					"Leaf",
+					Vector3.new(0.72, 0.09, 1.7) * scale,
+					tip + offset,
+					Color3.fromHSV(hue, 0.4, 0.34 + (twig % 3) * 0.045 + side * 0.025),
+					Enum.PartType.Ball
+				)
+				leaf.CFrame *= CFrame.Angles(0.18 + twig * 0.13, angle + side * 0.8, side * 0.25)
+				leaf.CanCollide = false
+				leaf.CanTouch = false
+				leaf.CanQuery = false
+			end
+		end
 	end
 	-- Buttress roots visually anchor trees instead of floating balloon canopies.
 	for j = 1, 3 do
@@ -285,7 +301,7 @@ function World.new(catalog)
 	folder.Parent = workspace
 	self.root = folder
 	local lighting = game:GetService("Lighting")
-	lighting.ClockTime = 16.6
+	lighting.ClockTime = 15.1
 	lighting.Brightness = 2
 	lighting.Ambient = Color3.fromRGB(66, 76, 91)
 	lighting.OutdoorAmbient = Color3.fromRGB(127, 139, 128)
@@ -303,7 +319,7 @@ function World.new(catalog)
 	local grade = Instance.new("ColorCorrectionEffect")
 	grade.Saturation = -0.04
 	grade.Contrast = 0.07
-	grade.TintColor = Color3.fromRGB(255, 247, 229)
+	grade.TintColor = Color3.fromRGB(255, 253, 248)
 	grade.Parent = lighting
 	local bloom = Instance.new("BloomEffect")
 	bloom.Intensity = 0.12
@@ -385,7 +401,7 @@ function World.new(catalog)
 		)
 	end
 	local rng = Random.new(4107)
-	for j = 1, 68 do
+	for j = 1, 38 do
 		local a = rng:NextNumber(0, math.pi * 2)
 		local radius = rng:NextNumber(192, 295)
 		local pos = Vector3.new(math.cos(a) * radius, -1, math.sin(a) * radius)
@@ -395,15 +411,10 @@ function World.new(catalog)
 		local a = j * 2.399
 		local radius = 270 + (j % 3) * 12
 		local pos = Vector3.new(math.cos(a) * radius, -1, math.sin(a) * radius)
-		local mound = part(
-			folder,
-			"Distant meadow hill",
-			Vector3.new(70, 22 + (j % 4) * 5, 65),
-			pos - Vector3.new(0, 9, 0),
-			Color3.fromRGB(104 + j % 3 * 5, 129, 93),
-			Enum.PartType.Ball
-		)
-		mound.Material = Enum.Material.Grass
+		local terrain = workspace:FindFirstChildOfClass("Terrain")
+		if terrain then
+			terrain:FillBall(pos - Vector3.new(0, 12, 0), 23 + j % 4 * 2, Enum.Material.Grass)
+		end
 		rock(folder, pos + Vector3.new(12, 1, 5), Vector3.new(5, 4, 6))
 	end
 	for i, name in catalog.biomes do
@@ -588,7 +599,10 @@ function World:claim(player)
 		if not p.owner then
 			p.owner = player
 			p.model:SetAttribute("Owner", player.UserId)
-			p.marker:FindFirstChildOfClass("BillboardGui").TextLabel.Text = player.DisplayName .. "'s garden"
+			local title = p.marker:FindFirstChildOfClass("BillboardGui").TextLabel
+			title.Text = player.DisplayName .. "'s garden"
+			title:SetAttribute("LocaleKey", "owner_garden")
+			title:SetAttribute("LocaleArg", player.DisplayName)
 			p.spawn.Enabled = true
 			player.RespawnLocation = p.spawn
 			return i
@@ -614,7 +628,10 @@ function World:release(index)
 	p.owner = nil
 	p.spawn.Enabled = false
 	p.model:SetAttribute("Owner", nil)
-	p.marker:FindFirstChildOfClass("BillboardGui").TextLabel.Text = "Unclaimed garden"
+	local title = p.marker:FindFirstChildOfClass("BillboardGui").TextLabel
+	title.Text = "Unclaimed garden"
+	title:SetAttribute("LocaleKey", "unclaimed")
+	title:SetAttribute("LocaleArg", nil)
 	for _, c in p.cells do
 		c:Destroy()
 	end
