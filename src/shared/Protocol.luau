@@ -13,6 +13,7 @@ local fields: { [string]: { string } } = {
 	Expand = {},
 	Quest = {},
 	Sync = {},
+	Home = {},
 }
 function Protocol.valid(action: any, args: any): boolean
 	if type(action) ~= "string" or type(args) ~= "table" then

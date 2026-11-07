@@ -31,3 +31,9 @@ Use the Garden tab to choose seeds, plant into numbered cells, water and harvest
 - `build/MutationGarden.rbxlx`: generated place (ignored in Git).
 
 No external secrets or runtime backend is needed. No paid purchases are offered. See DEVELOPMENT_PROGRESS.md for missing features. Only local Git commits are created; no push or publication is performed.
+
+## Garden interaction update
+
+The HUD now opens with the world visible. Select Plant/Water/Harvest in the bottom toolbar, walk to your own raised bed and click a soil square. Plant uses the seed selected in Garden. Hover shows a cell highlight and growth progress. Touch taps are wired to the same action, but mobile runtime QA is pending. Menu tabs open a compact right drawer. Store counters open menus with Roblox ProximityPrompts. My garden returns your character to its assigned plot; respawns are also assigned there. Farming requests check distance on the server; shop and research menus remain usable around the hub.
+
+The world now has framed greenhouses, garden fences/hedges, raised-bed edges, trees, flowers, pathways, a fountain and walk-in shop buildings. This is procedural primitive art, not a Studio-verified final art pass.

@@ -20,3 +20,9 @@ Trade reservation/commit and crash recovery, receipt idempotency, product grants
 ## Local Studio mode regression
 
 Three additional mocked-service checks execute the real Profiles source: unpublished Studio makes zero DataStore calls and resets on rejoin; published Studio and live servers select DataStore; published API failures do not fall back to temporary profiles. These are not Roblox integration tests. Actual Studio mode and HUD remain NOT RUN here.
+
+## World interaction redesign checks
+
+PASS: four mocked-world checks for all 96 cell positions inside plot bounds, ownership attributes and stage-only rebuilds, construction of all 40 species at five stages, and plot release cleanup. Existing 20 domain and 3 profile mode checks still pass (27 total).
+
+NOT RUN: rendered appearance, actual raycast coordinates at different GUI insets, mouse/touch interaction and Highlight display, proximity prompts, garden spawn/camera, and mobile drawer layout. In Studio, open the new file, Play, confirm spawn at owned plot, choose Plant then click nearby soil, switch to Water and finally Harvest. Verify another player's beds cannot be changed and long-distance farming fails. Confirm My garden works from the hub and respawn returns to the assigned plot. Check each shop counter and all old menus.

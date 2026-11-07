@@ -17,6 +17,10 @@
         "Garden": {
           "$path": "src/client"
         }
+      },
+      "$properties": {
+        "CameraMinZoomDistance": 6,
+        "CameraMaxZoomDistance": 30
       }
     },
     "Workspace": {

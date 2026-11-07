@@ -17,3 +17,9 @@ Next: Studio smoke test and persistence/failure tests first; then small reviewed
 ## Unpublished Studio startup fix
 
 Added explicit temporary profiles only for `RunService:IsStudio()` with `game.GameId == 0`, plus a persistent HUD notice. Published and live environments still require DataStore. Added three mocked-service regression checks. Rebuilt the downloadable place and ZIP; actual Studio execution remains unverified in this cloud environment.
+
+## First visual and interaction revision
+
+Replaced the block-only square with a fountain plaza, walk-in framed/windowed buildings, paths, meadow trees, wildflowers, hedges/fences, greenhouse frames and raised beds. World labels now have small fixed text and short draw distance. Added compact closed-by-default drawer, bottom action toolbar, mouse/touch world planting, hover highlighting, shop/chest prompts and a My garden return action. SpawnLocation binding and bounded camera zoom improve the first spawn. Farm requests enforce server distance checks; purchasing/research no longer require standing at the owner's plot.
+
+Local checks: 27 assertions groups PASS, syntax/format/build PASS. Actual Studio visual/interaction QA remains NOT RUN. Remaining specification items still apply; the rendering and mobile usability of this revision must be reviewed in Studio. No custom LOD or final production art is claimed.

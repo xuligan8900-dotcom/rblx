@@ -27,7 +27,8 @@ local function teleport(player, character)
 	local slot = slots[player]
 	local root = character:WaitForChild("HumanoidRootPart", 10)
 	if root and slot then
-		character:PivotTo(CFrame.new(world.plots[slot].center + Vector3.new(0, 6, 30)))
+		local center = world.plots[slot].center
+		character:PivotTo(CFrame.lookAt(center + Vector3.new(0, 5, 18), center + Vector3.new(-10, 3, -12)))
 	end
 end
 local function join(player)
@@ -104,14 +105,24 @@ remote.OnServerInvoke = function(player, action, args)
 	if closing or not p or not safe[player] or not slots[player] then
 		return { ok = false, message = "Garden unavailable" }
 	end
-	if action ~= "Sync" then
+	local farming = action == "Plant" or action == "Replant" or action == "Water" or action == "Harvest"
+	if farming then
 		local root = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-		if not root or (root.Position - world.plots[slots[player]].center).Magnitude > 85 then
-			return { ok = false, message = "Return to your garden to manage it" }
+		local cell = args.cell
+		if not cell then
+			local plant = p.plants[args.id]
+			cell = plant and plant.cell
+		end
+		if not root or (cell and (root.Position - world:cell(world.plots[slots[player]], cell)).Magnitude > 25) then
+			return { ok = false, message = "Walk closer to your garden bed" }
 		end
 	end
 	local ok, message = true, "Ready"
-	if action ~= "Sync" then
+	if action == "Home" then
+		if player.Character then
+			teleport(player, player.Character)
+		end
+	elseif action ~= "Sync" then
 		local success, a, b = pcall(sim.act, p, action, args, os.time(), weather)
 		if not success then
 			warn("Garden action failed", action, a)
